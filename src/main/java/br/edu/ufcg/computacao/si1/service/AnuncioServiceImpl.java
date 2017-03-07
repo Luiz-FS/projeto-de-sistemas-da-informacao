@@ -36,9 +36,13 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public Collection<Anuncio> get(String tipo) {
+
+        return anuncioRepository.findByTipo(tipo);
+
+        /*
         return anuncioRepository.findAll().stream()
                 .filter(anuncio -> anuncio.getTipo().equals(tipo))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList::new));*/
     }
 
     @Override

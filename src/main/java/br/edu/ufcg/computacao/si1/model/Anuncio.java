@@ -62,6 +62,7 @@ public class Anuncio {
     }
 
     /**
+     * WARNING: Não usar
      * Modifica o id do anuncio
      * @param _id id a ser colocado no anuncio
      */public void set_id(Long _id) {

@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.experts;
 
 import br.edu.ufcg.computacao.si1.model.Notas;
-import br.edu.ufcg.computacao.si1.util.Validacoes;
+import br.edu.ufcg.computacao.si1.util.Validador;
 
 import java.util.Date;
 
@@ -14,12 +14,12 @@ public class AnuncioExpert {
 
     public static boolean adiciona(String titulo, Date dataCriacao, double valor, Notas nota, String tipo, String idUsuario){
 
-        if(Validacoes.isStringNull(titulo) || Validacoes.isStringNull(tipo) || Validacoes.isStringNull(idUsuario)
-                || Validacoes.isStringVazia(titulo) || Validacoes.isStringVazia(tipo) || Validacoes.isStringVazia(idUsuario)){
+        if(Validador.isStringNull(titulo) || Validador.isStringNull(tipo) || Validador.isStringNull(idUsuario)
+                || Validador.isStringVazia(titulo) || Validador.isStringVazia(tipo) || Validador.isStringVazia(idUsuario)){
             return false;
         }
 
-        if(Validacoes.isValorNegativo(valor)){
+        if(Validador.isValorNegativo(valor)){
             return false;
         }
 
@@ -28,7 +28,7 @@ public class AnuncioExpert {
 
     public static boolean remove(Long idAnuncio){
 
-        if(Validacoes.isValorNegativo(idAnuncio)){
+        if(Validador.isValorNegativo(idAnuncio)){
             return false;
         }
 
@@ -38,7 +38,7 @@ public class AnuncioExpert {
 
     public static boolean editarTitulo(Long idAnuncio, String novoTitulo){
 
-        if(Validacoes.isValorNegativo(idAnuncio) || Validacoes.isStringNull(novoTitulo) || Validacoes.isStringVazia(novoTitulo)){
+        if(Validador.isValorNegativo(idAnuncio) || Validador.isStringNull(novoTitulo) || Validador.isStringVazia(novoTitulo)){
             return false;
         }
 
@@ -50,7 +50,7 @@ public class AnuncioExpert {
         //TODO Fazer validacao do novo valor
         //TODO Criar a logica para alterar o valor do anuncio para o novo valor
 
-        if(Validacoes.isValorNegativo(idAnuncio) || Validacoes.isValorNegativo(novoValor)){
+        if(Validador.isValorNegativo(idAnuncio) || Validador.isValorNegativo(novoValor)){
             return false;
         }
 
@@ -59,7 +59,7 @@ public class AnuncioExpert {
 
     public static boolean contratar(Long idAnuncio, Long idUsuarioComprador){
 
-        if(Validacoes.isValorNegativo(idAnuncio) || Validacoes.isValorNegativo(idUsuarioComprador)){
+        if(Validador.isValorNegativo(idAnuncio) || Validador.isValorNegativo(idUsuarioComprador)){
             return false;
         }
 
@@ -72,7 +72,7 @@ public class AnuncioExpert {
     }
 
     public static boolean darNota(Long idAnuncio, Long idUsuarioComprador, Notas nota){
-        if(Validacoes.isValorNegativo(idAnuncio) || Validacoes.isValorNegativo(idUsuarioComprador)){
+        if(Validador.isValorNegativo(idAnuncio) || Validador.isValorNegativo(idUsuarioComprador)){
             return false;
         }
 

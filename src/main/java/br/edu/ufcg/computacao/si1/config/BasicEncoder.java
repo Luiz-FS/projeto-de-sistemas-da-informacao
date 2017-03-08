@@ -13,6 +13,6 @@ public class BasicEncoder implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence charSequence, String s) {
-        return ((String) charSequence).equals(s);
+        return charSequence.equals(s);
     }
 }

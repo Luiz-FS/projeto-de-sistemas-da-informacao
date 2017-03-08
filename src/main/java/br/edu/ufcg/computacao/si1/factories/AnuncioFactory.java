@@ -13,28 +13,20 @@ import java.util.Date;
  */
 public class AnuncioFactory {
 
-
-    public static Anuncio criaEmprego(Long idUsuario, String titulo, Date dataCriacao, double valor, Notas nota){
+    public static Anuncio criaEmprego(Long idUsuario, String titulo, Date dataCriacao, double valor, Notas nota) {
 
         return new AnuncioEmprego(titulo, dataCriacao, nota);
-
     }
 
-
-    public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor, Notas nota, AnuncioProduto.Categoria categoria){
+    public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor, Notas nota,
+                                      AnuncioProduto.Categoria categoria) {
 
         return new AnuncioProduto(titulo, dataCriacao, valor, nota, categoria);
-
     }
 
+    public static Anuncio criaServico(Long idUsuario, String titulo, Date dataDeCriacao, double valor,
+                                      Notas nota, String tipo) {
 
-    public static Anuncio criaServico(Long idUsuario, String titulo, Date dataDeCriacao, Date dataDeAgendamento, double valor,
-                                      Notas nota, String tipo){
-
-        return new AnuncioServico(titulo, dataDeCriacao, dataDeAgendamento, valor, nota, tipo);
-
+        return new AnuncioServico(titulo, dataDeCriacao, valor, nota, tipo);
     }
-
-
-
 }

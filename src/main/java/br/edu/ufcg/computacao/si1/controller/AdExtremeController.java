@@ -1,8 +1,11 @@
 package br.edu.ufcg.computacao.si1.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,16 +37,19 @@ public class AdExtremeController {
         return new ResponseEntity<>(anuncios, HttpStatus.OK);
     }
 
-    /**
-     * Não usar esse método não é seguro enviar os usuário pro front-end
-     * Vai export todos os logins e senhas. A validação tem que ser feita
-     * No back-end, ou seja, aqui.
-     */
+
+
     @GetMapping(value = "/usuarios")
-    public ResponseEntity<List<Usuario>> mostrarTodosUsuarios() {
+    public ResponseEntity<List<UsuarioDto>> mostrarTodosUsuarios() {
 
         List<Usuario> usuarios = usuarioRepository.findAll();
 
-        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+        List<UsuarioDto> usuarioDtos = new ArrayList<>();
+
+        for(Usuario usuario : usuarios){
+            usuarioDtos.add( new UsuarioDto(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getPermissao()));
+        }
+
+        return new ResponseEntity<>(usuarioDtos, HttpStatus.OK);
     }
 }

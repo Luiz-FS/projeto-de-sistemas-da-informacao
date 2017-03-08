@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.experts;
 
+import br.edu.ufcg.computacao.si1.model.Notas;
 import br.edu.ufcg.computacao.si1.util.Validacoes;
 
 import java.util.Date;
@@ -11,10 +12,10 @@ import java.util.Date;
 public class AnuncioExpert {
 
 
-    public static boolean adiciona(String titulo, Date dataCriacao, double valor, String nota, String tipo, String idUsuario){
+    public static boolean adiciona(String titulo, Date dataCriacao, double valor, Notas nota, String tipo, String idUsuario){
 
-        if(Validacoes.isStringNull(titulo) || Validacoes.isStringNull(nota) || Validacoes.isStringNull(tipo) || Validacoes.isStringNull(idUsuario)
-                || Validacoes.isStringVazia(titulo) || Validacoes.isStringVazia(nota) || Validacoes.isStringVazia(tipo) || Validacoes.isStringVazia(idUsuario)){
+        if(Validacoes.isStringNull(titulo) || Validacoes.isStringNull(tipo) || Validacoes.isStringNull(idUsuario)
+                || Validacoes.isStringVazia(titulo) || Validacoes.isStringVazia(tipo) || Validacoes.isStringVazia(idUsuario)){
             return false;
         }
 
@@ -70,6 +71,16 @@ public class AnuncioExpert {
         return false;
     }
 
+    public static boolean darNota(Long idAnuncio, Long idUsuarioComprador, Notas nota){
+        if(Validacoes.isValorNegativo(idAnuncio) || Validacoes.isValorNegativo(idUsuarioComprador)){
+            return false;
+        }
+
+        //TODO Criar a logica para dar uma nota ao anuncio
+
+
+        return false;
+    }
 
 
 

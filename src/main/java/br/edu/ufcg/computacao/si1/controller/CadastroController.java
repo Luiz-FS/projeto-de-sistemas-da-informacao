@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.controller;
 
 import br.edu.ufcg.computacao.si1.model.Usuario;
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
+//import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import br.edu.ufcg.computacao.si1.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @Controller
 public class CadastroController {
-
+/*
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
@@ -43,7 +43,7 @@ public class CadastroController {
 
         attributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso!");
         return new ModelAndView("redirect:/cadastrar-se");
-    }
+    }*/
 
 
 }

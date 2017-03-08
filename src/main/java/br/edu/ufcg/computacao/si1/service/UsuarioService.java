@@ -1,13 +1,13 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.Usuario;
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
+//import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface UsuarioService {
-    Usuario create(UsuarioForm usuarioForm);
+    /*Usuario create(UsuarioForm usuarioForm);
 
     Optional<Usuario> getById(Long id);
 
@@ -17,5 +17,5 @@ public interface UsuarioService {
 
     boolean update(Usuario usuario);
 
-    boolean delete(Long id);
+    boolean delete(Long id);*/
 }

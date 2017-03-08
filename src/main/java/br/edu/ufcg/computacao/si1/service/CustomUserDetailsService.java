@@ -12,9 +12,9 @@ import java.io.Serializable;
 import java.util.Optional;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService /*implements UserDetailsService*/ {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Serializable.class);
+  /*  private static final Logger LOGGER = LoggerFactory.getLogger(Serializable.class);
     private final UsuarioService userService;
 
     @Autowired
@@ -34,6 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("User with email=%s was not found", email));
         }
 
-    }
+    }*/
 
 }

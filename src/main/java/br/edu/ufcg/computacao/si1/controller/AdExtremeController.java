@@ -47,7 +47,7 @@ public class AdExtremeController {
         List<UsuarioDto> usuarioDtos = new ArrayList<>();
 
         for(Usuario usuario : usuarios){
-            usuarioDtos.add( new UsuarioDto(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getPermissao()));
+            usuarioDtos.add( new UsuarioDto(usuario));
         }
 
         return new ResponseEntity<>(usuarioDtos, HttpStatus.OK);

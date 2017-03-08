@@ -33,9 +33,9 @@ public class AnuncioServiceTest {
 
     @Before
     public void setUp() {
-        anuncio1 = new Anuncio("Anuncio de Movel", new Date(), 100, Notas.notas[2], "movel");
-        anuncio2 = new Anuncio("Anuncio de Imovel", new Date(), 100000, Notas.notas[3], "imovel");
-        anuncio3 = new Anuncio("Anuncio de AnuncioEmprego", new Date(), 0, Notas.notas[1], "emprego");
+        anuncio1 = new Anuncio("Anuncio de Movel", new Date(), 100, Notas.NOTA_DOIS, "movel");
+        anuncio2 = new Anuncio("Anuncio de Imovel", new Date(), 100000, Notas.NOTA_TRES, "imovel");
+        anuncio3 = new Anuncio("Anuncio de AnuncioEmprego", new Date(), 0, Notas.NOTA_UM, "emprego");
     }
 
     @After
@@ -200,17 +200,17 @@ public class AnuncioServiceTest {
         assertEquals(anuncioEmprego.getValor(), anuncioService.getById(anuncioEmprego.getId()).get().getValor());
 
         //Update nota
-        anuncioMovel.setNota(Notas.notas[4]);
-        anuncioImovel.setNota(Notas.notas[4]);
-        anuncioEmprego.setNota(Notas.notas[4]);
+        anuncioMovel.setNota(Notas.NOTA_QUATRO);
+        anuncioImovel.setNota(Notas.NOTA_QUATRO);
+        anuncioEmprego.setNota(Notas.NOTA_QUATRO);
 
         assertTrue(anuncioService.update(anuncioMovel));
         assertTrue(anuncioService.update(anuncioImovel));
         assertTrue(anuncioService.update(anuncioEmprego));
 
-        assertEquals(Notas.notas[4], anuncioService.getById(anuncioMovel.getId()).get().getNota());
-        assertEquals(Notas.notas[4], anuncioService.getById(anuncioImovel.getId()).get().getNota());
-        assertEquals(Notas.notas[4], anuncioService.getById(anuncioEmprego.getId()).get().getNota());
+        assertEquals(Notas.NOTA_QUATRO, anuncioService.getById(anuncioMovel.getId()).get().getNota());
+        assertEquals(Notas.NOTA_QUATRO, anuncioService.getById(anuncioImovel.getId()).get().getNota());
+        assertEquals(Notas.NOTA_QUATRO, anuncioService.getById(anuncioEmprego.getId()).get().getNota());
     }
 
 }

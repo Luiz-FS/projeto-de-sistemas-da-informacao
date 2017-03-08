@@ -16,7 +16,7 @@ public class AnuncioProduto extends Anuncio {
     }
 
     public AnuncioProduto (String titulo, Date dataCriacao, double valor, Notas nota, Categoria categoria) {
-        super(titulo, dataCriacao,valor,nota,"produto");
+        super(titulo, dataCriacao,valor,nota);
         this.categoria = categoria;
     }
 

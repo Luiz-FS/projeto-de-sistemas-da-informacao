@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="tb_anuncio")
-public class Anuncio {
+public abstract class Anuncio {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
@@ -36,15 +36,11 @@ public class Anuncio {
     @Column(name = "nota")
     private Notas nota;
 
-    @Column(name = "tipo", nullable = false)
-    private String tipo;
-
-    public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota, String tipo) {
+    public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.valor = valor;
         this.nota = nota;
-        this.tipo = tipo;
     }
 
     public Anuncio() {
@@ -52,7 +48,6 @@ public class Anuncio {
         this.dataDeCriacao = new Date();
         this.valor = 0;
         this.nota = Notas.NOTA_ZERO;
-        this.tipo = "";
     }
 
     /**
@@ -91,14 +86,6 @@ public class Anuncio {
         this.nota = nota;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -107,25 +94,24 @@ public class Anuncio {
         Anuncio anuncio = (Anuncio) object;
 
         if (Double.compare(anuncio.getValor(), getValor()) != 0) return false;
-        if (!getId().equals(anuncio.getId())) return false;
+        if (!_id.equals(anuncio._id)) return false;
+        if (!idUsuario.equals(anuncio.idUsuario)) return false;
         if (!getTitulo().equals(anuncio.getTitulo())) return false;
         if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao())) return false;
-        if (getNota() != null ? !getNota().equals(anuncio.getNota()) : anuncio.getNota() != null) return false;
-        return getTipo().equals(anuncio.getTipo());
-
+        return getNota() == anuncio.getNota();
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = getId().hashCode();
+        result = _id.hashCode();
+        result = 31 * result + idUsuario.hashCode();
         result = 31 * result + getTitulo().hashCode();
         result = 31 * result + getDataDeCriacao().hashCode();
         temp = Double.doubleToLongBits(getValor());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (getNota() != null ? getNota().hashCode() : 0);
-        result = 31 * result + getTipo().hashCode();
+        result = 31 * result + getNota().hashCode();
         return result;
     }
 
@@ -137,7 +123,7 @@ public class Anuncio {
                 ", dataDeCriacao=" + getDataDeCriacao() +
                 ", valor=" + valor +
                 ", nota=" + nota +
-                ", tipo='" + tipo + '\'' +
+                /*", tipo='" + tipo + '\''*/ +
                 '}';
     }
 }

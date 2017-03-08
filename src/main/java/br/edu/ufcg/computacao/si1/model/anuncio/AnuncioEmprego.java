@@ -10,7 +10,7 @@ import java.util.Date;
 public class AnuncioEmprego extends Anuncio {
 
     public AnuncioEmprego(String titulo, Date dataCriacao, Notas nota) {
-        super(titulo, dataCriacao, 0, nota, "emprego");
+        super(titulo, dataCriacao, 0, nota);
     }
 
     public AnuncioEmprego() {

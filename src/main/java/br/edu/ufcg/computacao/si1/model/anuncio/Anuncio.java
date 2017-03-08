@@ -21,7 +21,7 @@ public class Anuncio {
     @Column(name = "_id", nullable = false, unique = true)
     private Long _id;
 
-    @Column(name="id_usuario", nullable = false)
+    @Column(name="id_usuario")
     private Long idUsuario;
 
     @Column(name = "titulo", nullable = false)
@@ -30,7 +30,7 @@ public class Anuncio {
     @Column(name = "data_criacao", nullable = false)
     private Date dataDeCriacao;
 
-    @Column(name = "valor", nullable = false)
+    @Column(name = "valor")
     private double valor;
 
     @Column(name = "nota")
@@ -48,11 +48,11 @@ public class Anuncio {
     }
 
     public Anuncio() {
-        titulo = "";
-        dataDeCriacao = new Date();
-        valor = 0;
-        nota = "";
-        tipo = "";
+        this.titulo = "";
+        this.dataDeCriacao = new Date();
+        this.valor = 0;
+        this.nota = "";
+        this.tipo = "";
     }
 
     public void contratar() {

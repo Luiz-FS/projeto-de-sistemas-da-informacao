@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import br.edu.ufcg.computacao.si1.model.Notas;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,12 +36,12 @@ public class Anuncio {
     private double valor;
 
     @Column(name = "nota")
-    private String nota;
+    private Notas nota;
 
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double valor, String nota, String tipo) {
+    public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota, String tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.valor = valor;
@@ -51,12 +53,8 @@ public class Anuncio {
         this.titulo = "";
         this.dataDeCriacao = new Date();
         this.valor = 0;
-        this.nota = "";
+        this.nota = Notas.NOTA_ZERO;
         this.tipo = "";
-    }
-
-    public void contratar() {
-
     }
 
     /**
@@ -87,11 +85,11 @@ public class Anuncio {
         this.valor = valor;
     }
 
-    public String getNota() {
+    public Notas getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(Notas nota) {
         this.nota = nota;
     }
 

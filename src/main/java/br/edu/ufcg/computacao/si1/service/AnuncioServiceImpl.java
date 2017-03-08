@@ -1,14 +1,12 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AnuncioServiceImpl implements AnuncioService {
@@ -52,7 +50,7 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public boolean update(Anuncio anuncio) {
-        if (anuncioRepository.exists(anuncio.get_id())) {
+        if (anuncioRepository.exists(anuncio.getId())) {
             anuncioRepository.save(anuncio);
             return true;
         }

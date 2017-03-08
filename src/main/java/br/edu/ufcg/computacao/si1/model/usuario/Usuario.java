@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.usuario;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
-public class Usuario extends org.springframework.security.core.userdetails.User{
+public class Usuario extends org.springframework.security.core.userdetails.User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,20 +17,19 @@ public class Usuario extends org.springframework.security.core.userdetails.User{
     @Column
     private String senha;
     @Column
-    private String role;
+    private Permissao permissao;
 
     public Usuario() {
-        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
+        super("default","default", AuthorityUtils.createAuthorityList("USER"));
     }
 
-    public Usuario(String nome, String email, String senha, String role) {
-
-        super(email, senha, AuthorityUtils.createAuthorityList(role));
+    public Usuario(String nome, String email, String senha, Permissao permissao) {
+        super(email, senha, AuthorityUtils.createAuthorityList(permissao.getTipoPermissao()));
 
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.role = role;
+        this.permissao = permissao;
     }
 
     public Long getId() {
@@ -65,11 +64,11 @@ public class Usuario extends org.springframework.security.core.userdetails.User{
         this.senha = senha;
     }
 
-    public String getRole() {
-        return role;
-    }
+	public Permissao getPermissao() {
+		return permissao;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
 }

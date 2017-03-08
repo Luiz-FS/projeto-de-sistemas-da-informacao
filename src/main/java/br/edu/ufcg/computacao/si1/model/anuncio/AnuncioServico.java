@@ -13,11 +13,19 @@ public class AnuncioServico extends Anuncio {
     @Column(name = "data_agendamento", nullable = false)
     private Date dataDeAgendamento;
 
+    /**
+     * O atributo data de criação está ferindo a construção da classe
+     * Já que o auncio de serviço quando é criado ainda não possui um agendamento.
+     */
     public AnuncioServico(String titulo, Date dataDeCriacao, Date dataDeAgendamento, double valor,
                           Notas nota, String tipo) {
         super(titulo,dataDeCriacao,valor,nota, tipo);
 
         this.dataDeAgendamento = dataDeAgendamento;
+    }
+
+    public AnuncioServico() {
+        super();
     }
 
     public Date getDataDeAgendamento() {

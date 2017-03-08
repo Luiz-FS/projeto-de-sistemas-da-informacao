@@ -33,7 +33,12 @@ public class AdExtremeController {
 
         return new ResponseEntity<>(anuncios, HttpStatus.OK);
     }
-    
+
+    /**
+     * Não usar esse método não é seguro enviar os usuário pro front-end
+     * Vai export todos os logins e senhas. A validação tem que ser feita
+     * No back-end, ou seja, aqui.
+     */
     @GetMapping(value = "/usuarios")
     public ResponseEntity<List<Usuario>> mostrarTodosUsuarios() {
 

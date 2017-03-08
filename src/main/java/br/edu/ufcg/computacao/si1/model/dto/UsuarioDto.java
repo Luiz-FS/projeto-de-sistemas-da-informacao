@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.dto;
 
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+
 /**
  * Created by antonioabreu on 08/03/17.
  */
@@ -16,6 +18,13 @@ public class UsuarioDto {
         this.nome = nome;
         this.email = email;
         this.permissao = permissao;
+    }
+
+    public UsuarioDto(Usuario usuario){
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.permissao = getPermissao();
     }
 
 

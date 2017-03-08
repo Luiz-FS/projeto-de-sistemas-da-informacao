@@ -55,10 +55,6 @@ public class Anuncio {
         tipo = "";
     }
 
-    public void contratar() {
-
-    }
-
     /**
      * Retorna o id do anuncio
      * @return o id do anuncio

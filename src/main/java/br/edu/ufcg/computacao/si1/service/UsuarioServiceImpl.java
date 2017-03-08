@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.Usuario;
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
+//import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
-
+public class UsuarioServiceImpl /*implements UsuarioService*/{
+/*
     private UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -76,5 +76,5 @@ public class UsuarioServiceImpl implements UsuarioService{
             return true;
         }
         return false;
-    }
+    }*/
 }

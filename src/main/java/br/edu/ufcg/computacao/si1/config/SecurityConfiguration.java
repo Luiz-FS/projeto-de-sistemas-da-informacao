@@ -77,7 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 //            .passwordEncoder(new BasicEncoder());
 //    }
 //
-    @Bean
+  /*  @Bean
     protected UserDetailsService userDetailsService(){
         return new UserDetailsService() {
             @Autowired
@@ -94,5 +94,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 }
             }
         };
-    }
+    }*/
 }

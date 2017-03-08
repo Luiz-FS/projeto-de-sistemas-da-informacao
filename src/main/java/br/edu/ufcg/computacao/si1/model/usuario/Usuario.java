@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
-public class Usuario extends org.springframework.security.core.userdetails.User {
+public class Usuario extends org.springframework.security.core.userdetails.User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,14 +17,15 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
     @Column
     private String senha;
     @Column
-    private Permissao permissao;
+    private String permissao;
 
     public Usuario() {
-        super("default","default", AuthorityUtils.createAuthorityList("USER"));
+        super("default", "default", AuthorityUtils.createAuthorityList("USER"));
     }
 
-    public Usuario(String nome, String email, String senha, Permissao permissao) {
-        super(email, senha, AuthorityUtils.createAuthorityList(permissao.getTipoPermissao()));
+    public Usuario(String nome, String email, String senha, String permissao) {
+
+        super(email, senha, AuthorityUtils.createAuthorityList(permissao));
 
         this.nome = nome;
         this.email = email;
@@ -64,11 +65,11 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
         this.senha = senha;
     }
 
-	public Permissao getPermissao() {
+	public String getPermissao() {
 		return permissao;
 	}
 
-	public void setPermissao(Permissao permissao) {
+	public void setPermissao(String permissao) {
 		this.permissao = permissao;
 	}
 }

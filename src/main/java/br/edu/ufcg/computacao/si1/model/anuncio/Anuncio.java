@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
-
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,6 +11,8 @@ import java.util.Date;
 @Entity
 @Table(name="tb_anuncio")
 public class Anuncio {
+
+    private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
@@ -34,12 +34,12 @@ public class Anuncio {
     private double valor;
 
     @Column(name = "nota")
-    private Notas nota;
+    private String nota;
 
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota, String tipo) {
+    public Anuncio(String titulo, Date dataDeCriacao, double valor, String nota, String tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.valor = valor;
@@ -51,8 +51,12 @@ public class Anuncio {
         titulo = "";
         dataDeCriacao = new Date();
         valor = 0;
-        nota = Notas.NOTA_ZERO;
+        nota = "";
         tipo = "";
+    }
+
+    public void contratar() {
+
     }
 
     /**
@@ -83,11 +87,11 @@ public class Anuncio {
         this.valor = valor;
     }
 
-    public Notas getNota() {
+    public String getNota() {
         return nota;
     }
 
-    public void setNota(Notas nota) {
+    public void setNota(String nota) {
         this.nota = nota;
     }
 
@@ -139,13 +143,5 @@ public class Anuncio {
                 ", nota=" + nota +
                 ", tipo='" + tipo + '\'' +
                 '}';
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
     }
 }

@@ -16,14 +16,14 @@ public class AnuncioFactory {
 
     public static Anuncio criaEmprego(Long idUsuario, String titulo, Date dataCriacao, double valor, Notas nota){
 
-        return new AnuncioEmprego();
+        return new AnuncioEmprego(titulo, dataCriacao, nota);
 
     }
 
 
-    public static Anuncio criaProduto(Long idUsuario, String titulo, Date dataDeCriacao, double valor, Notas nota){
+    public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor, Notas nota, AnuncioProduto.Categoria categoria){
 
-        return new AnuncioProduto();
+        return new AnuncioProduto(titulo, dataCriacao, valor, nota, categoria);
 
     }
 

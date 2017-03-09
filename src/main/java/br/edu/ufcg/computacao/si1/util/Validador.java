@@ -1,5 +1,8 @@
 package br.edu.ufcg.computacao.si1.util;
 
+import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+
 public class Validador {
 
     private static final String REGEX_EMAIL = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -26,4 +29,15 @@ public class Validador {
     public static boolean isEmailInvalido(String email) {
         return email.matches(REGEX_EMAIL);
     }
+
+    public static boolean isAutorizado(Usuario usuario, Permissao permissao){
+
+        if(usuario.getPermissao() == permissao){
+            return true;
+        }
+        return false;
+
+    }
+
+
 }

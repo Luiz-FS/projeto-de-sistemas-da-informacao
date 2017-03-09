@@ -7,9 +7,6 @@ import java.util.Date;
 
 public class AnuncioServico extends Anuncio {
 
-    @Column(name = "data_agendamento")
-    private Date dataDeAgendamento;
-
     public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota) {
         super(titulo, dataDeCriacao, valor, nota);
     }
@@ -18,11 +15,13 @@ public class AnuncioServico extends Anuncio {
         super();
     }
 
+    @Override
     public Date getDataDeAgendamento() {
-        return dataDeAgendamento;
+        return super.dataDeAgendamento;
     }
 
+    @Override
     public void setDataDeAgendamento(Date dataDeAgendamento) {
-        this.dataDeAgendamento = dataDeAgendamento;
+        super.dataDeAgendamento = dataDeAgendamento;
     }
 }

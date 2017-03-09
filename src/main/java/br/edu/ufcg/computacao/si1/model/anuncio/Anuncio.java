@@ -11,119 +11,137 @@ import java.util.Date;
  * Created by Marcus Oliveira on 08/12/16.
  */
 @Entity
-@Table(name="tb_anuncio")
+@Table(name = "tb_anuncio")
 public abstract class Anuncio {
 
-    private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+	private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "_id", nullable = false, unique = true)
-    private Long _id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "_id", nullable = false, unique = true)
+	private Long _id;
 
-    @Column(name="id_usuario")
-    private Long idUsuario;
+	@Column(name = "id_usuario")
+	private Long idUsuario;
 
-    @Column(name = "titulo", nullable = false)
-    private String titulo;
+	@Column(name = "titulo", nullable = false)
+	private String titulo;
 
-    @Column(name = "data_criacao", nullable = false)
-    private Date dataDeCriacao;
+	@Column(name = "data_criacao", nullable = false)
+	private Date dataDeCriacao;
 
-    @Column(name = "valor")
-    private double valor;
+	@Column(name = "valor")
+	private double valor;
 
-    @Column(name = "nota")
-    private Notas nota;
+	@Column(name = "nota")
+	private Notas nota;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
-        this.titulo = titulo;
-        this.dataDeCriacao = dataDeCriacao;
-        this.valor = valor;
-        this.nota = nota;
-    }
+	// usado apenas no Servico.
+	@Column(name = "data_agendamento")
+	protected Date dataDeAgendamento;
 
-    public Anuncio() {
-        this.titulo = "";
-        this.dataDeCriacao = new Date();
-        this.valor = 0;
-        this.nota = Notas.NOTA_ZERO;
-    }
+	public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+		this.titulo = titulo;
+		this.dataDeCriacao = dataDeCriacao;
+		this.valor = valor;
+		this.nota = nota;
+	}
 
-    /**
-     * Retorna o id do anuncio
-     * @return o id do anuncio
-     */
-    public Long getId() {
-        return _id;
-    }
+	public Anuncio() {
+		this.titulo = "";
+		this.dataDeCriacao = new Date();
+		this.valor = 0;
+		this.nota = Notas.NOTA_ZERO;
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	/**
+	 * Retorna o id do anuncio
+	 * 
+	 * @return o id do anuncio
+	 */
+	public Long getId() {
+		return _id;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getDataDeCriacao() {
-        return DATE_FORMAT.format(dataDeCriacao);
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public double getValor() {
-        return valor;
-    }
+	public String getDataDeCriacao() {
+		return DATE_FORMAT.format(dataDeCriacao);
+	}
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+	public double getValor() {
+		return valor;
+	}
 
-    public Notas getNota() {
-        return nota;
-    }
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
 
-    public void setNota(Notas nota) {
-        this.nota = nota;
-    }
+	public Notas getNota() {
+		return nota;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof Anuncio)) return false;
+	public void setNota(Notas nota) {
+		this.nota = nota;
+	}
 
-        Anuncio anuncio = (Anuncio) object;
+	// retorna null, pois não existe para
+	// alguns tipos de anuncio.
+	public Date getDataDeAgendamento() {
+		return null;
+	}
 
-        if (Double.compare(anuncio.getValor(), getValor()) != 0) return false;
-        if (!_id.equals(anuncio._id)) return false;
-        if (!idUsuario.equals(anuncio.idUsuario)) return false;
-        if (!getTitulo().equals(anuncio.getTitulo())) return false;
-        if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao())) return false;
-        return getNota() == anuncio.getNota();
-    }
+	// nao deve ser setado para alguns tipos
+	// de anuncio.
+	public void setDataDeAgendamento(Date dataDeAgendamento) {
+	}
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = _id.hashCode();
-        result = 31 * result + idUsuario.hashCode();
-        result = 31 * result + getTitulo().hashCode();
-        result = 31 * result + getDataDeCriacao().hashCode();
-        temp = Double.doubleToLongBits(getValor());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + getNota().hashCode();
-        return result;
-    }
+	@Override
+	public boolean equals(Object object) {
+		if (this == object)
+			return true;
+		if (!(object instanceof Anuncio))
+			return false;
 
-    @Override
-    public String toString() {
-        return "Anuncio{" +
-                "_id=" + _id +
-                ", titulo='" + titulo + '\'' +
-                ", dataDeCriacao=" + getDataDeCriacao() +
-                ", valor=" + valor +
-                ", nota=" + nota +
-                /*", tipo='" + tipo + '\''*/ +
-                '}';
-    }
+		Anuncio anuncio = (Anuncio) object;
+
+		if (Double.compare(anuncio.getValor(), getValor()) != 0)
+			return false;
+		if (!_id.equals(anuncio._id))
+			return false;
+		if (!idUsuario.equals(anuncio.idUsuario))
+			return false;
+		if (!getTitulo().equals(anuncio.getTitulo()))
+			return false;
+		if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao()))
+			return false;
+		return getNota() == anuncio.getNota();
+	}
+
+	@Override
+	public int hashCode() {
+		int result;
+		long temp;
+		result = _id.hashCode();
+		result = 31 * result + idUsuario.hashCode();
+		result = 31 * result + getTitulo().hashCode();
+		result = 31 * result + getDataDeCriacao().hashCode();
+		temp = Double.doubleToLongBits(getValor());
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + getNota().hashCode();
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Anuncio{" + "_id=" + _id + ", titulo='" + titulo + '\'' + ", dataDeCriacao=" + getDataDeCriacao()
+				+ ", valor=" + valor + ", nota=" + nota +
+				/* ", tipo='" + tipo + '\'' */ +'}';
+	}
 }

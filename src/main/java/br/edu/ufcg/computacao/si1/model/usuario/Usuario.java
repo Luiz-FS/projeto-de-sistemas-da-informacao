@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import br.edu.ufcg.computacao.si1.util.Constantes;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 import javax.persistence.*;
@@ -8,8 +9,7 @@ import javax.persistence.*;
 @Table(name = "tb_usuario")
 public class Usuario extends org.springframework.security.core.userdetails.User {
 	
-	private static final String USUARIO_DEFAULT = "default";
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -23,7 +23,7 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
 	private Permissao permissao;
 
 	public Usuario() {
-		super(USUARIO_DEFAULT, USUARIO_DEFAULT,
+		super(Constantes.USUARIO_DEFAULT, Constantes.USUARIO_DEFAULT,
 				AuthorityUtils.createAuthorityList(TiposPermissao.PERMISSAO_PESSOA_FISICA.getPermissao()));
 	}
 

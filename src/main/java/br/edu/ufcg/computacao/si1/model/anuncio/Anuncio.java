@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.util.Constantes;
 
 import javax.persistence.*;
 import java.text.DateFormat;
@@ -14,7 +15,6 @@ import java.util.Date;
 @Table(name = "tb_anuncio")
 public abstract class Anuncio {
 
-	private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -72,7 +72,7 @@ public abstract class Anuncio {
 	}
 
 	public String getDataDeCriacao() {
-		return DATE_FORMAT.format(dataDeCriacao);
+		return Constantes.DATE_FORMAT.format(dataDeCriacao);
 	}
 
 	public double getValor() {

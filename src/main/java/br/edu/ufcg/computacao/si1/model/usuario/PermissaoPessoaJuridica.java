@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import br.edu.ufcg.computacao.si1.util.Constantes;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,7 @@ import javax.persistence.Table;
 @Table(name = "tb_PermissaoPessoaJuridica")
 public class PermissaoPessoaJuridica extends Permissao {
 	
-	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_JURIDICA;
-	
+
 	@ElementCollection( targetClass = PermissoesUsuario.class )
 	private List<PermissoesUsuario> listaDePermissoes;
 	
@@ -30,7 +31,7 @@ public class PermissaoPessoaJuridica extends Permissao {
 	
 	@Override
 	public TiposPermissao getTipoPermissao() {
-		return TIPO_PERMISSAO;
+		return Constantes.PERMISSAO_JURIDICA;
 	}
 	
 	@Override

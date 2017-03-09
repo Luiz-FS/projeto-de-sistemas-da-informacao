@@ -10,8 +10,8 @@ public class AnuncioServico extends Anuncio {
     @Column(name = "data_agendamento")
     private Date dataDeAgendamento;
 
-    public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota, String tipo) {
-        super(titulo, dataDeCriacao, valor, nota, tipo);
+    public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+        super(titulo, dataDeCriacao, valor, nota);
     }
 
     public AnuncioServico() {

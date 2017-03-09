@@ -10,21 +10,21 @@ public class Cartao {
 
     private Long idUsuario;
 
-    private double saldoDevedor;
-    private double saldoCredor;
+    private double valorDebito;
+    private double valorSaque;
     private double saldoTotal;
 
     public Cartao(Long idUsuario) {
         this.idUsuario = idUsuario;
 
-        this.saldoDevedor = 0;
-        this.saldoCredor = 0;
+        this.valorDebito = 0;
+        this.valorSaque = 0;
         this.saldoTotal = 0;
     }
 
     public void debitar(double valor) {
         if (!Validador.isValorNegativo(valor)) {
-            this.saldoDevedor += valor;
+            this.valorDebito += valor;
 
             atualizarSaldoTotal();
         }
@@ -32,26 +32,26 @@ public class Cartao {
 
     public void sacar(double valor) {
         if (!Validador.isValorNegativo(valor)) {
-            this.saldoCredor += valor;
+            this.valorSaque += valor;
 
             atualizarSaldoTotal();
         }
     }
 
     private void atualizarSaldoTotal() {
-        this.saldoTotal = saldoCredor - saldoDevedor;
+        this.saldoTotal = valorDebito - valorSaque;
     }
 
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public double getSaldoDevedor() {
-        return saldoDevedor;
+    public double getValorDebito() {
+        return valorDebito;
     }
 
-    public double getSaldoCredor() {
-        return saldoCredor;
+    public double getValorSaque() {
+        return valorSaque;
     }
 
     public double getSaldoTotal() {
@@ -78,8 +78,8 @@ public class Cartao {
     public String toString() {
         return "Cartao{" +
                 "idUsuario=" + idUsuario +
-                ", saldoDevedor=" + saldoDevedor +
-                ", saldoCredor=" + saldoCredor +
+                ", valorDebito=" + valorDebito +
+                ", valorSaque=" + valorSaque +
                 ", saldoTotal=" + saldoTotal +
                 '}';
     }

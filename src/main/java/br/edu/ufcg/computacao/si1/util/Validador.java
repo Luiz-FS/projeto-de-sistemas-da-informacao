@@ -8,7 +8,7 @@ public class Validador {
     private static final String REGEX_EMAIL = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    private static final String REGEX_PALAVRAS = "[a-zA-Z\\s,]+";
+    private static final String REGEX_PALAVRAS = "[a-zA-Z\\u00C0-\\u00FF ]+";
 
     public static boolean isStringNull(String string){
         return (string == null);
@@ -30,12 +30,8 @@ public class Validador {
         return email.matches(REGEX_EMAIL);
     }
 
-    public static boolean isAutorizado(Usuario usuario, Permissao permissao){
-
-        if(usuario.getPermissao() == permissao){
-            return true;
-        }
-        return false;
+    public static boolean isAutorizado(Usuario usuario, Permissao permissao) {
+        return (usuario.getPermissao() == permissao);
 
     }
 

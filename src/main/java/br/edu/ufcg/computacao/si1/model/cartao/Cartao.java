@@ -23,7 +23,7 @@ public class Cartao {
     }
 
     public void debitar(double valor) {
-        if (!Validador.isValorNegativo(valor)) {
+        if (! Validador.isValorNegativo(valor)) {
             this.valorDebito += valor;
 
             atualizarSaldoTotal();
@@ -31,7 +31,7 @@ public class Cartao {
     }
 
     public void sacar(double valor) {
-        if (!Validador.isValorNegativo(valor)) {
+        if (! Validador.isValorNegativo(valor)) {
             this.valorSaque += valor;
 
             atualizarSaldoTotal();

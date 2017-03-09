@@ -12,7 +12,7 @@ public enum TiposPermissao {
 
     private String permissao;
 
-    private PermissaoUsuario(String permissao) {
+    private TiposPermissao(String permissao) {
         this.permissao = permissao;
     }
 

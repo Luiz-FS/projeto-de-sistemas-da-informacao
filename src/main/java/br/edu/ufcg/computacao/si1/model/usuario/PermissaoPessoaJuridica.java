@@ -3,11 +3,8 @@ package br.edu.ufcg.computacao.si1.model.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,15 +15,11 @@ import javax.persistence.Table;
 
 @Entity(name = "PermissaoPessoaJuridica")
 @Table(name = "tb_PermissaoPessoaJuridica")
-public class PermissaoPessoaJuridica implements Permissao {
+public class PermissaoPessoaJuridica extends Permissao {
 	
 	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_JURIDICA;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@OneToMany
+	@ElementCollection( targetClass = PermissoesUsuario.class )
 	private List<PermissoesUsuario> listaDePermissoes;
 	
 	public PermissaoPessoaJuridica() {
@@ -38,6 +31,11 @@ public class PermissaoPessoaJuridica implements Permissao {
 	@Override
 	public TiposPermissao getTipoPermissao() {
 		return TIPO_PERMISSAO;
+	}
+	
+	@Override
+	public List<PermissoesUsuario> getPermissoes() {
+		return this.listaDePermissoes;
 	}
 	
 	private void addPermissoes() {

@@ -19,7 +19,7 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
 	private String email;
 	@Column
 	private String senha;
-	@Column
+	@OneToOne
 	private Permissao permissao;
 
 	public Usuario() {

@@ -3,11 +3,8 @@ package br.edu.ufcg.computacao.si1.model.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,15 +15,11 @@ import javax.persistence.Table;
 
 @Entity(name = "PermissaoPessoaFisica")
 @Table(name = "tb_PermissaoPessoaFisica")
-public class PermissaoPessoaFisica implements Permissao {
+public class PermissaoPessoaFisica extends Permissao {
 
 	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_PESSOA_FISICA;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
-	@OneToMany
+	@ElementCollection(targetClass = PermissoesUsuario.class )
 	private List<PermissoesUsuario> listaDePermissoes;
 
 	public PermissaoPessoaFisica() {
@@ -39,7 +32,12 @@ public class PermissaoPessoaFisica implements Permissao {
 	public TiposPermissao getTipoPermissao() {
 		return TIPO_PERMISSAO;
 	}
-
+	
+	@Override
+	public List<PermissoesUsuario> getPermissoes() {
+		return this.listaDePermissoes;
+	}
+	
 	private void addPermissoes() {
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);

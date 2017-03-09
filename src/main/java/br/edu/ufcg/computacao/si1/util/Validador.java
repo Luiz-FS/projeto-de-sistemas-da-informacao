@@ -2,7 +2,7 @@ package br.edu.ufcg.computacao.si1.util;
 
 public class Validador {
 
-    private static final String REGEX_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+    private static final String REGEX_EMAIL = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private static final String REGEX_PALAVRAS = "[a-zA-Z\\s,]+";

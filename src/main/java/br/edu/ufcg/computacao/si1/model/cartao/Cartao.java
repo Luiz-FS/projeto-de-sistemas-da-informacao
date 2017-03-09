@@ -10,52 +10,38 @@ public class Cartao {
 
     private Long idUsuario;
 
-    private double valorDebito;
-    private double valorSaque;
-    private double saldoTotal;
+    private double debito;
+    private double credito;
 
     public Cartao(Long idUsuario) {
         this.idUsuario = idUsuario;
 
-        this.valorDebito = 0;
-        this.valorSaque = 0;
-        this.saldoTotal = 0;
+        this.debito = 0;
+        this.credito = 0;
     }
 
     public void debitar(double valor) {
         if (! Validador.isValorNegativo(valor)) {
-            this.valorDebito += valor;
-
-            atualizarSaldoTotal();
+            this.debito += valor;
         }
     }
 
-    public void sacar(double valor) {
+    public void creditar(double valor) {
         if (! Validador.isValorNegativo(valor)) {
-            this.valorSaque += valor;
-
-            atualizarSaldoTotal();
+            this.credito += valor;
         }
-    }
-
-    private void atualizarSaldoTotal() {
-        this.saldoTotal = valorDebito - valorSaque;
     }
 
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public double getValorDebito() {
-        return valorDebito;
+    public double getDebito() {
+        return debito;
     }
 
-    public double getValorSaque() {
-        return valorSaque;
-    }
-
-    public double getSaldoTotal() {
-        return saldoTotal;
+    public double getCredito() {
+        return credito;
     }
 
     @Override
@@ -78,9 +64,8 @@ public class Cartao {
     public String toString() {
         return "Cartao{" +
                 "idUsuario=" + idUsuario +
-                ", valorDebito=" + valorDebito +
-                ", valorSaque=" + valorSaque +
-                ", saldoTotal=" + saldoTotal +
+                ", debito=" + debito +
+                ", credito=" + credito +
                 '}';
     }
 

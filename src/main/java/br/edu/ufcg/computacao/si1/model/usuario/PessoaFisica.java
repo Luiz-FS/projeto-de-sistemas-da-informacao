@@ -5,7 +5,14 @@ package br.edu.ufcg.computacao.si1.model.usuario;
  */
 public class PessoaFisica {
 
+    public PessoaFisica() {
+    }
+
     public enum Permissoes {
         MOVEL, IMOVEL;
     }
+
+
+
+
 }

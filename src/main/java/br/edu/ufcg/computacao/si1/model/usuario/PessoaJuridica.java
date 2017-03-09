@@ -5,7 +5,13 @@ package br.edu.ufcg.computacao.si1.model.usuario;
  */
 public class PessoaJuridica {
 
+    public PessoaJuridica() {
+    }
+
     public enum Permissoes {
         SERVICO, EMPREGO;
     }
+
+
+
 }

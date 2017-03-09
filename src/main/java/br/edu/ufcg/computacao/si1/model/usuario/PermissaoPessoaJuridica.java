@@ -19,27 +19,27 @@ import javax.persistence.Table;
 @Entity(name = "PermissaoPessoaJuridica")
 @Table(name = "tb_PermissaoPessoaJuridica")
 public class PermissaoPessoaJuridica implements Permissao {
-
+	
 	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_JURIDICA;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
 	@OneToMany
 	private List<PermissoesUsuario> listaDePermissoes;
-
+	
 	public PermissaoPessoaJuridica() {
 		this.listaDePermissoes = new ArrayList<PermissoesUsuario>();
-
+		
 		addPermissoes();
 	}
-
+	
 	@Override
 	public TiposPermissao getTipoPermissao() {
 		return TIPO_PERMISSAO;
 	}
-
+	
 	private void addPermissoes() {
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);

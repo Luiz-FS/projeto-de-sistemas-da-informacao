@@ -7,6 +7,6 @@ public interface Permissao {
 	 * 
 	 * @return String tipo de permissao.
 	 */
-	public String getTipoPermissao();
+	public TiposPermissao getTipoPermissao();
 
 }

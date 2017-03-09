@@ -27,6 +27,6 @@ public class AnuncioFactory {
     public static Anuncio criaServico(Long idUsuario, String titulo, Date dataDeCriacao, double valor,
                                       Notas nota, String tipo) {
 
-        return new AnuncioServico(titulo, dataDeCriacao, valor, nota, tipo);
+        return new AnuncioServico(titulo, dataDeCriacao, valor, nota);
     }
 }

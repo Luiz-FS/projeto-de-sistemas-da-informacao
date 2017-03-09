@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Table(name = "tb_usuario")
 public class Usuario extends org.springframework.security.core.userdetails.User {
 	
+	private static final String USUARIO_DEFAULT = "default";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -17,16 +19,16 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
 	private String email;
 	@Column
 	private String senha;
-	@OneToOne
+	@Column
 	private Permissao permissao;
 
 	public Usuario() {
-		super("default", "default", AuthorityUtils.createAuthorityList("USER"));
+		super(USUARIO_DEFAULT, USUARIO_DEFAULT,
+				AuthorityUtils.createAuthorityList(TiposPermissao.PERMISSAO_PESSOA_FISICA.getPermissao()));
 	}
 
 	public Usuario(String nome, String email, String senha, Permissao permissao) {
-
-		super(email, senha, AuthorityUtils.createAuthorityList(permissao.getTipoPermissao()));
+		super(email, senha, AuthorityUtils.createAuthorityList(permissao.getTipoPermissao().getPermissao()));
 
 		this.nome = nome;
 		this.email = email;

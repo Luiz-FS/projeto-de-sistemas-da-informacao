@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.dto;
 
+import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 /**
@@ -11,9 +12,9 @@ public class UsuarioDto {
     private Long id;
     private String nome;
     private String email;
-    private String permissao;
+    private Permissao permissao;
 
-    public UsuarioDto(Long id, String nome, String email, String permissao) {
+    public UsuarioDto(Long id, String nome, String email, Permissao permissao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -24,7 +25,7 @@ public class UsuarioDto {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
-        this.permissao = getPermissao();
+        this.permissao = usuario.getPermissao();
     }
 
 
@@ -52,11 +53,11 @@ public class UsuarioDto {
         this.email = email;
     }
 
-    public String getPermissao() {
+    public Permissao getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(String permissao) {
+    public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
     }
 }

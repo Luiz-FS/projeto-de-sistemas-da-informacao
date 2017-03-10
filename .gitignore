@@ -3,6 +3,7 @@
 .project
 .idea/
 .bin/
+.settings/
 ad-extreme.iml
 mvnw
 mvnw.cmd

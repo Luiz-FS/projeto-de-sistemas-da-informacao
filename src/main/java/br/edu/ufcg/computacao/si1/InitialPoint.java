@@ -9,4 +9,5 @@ public class InitialPoint {
 	public static void main(String[] args) {
 		SpringApplication.run(InitialPoint.class, args);
 	}
+	
 }

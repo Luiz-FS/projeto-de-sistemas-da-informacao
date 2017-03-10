@@ -1,32 +1,31 @@
 package br.edu.ufcg.computacao.si1.factories;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
+import java.util.Date;
+
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioProduto;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
-
-import java.util.Date;
+import br.edu.ufcg.computacao.si1.model.anuncio.Categoria;
 
 /**
  * Created by Antonio Pedro on 07/03/2017.
  */
 public class AnuncioFactory {
 
-    public static Anuncio criaEmprego(Long idUsuario, String titulo, Date dataCriacao, double valor, Notas nota) {
+    public static Anuncio criaEmprego(Long idUsuario, String titulo, Date dataCriacao, double valor) {
 
-        return new AnuncioEmprego(titulo, dataCriacao, nota);
+        return new AnuncioEmprego(titulo, dataCriacao);
     }
 
-    public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor, Notas nota,
-                                      AnuncioProduto.Categoria categoria) {
+    public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor,
+                                      Categoria categoria) {
 
-        return new AnuncioProduto(titulo, dataCriacao, valor, nota, categoria);
+        return new AnuncioProduto(titulo, dataCriacao, valor, categoria);
     }
 
-    public static Anuncio criaServico(Long idUsuario, String titulo, Date dataDeCriacao, double valor,
-                                      Notas nota, String tipo) {
+    public static Anuncio criaServico(Long idUsuario, String titulo, Date dataDeCriacao, double valor,String tipo) {
 
-        return new AnuncioServico(titulo, dataDeCriacao, valor, nota);
+        return new AnuncioServico(titulo, dataDeCriacao, valor);
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * Classe que da permissão do tipo pessoa juridica.
@@ -13,6 +12,7 @@ import javax.persistence.Table;
  * @author Davi Laerte
  */
 
+@Entity
 public class PermissaoPessoaJuridica extends Permissao {
 	
 

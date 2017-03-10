@@ -2,6 +2,7 @@
 .classpath
 .project
 .idea/
+.bin/
 ad-extreme.iml
 mvnw
 mvnw.cmd

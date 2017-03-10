@@ -13,12 +13,9 @@ import javax.persistence.Table;
  * @author Davi Laerte
  */
 
-@Entity(name = "PermissaoPessoaJuridica")
-@Table(name = "tb_PermissaoPessoaJuridica")
 public class PermissaoPessoaJuridica extends Permissao {
 	
-	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_JURIDICA;
-	
+
 	@ElementCollection( targetClass = PermissoesUsuario.class )
 	private List<PermissoesUsuario> listaDePermissoes;
 	
@@ -30,7 +27,7 @@ public class PermissaoPessoaJuridica extends Permissao {
 	
 	@Override
 	public TiposPermissao getTipoPermissao() {
-		return TIPO_PERMISSAO;
+		return TiposPermissao.PERMISSAO_JURIDICA;
 	}
 	
 	@Override

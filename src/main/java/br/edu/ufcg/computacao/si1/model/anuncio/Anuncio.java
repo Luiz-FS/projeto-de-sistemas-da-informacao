@@ -14,37 +14,42 @@ import java.util.Date;
 @Table(name = "tb_anuncio")
 public abstract class Anuncio {
 
-	private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+	protected final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "_id", nullable = false, unique = true)
+	@Column(name = "_id")
 	private Long _id;
 
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@Column(name = "titulo", nullable = false)
+	@Column(name = "titulo")
 	private String titulo;
 
-	@Column(name = "data_criacao", nullable = false)
+	@Column(name = "data_criacao")
 	private Date dataDeCriacao;
 
 	@Column(name = "valor")
 	private double valor;
-
+	
+	// inicia null, so muda quando usuario
+	// der uma nota ele deve mudar.
 	@Column(name = "nota")
 	private Notas nota;
 
 	// usado apenas no Servico.
 	@Column(name = "data_agendamento")
 	protected Date dataDeAgendamento;
+	
+	// usado apenas no Emprego.
+	@Column(name = "categoria")
+	protected Categoria categoria;
 
-	public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+	public Anuncio(String titulo, Date dataDeCriacao, double valor) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.valor = valor;
-		this.nota = nota;
 	}
 
 	public Anuncio() {
@@ -93,7 +98,7 @@ public abstract class Anuncio {
 
 	// retorna null, pois não existe para
 	// alguns tipos de anuncio.
-	public Date getDataDeAgendamento() {
+	public String getDataDeAgendamento() {
 		return null;
 	}
 
@@ -101,6 +106,18 @@ public abstract class Anuncio {
 	// de anuncio.
 	public void setDataDeAgendamento(Date dataDeAgendamento) {
 	}
+	
+	// retorna null, pois não existe para
+	// alguns tipos de anuncio.
+	public Categoria getCategoria() {
+        return null;
+    }
+	
+	// nao deve ser setado para alguns tipos
+	// de anuncio.
+	public void setCategoria(Categoria categoria) {
+    }
+
 
 	@Override
 	public boolean equals(Object object) {

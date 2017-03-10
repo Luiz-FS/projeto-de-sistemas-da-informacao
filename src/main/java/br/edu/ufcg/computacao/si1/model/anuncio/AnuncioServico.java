@@ -2,9 +2,10 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import br.edu.ufcg.computacao.si1.model.Notas;
 
-import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class AnuncioServico extends Anuncio {
 
     public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota) {

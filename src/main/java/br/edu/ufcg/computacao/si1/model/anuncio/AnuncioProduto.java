@@ -2,11 +2,13 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import br.edu.ufcg.computacao.si1.model.Notas;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
 /**
  * Created by luiz on 07/03/17.
  */
+@Entity
 public class AnuncioProduto extends Anuncio {
 
     private Categoria categoria;
@@ -23,6 +25,10 @@ public class AnuncioProduto extends Anuncio {
     public AnuncioProduto(Categoria categoria) {
         super();
         this.categoria = categoria;
+    }
+
+    public AnuncioProduto() {
+        super();
     }
 
     public Categoria getCategoria() {

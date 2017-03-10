@@ -13,8 +13,6 @@ import javax.persistence.Table;
  * @author Davi Laerte
  */
 
-@Entity(name = "PermissaoPessoaFisica")
-@Table(name = "tb_PermissaoPessoaFisica")
 public class PermissaoPessoaFisica extends Permissao {
 
 	private final TiposPermissao TIPO_PERMISSAO = TiposPermissao.PERMISSAO_PESSOA_FISICA;

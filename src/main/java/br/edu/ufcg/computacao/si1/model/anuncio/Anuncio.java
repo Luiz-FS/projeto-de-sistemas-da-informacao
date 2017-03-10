@@ -36,10 +36,6 @@ public abstract class Anuncio {
 	@Column(name = "nota")
 	private Notas nota;
 
-	// usado apenas no Servico.
-	@Column(name = "data_agendamento")
-	protected Date dataDeAgendamento;
-
 	public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
@@ -91,16 +87,6 @@ public abstract class Anuncio {
 		this.nota = nota;
 	}
 
-	// retorna null, pois não existe para
-	// alguns tipos de anuncio.
-	public Date getDataDeAgendamento() {
-		return null;
-	}
-
-	// nao deve ser setado para alguns tipos
-	// de anuncio.
-	public void setDataDeAgendamento(Date dataDeAgendamento) {
-	}
 
 	@Override
 	public boolean equals(Object object) {

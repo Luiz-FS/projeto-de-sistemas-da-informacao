@@ -1,14 +1,18 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import org.springframework.security.core.authority.AuthorityUtils;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
-public class Usuario extends org.springframework.security.core.userdetails.User {
-	
-	private static final String USUARIO_DEFAULT = "default";
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,16 +23,13 @@ public class Usuario extends org.springframework.security.core.userdetails.User 
 	private String email;
 	@Column
 	private String senha;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	private Permissao permissao;
 
 	public Usuario() {
-		super(USUARIO_DEFAULT, USUARIO_DEFAULT,
-				AuthorityUtils.createAuthorityList(TiposPermissao.PERMISSAO_PESSOA_FISICA.getPermissao()));
 	}
 
 	public Usuario(String nome, String email, String senha, Permissao permissao) {
-		super(email, senha, AuthorityUtils.createAuthorityList(permissao.getTipoPermissao().getPermissao()));
 
 		this.nome = nome;
 		this.email = email;

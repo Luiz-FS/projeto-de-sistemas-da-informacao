@@ -1,7 +1,23 @@
 package br.edu.ufcg.computacao.si1;
 
+import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioProduto;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
+import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
+import br.edu.ufcg.computacao.si1.model.usuario.PermissaoPessoaFisica;
+import br.edu.ufcg.computacao.si1.model.usuario.PermissaoPessoaJuridica;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class InitialPoint {
@@ -10,4 +26,32 @@ public class InitialPoint {
 		SpringApplication.run(InitialPoint.class, args);
 	}
 	
+	@Bean
+	public CommandLineRunner initializeDb(AnuncioRepository repository){
+	   return (args) -> {
+	       repository.deleteAll();
+//
+//		   Permissao permissao = new PermissaoPessoaFisica();
+//		   Usuario usuario = new Usuario("Davi", "davi@seila.com", "seila",permissao);
+//
+//		   Permissao permissao2 = new PermissaoPessoaJuridica();
+//		   Usuario usuario2 = new Usuario("DaviExecutivo", "daviLaerte@massa.com", "massa", permissao2);
+
+		   Anuncio anuncioEmprego = new AnuncioEmprego("titulo padrao", new Date(), Notas.NOTA_CINCO);
+
+		   Anuncio anuncioProduto = new AnuncioProduto("titulo padrao", new Date(), 30, Notas.NOTA_CINCO, AnuncioProduto.Categoria.IMOVEL);
+
+		   Anuncio anuncioServico = new AnuncioServico("titulo padrao", new Date(), 49, Notas.NOTA_CINCO);
+
+		   ((AnuncioServico) anuncioServico).setDataDeAgendamento( new Date());
+
+		   repository.save(anuncioEmprego);
+		   repository.save(anuncioServico);
+		   repository.save(anuncioProduto);
+
+
+//		   repository.save(usuario);
+//		   repository.save(usuario2);
+	   };
+	}
 }

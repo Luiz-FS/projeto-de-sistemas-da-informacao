@@ -14,42 +14,33 @@ import java.util.Date;
 @Table(name = "tb_anuncio")
 public abstract class Anuncio {
 
-	protected final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+	private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "_id")
+	@Column(name = "_id", nullable = false, unique = true)
 	private Long _id;
 
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@Column(name = "titulo")
+	@Column(name = "titulo", nullable = false)
 	private String titulo;
 
-	@Column(name = "data_criacao")
+	@Column(name = "data_criacao", nullable = false)
 	private Date dataDeCriacao;
 
 	@Column(name = "valor")
 	private double valor;
-	
-	// inicia null, so muda quando usuario
-	// der uma nota ele deve mudar.
+
 	@Column(name = "nota")
 	private Notas nota;
 
-	// usado apenas no Servico.
-	@Column(name = "data_agendamento")
-	protected Date dataDeAgendamento;
-	
-	// usado apenas no Emprego.
-	@Column(name = "categoria")
-	protected Categoria categoria;
-
-	public Anuncio(String titulo, Date dataDeCriacao, double valor) {
+	public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.valor = valor;
+		this.nota = nota;
 	}
 
 	public Anuncio() {
@@ -95,28 +86,6 @@ public abstract class Anuncio {
 	public void setNota(Notas nota) {
 		this.nota = nota;
 	}
-
-	// retorna null, pois não existe para
-	// alguns tipos de anuncio.
-	public String getDataDeAgendamento() {
-		return null;
-	}
-
-	// nao deve ser setado para alguns tipos
-	// de anuncio.
-	public void setDataDeAgendamento(Date dataDeAgendamento) {
-	}
-	
-	// retorna null, pois não existe para
-	// alguns tipos de anuncio.
-	public Categoria getCategoria() {
-        return null;
-    }
-	
-	// nao deve ser setado para alguns tipos
-	// de anuncio.
-	public void setCategoria(Categoria categoria) {
-    }
 
 
 	@Override

@@ -1,26 +1,35 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import br.edu.ufcg.computacao.si1.model.Notas;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class AnuncioServico extends Anuncio {
 
-	public AnuncioServico(String titulo, Date dataDeCriacao, double valor) {
-		super(titulo, dataDeCriacao, valor);
-	}
+    private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");//isso sera removido pois temos uma classe CONSTANTES
 
-	public AnuncioServico() {
-		super();
-	}
 
-	@Override
-	public String getDataDeAgendamento() {
-		return DATE_FORMAT.format(super.dataDeAgendamento);
-	}
+    @Column(name = "data_agendamento")
+    private Date dataDeAgendamento;
 
-	@Override
-	public void setDataDeAgendamento(Date dataDeAgendamento) {
-		super.dataDeAgendamento = dataDeAgendamento;
-	}
+    public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+        super(titulo, dataDeCriacao, valor, nota);
+    }
+
+    public AnuncioServico() {
+        super();
+    }
+
+    public String getDataDeAgendamento() {
+        return DATE_FORMAT.format(this.dataDeAgendamento);
+    }
+
+    public void setDataDeAgendamento(Date dataDeAgendamento) {
+        this.dataDeAgendamento = dataDeAgendamento;
+    }
 }

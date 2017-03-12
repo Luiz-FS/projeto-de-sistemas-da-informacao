@@ -37,8 +37,6 @@ public class PermissaoPessoaFisica extends Permissao {
 	}
 	
 	private void addPermissoes() {
-		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);
-		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_SERVICO);
 	}
 }

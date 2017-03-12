@@ -32,6 +32,10 @@ public class Cartao {
         }
     }
 
+    public double obterSaldoTotal() {
+        return debito - credito;
+    }
+
     public Long getIdUsuario() {
         return idUsuario;
     }

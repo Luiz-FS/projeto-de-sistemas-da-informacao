@@ -12,8 +12,8 @@ public class AnuncioServico extends Anuncio {
 	@Column(name = "data_agendamento")
 	protected Date dataDeAgendamento;
 	
-	public AnuncioServico(String titulo, Date dataDeCriacao, double valor) {
-		super(titulo, dataDeCriacao, valor, TIPO);
+	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario) {
+		super(titulo, dataDeCriacao, valor, TIPO, idUsuario);
 	}
 
 	public AnuncioServico() {

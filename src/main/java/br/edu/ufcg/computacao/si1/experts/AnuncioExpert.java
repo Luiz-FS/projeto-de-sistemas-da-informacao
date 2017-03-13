@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.experts;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
@@ -18,6 +20,7 @@ public class AnuncioExpert {
 		return repositorioAnuncio.save(anuncio);
 	}
 	
-	
-
+	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
+		return repositorioAnuncio.findByIdUsuario(idUsuario);
+	}
 }

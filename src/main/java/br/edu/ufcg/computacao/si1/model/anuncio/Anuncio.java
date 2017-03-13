@@ -37,11 +37,12 @@ public abstract class Anuncio {
 	@Column(name = "tipo")
 	private TipoAnuncio tipo;
 	
-	public Anuncio(String titulo, Date dataDeCriacao, double valor, TipoAnuncio tipo) {
+	public Anuncio(String titulo, Date dataDeCriacao, double valor, TipoAnuncio tipo, Long idUsuario) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.valor = valor;
 		this.tipo = tipo;
+		this.idUsuario = idUsuario;
 	}
 
 	public Anuncio() {
@@ -87,4 +88,9 @@ public abstract class Anuncio {
 	public void setTipo(TipoAnuncio tipo) {
 		this.tipo = tipo;
 	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+	
 }

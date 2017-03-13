@@ -15,4 +15,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 	// comentei pois ele não achou o tipo, foi tirado de anuncio.
     //@Query("select anuncio from Anuncio anuncio where anuncio.tipo = :tipo")
     //public List<Anuncio> findByTipo(String tipo);
+	
+	public List<Anuncio> findByIdUsuario(Long idUsuario);
 }

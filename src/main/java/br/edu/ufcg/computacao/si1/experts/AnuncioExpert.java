@@ -8,7 +8,6 @@ import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 
 /**
- * Created by Antonio Pedro on 07/03/2017.
  */
 public class AnuncioExpert {
 	
@@ -22,5 +21,15 @@ public class AnuncioExpert {
 	
 	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
 		return repositorioAnuncio.findByIdUsuario(idUsuario);
+	}
+	
+	public void contratarAnuncio(Anuncio anuncio) {
+		// debita e credita usuario
+		
+		deletarAnuncio(anuncio);
+	}
+		
+	private void deletarAnuncio(Anuncio anuncio) {
+		repositorioAnuncio.delete(anuncio);
 	}
 }

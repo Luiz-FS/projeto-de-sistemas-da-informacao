@@ -12,13 +12,9 @@ import java.util.*;
  */
 public class TokenCodificadorDecodificador {
 
-    private final long TEMPO_DE_EXPIRACAO;
-
     private Set<Key> chavesDeAcessso;
 
     public TokenCodificadorDecodificador() {
-
-        this.TEMPO_DE_EXPIRACAO = 1800000;
         this.chavesDeAcessso = new HashSet<Key>();
     }
 

@@ -1,33 +1,25 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-
-/**
- * Classe que da permissão do tipo pessoa juridica.
- * 
- * @author Davi Laerte
- */
-
 @Entity
 public class PermissaoPessoaJuridica extends Permissao {
-	
 
 	@ElementCollection( targetClass = PermissoesUsuario.class )
 	private List<PermissoesUsuario> listaDePermissoes;
 	
 	public PermissaoPessoaJuridica() {
-		this.listaDePermissoes = new ArrayList<PermissoesUsuario>();
+		this.listaDePermissoes = new ArrayList<>();
 		
 		addPermissoes();
 	}
 	
 	@Override
 	public TiposPermissao getTipoPermissao() {
-		return TiposPermissao.PERMISSAO_JURIDICA;
+		return TiposPermissao.PERMISSAO_PESSOA_JURIDICA;
 	}
 	
 	@Override
@@ -40,5 +32,4 @@ public class PermissaoPessoaJuridica extends Permissao {
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_SERVICO);
 	}
-
 }

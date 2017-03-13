@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
-
 import javax.persistence.Entity;
 import java.util.Date;
 
@@ -17,7 +15,7 @@ public class AnuncioProduto extends Anuncio {
         MOVEL, IMOVEL;
     }
 
-    public AnuncioProduto (String titulo, Date dataCriacao, double valor, Notas nota, Categoria categoria) {
+    public AnuncioProduto (String titulo, Date dataCriacao, double valor, AvaliacaoDeAnuncio nota, Categoria categoria) {
         super(titulo, dataCriacao,valor,nota);
         this.categoria = categoria;
     }

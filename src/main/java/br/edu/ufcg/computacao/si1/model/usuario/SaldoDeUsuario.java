@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model.cartao;
+package br.edu.ufcg.computacao.si1.model.usuario;
 
 import br.edu.ufcg.computacao.si1.util.Validador;
 
@@ -6,14 +6,14 @@ import br.edu.ufcg.computacao.si1.util.Validador;
  * @author Lucas Vieira
  */
 
-public class Cartao {
+public class SaldoDeUsuario {
 
     private Long idUsuario;
 
     private double debito;
     private double credito;
 
-    public Cartao(Long idUsuario) {
+    public SaldoDeUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
 
         this.debito = 0;
@@ -53,9 +53,9 @@ public class Cartao {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
 
-        Cartao cartao = (Cartao) object;
+        SaldoDeUsuario saldoDeUsuario = (SaldoDeUsuario) object;
 
-        return idUsuario != null ? idUsuario.equals(cartao.idUsuario) : cartao.idUsuario == null;
+        return idUsuario != null ? idUsuario.equals(saldoDeUsuario.idUsuario) : saldoDeUsuario.idUsuario == null;
 
     }
 
@@ -66,7 +66,7 @@ public class Cartao {
 
     @Override
     public String toString() {
-        return "Cartao{" +
+        return "SaldoDeUsuario{" +
                 "idUsuario=" + idUsuario +
                 ", debito=" + debito +
                 ", credito=" + credito +

@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.experts;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.model.anuncio.AvaliacaoDeAnuncio;
 import br.edu.ufcg.computacao.si1.util.Validador;
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Date;
 public class AnuncioExpert {
 
 
-    public static boolean adiciona(String titulo, Date dataCriacao, double valor, Notas nota, String tipo, String idUsuario){
+    public static boolean adiciona(String titulo, Date dataCriacao, double valor, AvaliacaoDeAnuncio nota, String tipo, String idUsuario){
 
         if(Validador.isStringNull(titulo) || Validador.isStringNull(tipo) || Validador.isStringNull(idUsuario)
                 || Validador.isStringVazia(titulo) || Validador.isStringVazia(tipo) || Validador.isStringVazia(idUsuario)){
@@ -71,7 +71,7 @@ public class AnuncioExpert {
         return false;
     }
 
-    public static boolean darNota(Long idAnuncio, Long idUsuarioComprador, Notas nota){
+    public static boolean darNota(Long idAnuncio, Long idUsuarioComprador, AvaliacaoDeAnuncio nota){
         if(Validador.isValorNegativo(idAnuncio) || Validador.isValorNegativo(idUsuarioComprador)){
             return false;
         }

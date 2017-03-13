@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
 public class Usuario {
@@ -17,20 +16,22 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	@Column
 	private String nome;
+
 	@Column(unique = true)
 	private String email;
+
 	@Column
 	private String senha;
+
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	private Permissao permissao;
 
-	public Usuario() {
-	}
+	public Usuario() {}
 
 	public Usuario(String nome, String email, String senha, Permissao permissao) {
-
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;

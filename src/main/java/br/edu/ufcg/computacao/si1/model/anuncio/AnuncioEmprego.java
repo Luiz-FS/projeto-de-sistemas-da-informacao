@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
-
 import javax.persistence.Entity;
 import java.util.Date;
 
@@ -13,7 +11,7 @@ public class AnuncioEmprego extends Anuncio {
 
 	private static final Double VALOR_ZERO = 0.0;
 
-	public AnuncioEmprego(String titulo, Date dataCriacao, Notas nota) {
+	public AnuncioEmprego(String titulo, Date dataCriacao, AvaliacaoDeAnuncio nota) {
 		super(titulo, dataCriacao, VALOR_ZERO, nota);
 	}
 

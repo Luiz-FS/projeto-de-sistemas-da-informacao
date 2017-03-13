@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
-
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,9 +32,9 @@ public abstract class Anuncio {
 	private double valor;
 
 	@Column(name = "nota")
-	private Notas nota;
+	private AvaliacaoDeAnuncio nota;
 
-	public Anuncio(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+	public Anuncio(String titulo, Date dataDeCriacao, double valor, AvaliacaoDeAnuncio nota) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.valor = valor;
@@ -47,7 +45,7 @@ public abstract class Anuncio {
 		this.titulo = "";
 		this.dataDeCriacao = new Date();
 		this.valor = 0;
-		this.nota = Notas.NOTA_ZERO;
+		this.nota = AvaliacaoDeAnuncio.NOTA_ZERO;
 	}
 
 	/**
@@ -79,11 +77,11 @@ public abstract class Anuncio {
 		this.valor = valor;
 	}
 
-	public Notas getNota() {
+	public AvaliacaoDeAnuncio getNota() {
 		return nota;
 	}
 
-	public void setNota(Notas nota) {
+	public void setNota(AvaliacaoDeAnuncio nota) {
 		this.nota = nota;
 	}
 

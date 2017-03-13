@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Notas;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.text.DateFormat;
@@ -17,7 +15,7 @@ public class AnuncioServico extends Anuncio {
     @Column(name = "data_agendamento")
     private Date dataDeAgendamento;
 
-    public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Notas nota) {
+    public AnuncioServico(String titulo, Date dataDeCriacao, double valor, AvaliacaoDeAnuncio nota) {
         super(titulo, dataDeCriacao, valor, nota);
     }
 

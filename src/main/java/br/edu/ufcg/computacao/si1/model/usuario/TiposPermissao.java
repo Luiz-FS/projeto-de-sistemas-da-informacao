@@ -1,11 +1,9 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-/**
- * Created by luiz on 08/03/17.
- */
 public enum TiposPermissao {
 
-    PERMISSAO_PESSOA_FISICA("USER"), PERMISSAO_JURIDICA("COMPANY");
+    PERMISSAO_PESSOA_FISICA("USER"),
+    PERMISSAO_PESSOA_JURIDICA("COMPANY");
 
     private String permissao;
 

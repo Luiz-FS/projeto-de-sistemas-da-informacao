@@ -1,27 +1,32 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
 public class AnuncioProduto extends Anuncio {
-
-	public AnuncioProduto(String titulo, Date dataCriacao, double valor, Categoria categoria) {
-		super(titulo, dataCriacao, valor);
-		super.categoria = categoria;
+	
+	private static final TipoAnuncio TIPO = TipoAnuncio.PRODUTO;
+	
+	@Column(name = "categoria")
+	private CategoriaAnuncioProduto categoria;
+	
+	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncioProduto categoria) {
+		super(titulo, dataCriacao, valor, TIPO);
+		this.categoria = categoria;
 	}
 
 	public AnuncioProduto() {
 		super();
+		this.categoria = CategoriaAnuncioProduto.DEFAULT;
 	}
-
-	@Override
-	public Categoria getCategoria() {
-		return super.categoria;
-	}
-
-	@Override
-	public void setCategoria(Categoria categoria) {
-		super.categoria = categoria;
+	
+	public CategoriaAnuncioProduto getCategoria() {
+        return this.categoria;
+    }
+	
+	public void setCategoria(CategoriaAnuncioProduto categoria) {
+		this.categoria = categoria;
 	}
 }

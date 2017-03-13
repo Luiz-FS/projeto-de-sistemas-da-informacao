@@ -1,26 +1,30 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
 public class AnuncioServico extends Anuncio {
-
+	
+	private static final TipoAnuncio TIPO = TipoAnuncio.SERVICO;
+	
+	@Column(name = "data_agendamento")
+	protected Date dataDeAgendamento;
+	
 	public AnuncioServico(String titulo, Date dataDeCriacao, double valor) {
-		super(titulo, dataDeCriacao, valor);
+		super(titulo, dataDeCriacao, valor, TIPO);
 	}
 
 	public AnuncioServico() {
 		super();
 	}
 
-	@Override
 	public String getDataDeAgendamento() {
-		return DATE_FORMAT.format(super.dataDeAgendamento);
+		return DATE_FORMAT.format(this.dataDeAgendamento);
 	}
 
-	@Override
 	public void setDataDeAgendamento(Date dataDeAgendamento) {
-		super.dataDeAgendamento = dataDeAgendamento;
+		this.dataDeAgendamento = dataDeAgendamento;
 	}
 }

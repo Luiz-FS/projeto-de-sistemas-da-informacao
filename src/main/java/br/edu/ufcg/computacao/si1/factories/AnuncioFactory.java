@@ -6,7 +6,7 @@ import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioEmprego;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioProduto;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
-import br.edu.ufcg.computacao.si1.model.anuncio.Categoria;
+import br.edu.ufcg.computacao.si1.model.anuncio.CategoriaAnuncioProduto;
 
 /**
  * Created by Antonio Pedro on 07/03/2017.
@@ -19,7 +19,7 @@ public class AnuncioFactory {
     }
 
     public static Anuncio criaProduto(String titulo, Date dataCriacao, double valor,
-                                      Categoria categoria) {
+                                      CategoriaAnuncioProduto categoria) {
 
         return new AnuncioProduto(titulo, dataCriacao, valor, categoria);
     }

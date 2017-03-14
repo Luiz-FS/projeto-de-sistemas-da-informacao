@@ -29,6 +29,9 @@ public class Usuario {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	private Permissao permissao;
 
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
+	private SaldoDeUsuario saldoDeUsuario;
+
 	public Usuario() {}
 
 	public Usuario(String nome, String email, String senha, Permissao permissao) {
@@ -36,6 +39,7 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.permissao = permissao;
+		this.saldoDeUsuario = new SaldoDeUsuario();
 	}
 
 	public Long getId() {
@@ -76,5 +80,13 @@ public class Usuario {
 
 	public void setPermissao(Permissao permissao) {
 		this.permissao = permissao;
+	}
+
+	public SaldoDeUsuario getSaldoDeUsuario() {
+		return saldoDeUsuario;
+	}
+
+	public void setSaldoDeUsuario(SaldoDeUsuario saldoDeUsuario) {
+		this.saldoDeUsuario = saldoDeUsuario;
 	}
 }

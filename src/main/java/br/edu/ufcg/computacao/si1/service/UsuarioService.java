@@ -1,20 +1,53 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface UsuarioService {
+@Service
+public class UsuarioService {
 
-    Usuario create(Usuario usuario);
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    Usuario getById(Long id);
+    public Usuario create(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 
-    Usuario getByEmail(String email);
+    public Usuario getById(Long id) {
+        return usuarioRepository.findOne(id);
+    }
 
-    List<Usuario> getAll();
+    public Usuario getByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
 
-    boolean update(Usuario usuario);
+    public List<Usuario> getAll() {
+        return usuarioRepository.findAll();
+    }
 
-    boolean delete(Long id);
+    public Usuario update(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public void delete(Long id) {
+        usuarioRepository.delete(id);
+    }
+
+    public void debitarSaldoUsuario(Long idUsuario, double valor) {
+        Usuario usuario = getById(idUsuario);
+
+        usuario.getSaldoDeUsuario().debitar(valor);
+        update(usuario);
+    }
+
+    public void creditarSaldoUsuario(Long idUsuario, double valor) {
+        Usuario usuario = getById(idUsuario);
+
+        usuario.getSaldoDeUsuario().creditar(valor);
+        update(usuario);
+    }
 }

@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.AvaliacaoDeAnuncio;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +19,12 @@ public class Avaliacao {
 	private Long _id;
 	
 	@Column(name = "nota")
-	private Notas nota;
+	private AvaliacaoDeAnuncio nota;
 	
 	@Column(name = "comentarios")
 	private String comentarios;
 	
-	public Avaliacao(Notas nota, String comentarios) {
+	public Avaliacao(AvaliacaoDeAnuncio nota, String comentarios) {
 		this.nota = nota;
 		this.comentarios = comentarios;
 	}
@@ -31,11 +33,11 @@ public class Avaliacao {
 
 	}
 
-	public Notas getNota() {
+	public AvaliacaoDeAnuncio getNota() {
 		return nota;
 	}
 
-	public void setNota(Notas nota) {
+	public void setNota(AvaliacaoDeAnuncio nota) {
 		this.nota = nota;
 	}
 

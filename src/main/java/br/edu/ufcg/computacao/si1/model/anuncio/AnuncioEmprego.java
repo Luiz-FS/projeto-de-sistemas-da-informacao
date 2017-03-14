@@ -9,8 +9,8 @@ public class AnuncioEmprego extends Anuncio {
 	private static final TipoAnuncio TIPO = TipoAnuncio.EMPREGO;
 	private static final Double VALOR_ZERO = 0.0;
 
-	public AnuncioEmprego(String titulo, Date dataCriacao, Long idUsuario) {
-		super(titulo, dataCriacao, VALOR_ZERO, TIPO, idUsuario);
+	public AnuncioEmprego(String titulo, Date dataCriacao, Long idUsuario, String descricao) {
+		super(titulo, dataCriacao, VALOR_ZERO, TIPO, idUsuario, descricao);
 	}
 
 	public AnuncioEmprego() {

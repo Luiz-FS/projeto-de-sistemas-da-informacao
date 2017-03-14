@@ -1,10 +1,9 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Entity
 public class AnuncioServico extends Anuncio {
@@ -14,8 +13,8 @@ public class AnuncioServico extends Anuncio {
 	@Column(name = "data_agendamento")
 	protected Date dataDeAgendamento;
 
-	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario) {
-		super(titulo, dataDeCriacao, valor, TIPO, idUsuario);
+	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario, String descricao) {
+		super(titulo, dataDeCriacao, valor, TIPO, idUsuario, descricao);
 	}
 
     public AnuncioServico() {

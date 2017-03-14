@@ -2,23 +2,25 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 public class AnuncioServico extends Anuncio {
-	
+
 	private static final TipoAnuncio TIPO = TipoAnuncio.SERVICO;
-	
+
 	@Column(name = "data_agendamento")
 	protected Date dataDeAgendamento;
-	
+
 	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario) {
 		super(titulo, dataDeCriacao, valor, TIPO, idUsuario);
 	}
 
-	public AnuncioServico() {
-		super();
-	}
+    public AnuncioServico() {
+        super();
+    }
 
 	public String getDataDeAgendamento() {
 		return DATE_FORMAT.format(this.dataDeAgendamento);

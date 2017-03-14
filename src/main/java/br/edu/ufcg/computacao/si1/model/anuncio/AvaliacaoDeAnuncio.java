@@ -1,6 +1,6 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.anuncio;
 
-public enum Notas {
+public enum AvaliacaoDeAnuncio {
 
     NOTA_ZERO,
     NOTA_UM,

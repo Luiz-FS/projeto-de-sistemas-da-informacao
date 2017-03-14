@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 public class AnuncioEmprego extends Anuncio {
-	
+
 	private static final TipoAnuncio TIPO = TipoAnuncio.EMPREGO;
 	private static final Double VALOR_ZERO = 0.0;
 

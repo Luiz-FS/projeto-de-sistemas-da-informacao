@@ -1,16 +1,9 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-
-/**
- * Classe que da permissão do tipo pessoa fisica.
- * 
- * @author Davi Laerte
- */
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class PermissaoPessoaFisica extends Permissao {
@@ -21,7 +14,7 @@ public class PermissaoPessoaFisica extends Permissao {
 	private List<PermissoesUsuario> listaDePermissoes;
 
 	public PermissaoPessoaFisica() {
-		this.listaDePermissoes = new ArrayList<PermissoesUsuario>();
+		this.listaDePermissoes = new ArrayList<>();
 
 		addPermissoes();
 	}
@@ -37,8 +30,6 @@ public class PermissaoPessoaFisica extends Permissao {
 	}
 	
 	private void addPermissoes() {
-		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);
-		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_SERVICO);
 	}
 }

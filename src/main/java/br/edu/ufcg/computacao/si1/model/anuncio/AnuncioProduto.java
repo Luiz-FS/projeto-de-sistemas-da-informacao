@@ -6,12 +6,12 @@ import java.util.Date;
 
 @Entity
 public class AnuncioProduto extends Anuncio {
-	
+
 	private static final TipoAnuncio TIPO = TipoAnuncio.PRODUTO;
-	
+
 	@Column(name = "categoria")
 	private CategoriaAnuncioProduto categoria;
-	
+
 	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncioProduto categoria, Long idUsuario) {
 		super(titulo, dataCriacao, valor, TIPO, idUsuario);
 		this.categoria = categoria;
@@ -21,11 +21,11 @@ public class AnuncioProduto extends Anuncio {
 		super();
 		this.categoria = CategoriaAnuncioProduto.DEFAULT;
 	}
-	
+
 	public CategoriaAnuncioProduto getCategoria() {
         return this.categoria;
     }
-	
+
 	public void setCategoria(CategoriaAnuncioProduto categoria) {
 		this.categoria = categoria;
 	}

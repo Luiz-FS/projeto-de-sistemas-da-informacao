@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.controller;
+package br.edu.ufcg.computacao.si1.controller.restController;
 
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
@@ -17,7 +17,7 @@ import java.util.List;
  *
  */
 @RestController
-public class UsuarioController {
+public class UsuarioRestController {
 
     private final String OBTER_TODOS_USUARIOS = "/usuarios";
     private final String OBTER_USUARIO_POR_ID = "/usuarios/{id}";

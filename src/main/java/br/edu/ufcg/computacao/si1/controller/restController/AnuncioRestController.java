@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.controller;
+package br.edu.ufcg.computacao.si1.controller.restController;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by pedro on 12/03/17.
  */
 @RestController
-public class AnuncioController {
+public class AnuncioRestController {
 
     private final String OBTER_TODOS_ANUNCIOS = "/anuncios";
     private final String OBTER_ANUNCIO_POR_ID = "/anuncios/{id}";

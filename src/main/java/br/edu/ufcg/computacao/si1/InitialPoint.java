@@ -28,11 +28,11 @@ public class InitialPoint {
 		   Permissao permissaoPessoaJuridica = new PermissaoPessoaJuridica();
 		   Usuario usuarioLucas = new Usuario("Lucas", "lucas@massa.com", "massa", permissaoPessoaJuridica);
 
-//		   Anuncio anuncioEmprego = new AnuncioEmprego("titulo padrao", new Date(), AvaliacaoDeAnuncio.NOTA_CINCO);
+//		   Anuncio anuncioEmprego = new AnuncioEmprego("titulo padrao", new Date(), ConceitoDoAnuncio.NOTA_CINCO);
 //
-//		   Anuncio anuncioProduto = new AnuncioProduto("titulo padrao", new Date(), 30, AvaliacaoDeAnuncio.NOTA_CINCO, AnuncioProduto.Categoria.IMOVEL);
+//		   Anuncio anuncioProduto = new AnuncioProduto("titulo padrao", new Date(), 30, ConceitoDoAnuncio.NOTA_CINCO, AnuncioProduto.Categoria.IMOVEL);
 //
-//		   Anuncio anuncioServico = new AnuncioServico("titulo padrao", new Date(), 49, AvaliacaoDeAnuncio.NOTA_CINCO);
+//		   Anuncio anuncioServico = new AnuncioServico("titulo padrao", new Date(), 49, ConceitoDoAnuncio.NOTA_CINCO);
 //
 //		   ((AnuncioServico) anuncioServico).setDataDeAgendamento( new Date());
 //

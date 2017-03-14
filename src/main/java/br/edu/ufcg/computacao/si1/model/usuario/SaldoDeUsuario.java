@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * @author Lucas Vieira
@@ -9,6 +8,11 @@ import javax.persistence.Entity;
 
 @Entity
 public class SaldoDeUsuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
 
     @Column(name = "debito")
     private double debito;
@@ -33,6 +37,10 @@ public class SaldoDeUsuario {
         return (this.credito - this.debito);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public double getDebito() {
         return this.debito;
     }
@@ -44,6 +52,7 @@ public class SaldoDeUsuario {
     @Override
     public String toString() {
         return "SaldoDeUsuario{" +
+                "id=" + id +
                 ", debito=" + debito +
                 ", credito=" + credito +
                 '}';

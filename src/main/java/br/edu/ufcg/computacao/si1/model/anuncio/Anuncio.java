@@ -30,13 +30,17 @@ public abstract class Anuncio {
 
 	@Column(name = "tipo")
 	private TipoAnuncio tipo;
+	
+	@Column(name = "descricao")
+	private String descricao;
 
-	public Anuncio(String titulo, Date dataDeCriacao, double valor, TipoAnuncio tipo, Long idUsuario) {
+	public Anuncio(String titulo, Date dataDeCriacao, double valor, TipoAnuncio tipo, Long idUsuario, String descricao) {
 		this.titulo = titulo;
 		this.dataDeCriacao = dataDeCriacao;
 		this.valor = valor;
 		this.tipo = tipo;
 		this.idUsuario = idUsuario;
+		this.descricao = descricao;
 	}
 
 	public Anuncio() {
@@ -80,5 +84,13 @@ public abstract class Anuncio {
 
 	public Long getIdUsuario() {
 		return idUsuario;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

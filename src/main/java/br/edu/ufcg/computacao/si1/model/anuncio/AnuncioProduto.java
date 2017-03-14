@@ -12,8 +12,8 @@ public class AnuncioProduto extends Anuncio {
 	@Column(name = "categoria")
 	private CategoriaAnuncioProduto categoria;
 
-	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncioProduto categoria, Long idUsuario) {
-		super(titulo, dataCriacao, valor, TIPO, idUsuario);
+	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncioProduto categoria, Long idUsuario, String descricao) {
+		super(titulo, dataCriacao, valor, TIPO, idUsuario, descricao);
 		this.categoria = categoria;
 	}
 

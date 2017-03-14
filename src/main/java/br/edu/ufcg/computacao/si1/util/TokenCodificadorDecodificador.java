@@ -18,7 +18,7 @@ public class TokenCodificadorDecodificador {
         this.chavesDeAcessso = new HashMap<>();
     }
 
-    public String criarToken(Long idUsuario) {
+    public String criarToken(long idUsuario) {
 
         String idUsr = String.valueOf(idUsuario);
         Key key = MacProvider.generateKey(SignatureAlgorithm.HS512);

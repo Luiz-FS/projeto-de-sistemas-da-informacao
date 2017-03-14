@@ -15,8 +15,8 @@ public class Avaliacao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "_id")
-	private Long _id;
+	@Column(name = "id")
+	private Long id;
 	
 	@Column(name = "nota")
 	private ConceitoDoAnuncio nota;
@@ -50,6 +50,6 @@ public class Avaliacao {
 	}
 
 	public Long get_id() {
-		return _id;
+		return id;
 	}
 }

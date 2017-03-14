@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1;
 
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.anuncio.ConceitoDoAnuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
 import br.edu.ufcg.computacao.si1.model.usuario.PermissaoPessoaFisica;
 import br.edu.ufcg.computacao.si1.model.usuario.PermissaoPessoaJuridica;
@@ -39,7 +41,10 @@ public class InitialPoint {
 //		   repository.save(anuncioEmprego);
 //		   repository.save(anuncioServico);
 //		   repository.save(anuncioProduto);
-
+		   
+		   
+		   usuarioLucas.getListaDeAvaliacoes().add(new Avaliacao(ConceitoDoAnuncio.NOTA_CINCO, "massa"));
+		   
 		   repository.save(usuarioDavi);
 		   repository.save(usuarioLucas);
 	   };

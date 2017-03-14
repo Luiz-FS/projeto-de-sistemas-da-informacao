@@ -1,25 +1,35 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import java.util.List;
 
-import java.util.Collection;
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 
 /**
- * Created by Marcus Oliveira on 28/12/16.
  */
-public interface AnuncioService {
+public class AnuncioService {
 
-    Anuncio create(Anuncio anuncio);
+	@Autowired
+	private AnuncioRepository repositorioAnuncio;
 
-    Optional<Anuncio> getById(Long id);
 
-    Collection<Anuncio> get(String tipo);
+	public Anuncio salvarAnuncio(Anuncio anuncio) {
+		return repositorioAnuncio.save(anuncio);
+	}
 
-    Collection<Anuncio> getAll();
+	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
+		return repositorioAnuncio.findByIdUsuario(idUsuario);
+	}
 
-    boolean update(Anuncio anuncio);
+	public void contratarAnuncio(Anuncio anuncio) {
+		// debita e credita usuario
 
-    boolean delete(Long id);
+		deletarAnuncio(anuncio);
+	}
 
+	private void deletarAnuncio(Anuncio anuncio) {
+		repositorioAnuncio.delete(anuncio);
+	}
 }

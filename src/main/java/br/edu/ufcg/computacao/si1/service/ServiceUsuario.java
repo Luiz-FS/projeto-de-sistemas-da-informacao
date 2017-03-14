@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuarioService {
+public class ServiceUsuario {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -29,8 +29,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario update(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public void update(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }
 
     public void delete(Long id) {

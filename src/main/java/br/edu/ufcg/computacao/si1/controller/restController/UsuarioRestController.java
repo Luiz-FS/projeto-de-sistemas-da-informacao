@@ -2,7 +2,7 @@ package br.edu.ufcg.computacao.si1.controller.restController;
 
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
+import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,7 +30,7 @@ public class UsuarioRestController {
     private final String EMAIL = "email";
 
     @Autowired
-    private UsuarioService usuarioService;
+    private ServiceUsuario usuarioService;
 
     @GetMapping(value = OBTER_TODOS_USUARIOS, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UsuarioDto>> obterTodosUsuarios() {

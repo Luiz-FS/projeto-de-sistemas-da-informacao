@@ -13,8 +13,8 @@ public abstract class Anuncio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "_id", nullable = false, unique = true)
-	private Long _id;
+	@Column(name = "id", nullable = false, unique = true)
+	private Long id;
 
 	@Column(name = "id_usuario")
 	private Long idUsuario;
@@ -47,7 +47,7 @@ public abstract class Anuncio {
 	}
 
 	public Long getId() {
-		return _id;
+		return id;
 	}
 
 	public String getTitulo() {

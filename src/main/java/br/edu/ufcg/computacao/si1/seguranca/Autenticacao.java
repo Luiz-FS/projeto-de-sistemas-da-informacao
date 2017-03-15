@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.seguranca;
 
+import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
@@ -20,7 +21,6 @@ public class Autenticacao {
 
     public Autenticacao() {
         this.tokenCodificadorDecodificador =  new TokenCodificadorDecodificador();
-        this.serviceUsuario = new ServiceUsuario();
     }
 
     /**
@@ -64,9 +64,9 @@ public class Autenticacao {
      *
      * @param token - Recebe o token refente ao usuário que fez a requisição.
      * @return - Retorna um Long que representa o id do usuário que fez a requisição.
-     * @throws Exception - Gera uma exceção caso o token sejá inválido.
+     * @throws TokenInvalidoException - Gera uma exceção caso o token sejá inválido.
      */
-    public long decodificarToken(String token) throws Exception {
+    public long decodificarToken(String token) throws TokenInvalidoException {
 
         long idUsuario = tokenCodificadorDecodificador.decodificarToken(token);
 

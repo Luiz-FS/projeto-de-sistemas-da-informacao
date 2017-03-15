@@ -15,14 +15,26 @@ public class ControllerSistema {
     @Autowired
     private Autenticacao autenticacao;
 
-    public ControllerSistema() {
-        this.autenticacao = new Autenticacao();
-    }
-
+    /**
+     * Método que autentica o usuário caso suas credenciais esteja corretas.
+     *
+     * @param usuario Recebe o usuário que será comparado com um já existente no sistema
+     *                Para verificar se as credenciais estão corretas.
+     * @return - Retorna uma String que representa o token do usuário, caso as credenciais
+     * estejam corretas.
+     * @throws UsuarioInvalidoException - Gera uma exceção caso as cedenciais do usuário recebido
+     * sejam inválidas.
+     */
     public String login(Usuario usuario) throws UsuarioInvalidoException {
         return autenticacao.autenticarUsuario(usuario);
     }
 
+    /**
+     * Método que realiza a desautenticação do usuário no sistema, se o mesmo estiver autenticado.
+     *
+     * @param token - Recebe o token do usuário logado no sistema.
+     * @return - Retorna um boolean indicando se a desautenticação foi feita com sucesso ou não.
+     */
     public boolean logout(String token) {
         return autenticacao.fazerLogout(token);
     }

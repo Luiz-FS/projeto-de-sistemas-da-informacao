@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.si1;
 
 import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.ConceitoDoAnuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
 import br.edu.ufcg.computacao.si1.model.usuario.PermissaoPessoaFisica;
@@ -41,11 +43,11 @@ public class InitialPoint {
 //		   repository.save(anuncioEmprego);
 //		   repository.save(anuncioServico);
 //		   repository.save(anuncioProduto);
-		   
+		   repository.save(usuarioDavi);
 		   
 		   usuarioLucas.getListaDeAvaliacoes().add(new Avaliacao(ConceitoDoAnuncio.NOTA_CINCO, "massa"));
+		   usuarioLucas.getListaDeNotificacoes().add(new Notificacao("Hora do Show", usuarioDavi.getId(), TipoNotificacao.COMPRA));
 		   
-		   repository.save(usuarioDavi);
 		   repository.save(usuarioLucas);
 	   };
 	}

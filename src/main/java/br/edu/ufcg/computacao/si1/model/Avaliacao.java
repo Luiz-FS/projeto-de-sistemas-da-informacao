@@ -49,7 +49,7 @@ public class Avaliacao {
 		this.comentarios = comentarios;
 	}
 
-	public Long get_id() {
+	public Long getId() {
 		return id;
 	}
 }

@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
@@ -40,7 +41,10 @@ public class Usuario {
 	
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Avaliacao> listaDeAvaliacoes;
-
+	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Notificacao> listaDeNotificacoes;
+	
 	public Usuario() {}
 
 	public Usuario(String nome, String email, String senha, Permissao permissao) {
@@ -50,6 +54,7 @@ public class Usuario {
 		this.permissao = permissao;
 		this.saldoDeUsuario = new SaldoDeUsuario();
 		this.listaDeAvaliacoes = new ArrayList<>();
+		this.listaDeNotificacoes = new ArrayList<>();
 	}
 
 	public Long getId() {
@@ -102,5 +107,9 @@ public class Usuario {
 
 	public List<Avaliacao> getListaDeAvaliacoes() {
 		return listaDeAvaliacoes;
+	}
+
+	public List<Notificacao> getListaDeNotificacoes() {
+		return listaDeNotificacoes;
 	}
 }

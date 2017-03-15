@@ -32,7 +32,7 @@ public class TokenCodificadorDecodificador {
         return token;
     }
 
-    public boolean tokenValido(String token) {
+    public boolean existeToken(String token) {
         return this.chavesDeAcessso.containsKey(token);
     }
 
@@ -43,7 +43,7 @@ public class TokenCodificadorDecodificador {
 
         Claims claims = null;
 
-        if (tokenValido(token)) {
+        if (existeToken(token)) {
             Key chave = this.chavesDeAcessso.get(token);
             claims = Jwts.parser().setSigningKey(chave).parseClaimsJws(token).getBody();
         }
@@ -56,10 +56,13 @@ public class TokenCodificadorDecodificador {
             throw new Exception("Token inválido!");
     }
 
-    public void removerToken(String token) {
+    public boolean removerToken(String token) {
 
-        if (tokenValido(token)) {
+        if (existeToken(token)) {
             this.chavesDeAcessso.remove(token);
+            return true;
+        } else {
+            return false;
         }
 
     }

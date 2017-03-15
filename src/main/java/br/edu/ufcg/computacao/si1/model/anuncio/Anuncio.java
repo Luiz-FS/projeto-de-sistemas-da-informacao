@@ -1,9 +1,13 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_anuncio")
@@ -30,9 +34,12 @@ public abstract class Anuncio {
 
 	@Column(name = "tipo")
 	private TipoAnuncio tipo;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
+
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Avaliacao> avaliacoes;
 
 	public Anuncio(String titulo, Date dataDeCriacao, double valor, TipoAnuncio tipo, Long idUsuario, String descricao) {
 		this.titulo = titulo;
@@ -41,6 +48,7 @@ public abstract class Anuncio {
 		this.tipo = tipo;
 		this.idUsuario = idUsuario;
 		this.descricao = descricao;
+		this.avaliacoes = new ArrayList<>();
 	}
 
 	public Anuncio() {
@@ -92,5 +100,17 @@ public abstract class Anuncio {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public void setDataDeCriacao(Date dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
+	}
+
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 }

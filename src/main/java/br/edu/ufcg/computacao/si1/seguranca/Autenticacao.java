@@ -60,6 +60,16 @@ public class Autenticacao {
     }
 
     /**
+     * Método que verifica se um determinado token existe no sistema.
+     *
+     * @param token - Recebe o token a ser verificado.
+     * @return - Retorna um boolean indicando se o token existe ou não.
+     */
+    public boolean exiteToken(String token) {
+        return tokenCodificadorDecodificador.existeToken(token);
+    }
+
+    /**
      * Método que descritografa o token retna o id do usuário logado.
      *
      * @param token - Recebe o token refente ao usuário que fez a requisição.

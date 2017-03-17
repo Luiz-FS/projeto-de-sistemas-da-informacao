@@ -6,5 +6,5 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 
-    public Usuario findByEmail(String email);
+    Usuario findByEmail(String email);
 }

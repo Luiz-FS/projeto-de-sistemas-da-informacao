@@ -44,7 +44,9 @@ public class Autenticacao {
             O usuário deve proteger sua senha e não fornecer pra qualquer
             Objeto que pedir, estou fazendo aqui somente pra testar o método login
              */
-            if(usuarioEncontrado.getSenha().equals(usuario.getSenha())) {
+
+            if (usuarioEncontrado.isSenhaValida("senha")) {
+//            if(usuarioEncontrado.getSenha().equals(usuario.getSenha())) {
 
                 token = tokenCodificadorDecodificador.criarToken(usuarioEncontrado.getId());
 
@@ -65,7 +67,7 @@ public class Autenticacao {
      * @param token - Recebe o token a ser verificado.
      * @return - Retorna um boolean indicando se o token existe ou não.
      */
-    public boolean exiteToken(String token) {
+    public boolean existeToken(String token) {
         return tokenCodificadorDecodificador.existeToken(token);
     }
 

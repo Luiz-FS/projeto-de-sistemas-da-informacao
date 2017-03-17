@@ -1,20 +1,11 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.Notificacao;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
@@ -57,6 +48,10 @@ public class Usuario {
 		this.listaDeNotificacoes = new ArrayList<>();
 	}
 
+	public boolean isSenhaValida(String senha) {
+		return this.senha.equals(senha);
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -79,14 +74,6 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public Permissao getPermissao() {

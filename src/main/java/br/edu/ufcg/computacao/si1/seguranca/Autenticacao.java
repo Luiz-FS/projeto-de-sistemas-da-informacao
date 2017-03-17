@@ -26,7 +26,9 @@ public class Autenticacao {
     /**
      * Método que verifica e autentica os dados do usuário que está tentando logar no sistema.
      *
-     * @param usuario - Recebe um usuário o qual será comparado com um usuário que já existe no sistema
+     * @param email - Recebe um email, o qual será comparado com um email que já existe no sistema
+     *                e verifica se os dados são iguais, em caso positivo, autentica o usuário.
+     * @param senha - Recebe uma senha, a qual será comparada com a senha que já existe no sistema
      *                e verifica se os dados são iguais, em caso positivo, autentica o usuário.
      * @return - Retora uma String representando o token de login do usuário caso os dados sejam válidos.
      * @throws UsuarioInvalidoException Gera uma exceção caso os dados do usuário recebidos sejam inválidos.

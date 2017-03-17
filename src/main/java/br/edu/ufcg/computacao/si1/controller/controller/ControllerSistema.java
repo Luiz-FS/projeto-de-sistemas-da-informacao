@@ -1,10 +1,16 @@
 package br.edu.ufcg.computacao.si1.controller.controller;
 
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
+import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by luiz on 13/03/17.
@@ -14,6 +20,9 @@ public class ControllerSistema {
 
     @Autowired
     private Autenticacao autenticacao;
+
+    @Autowired
+    private ServiceUsuario usuarioService;
 
     /**
      * Método que autentica o usuário caso suas credenciais esteja corretas.
@@ -39,5 +48,39 @@ public class ControllerSistema {
      */
     public boolean logout(String token) {
         return autenticacao.fazerLogout(token);
+    }
+
+    public List<UsuarioDto> obterTodosUsuarios() {
+        List<UsuarioDto> usuarioDtos = new ArrayList<>();
+
+        List<Usuario> usuarios = usuarioService.getAll();
+
+        for (Usuario usuario : usuarios) {
+            usuarioDtos.add(UsuarioFactory.criaUsuarioDto(usuario));
+        }
+
+        return usuarioDtos;
+    }
+
+    public UsuarioDto obterUsuarioPorId(Long id) {
+        Usuario usuario = usuarioService.getById(id);
+
+        return UsuarioFactory.criaUsuarioDto(usuario);
+    }
+
+    public UsuarioDto adicionarUsuario(Usuario usuario) {
+        usuarioService.create(usuario);
+
+        return UsuarioFactory.criaUsuarioDto(usuario);
+    }
+
+    public UsuarioDto atualizarUsuario(Usuario usuario) {
+        usuarioService.update(usuario);
+
+        return UsuarioFactory.criaUsuarioDto(usuario);
+    }
+
+    public void deletarUsuario(Long id) {
+        usuarioService.delete(id);
     }
 }

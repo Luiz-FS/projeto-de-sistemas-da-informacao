@@ -1,11 +1,13 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jvnet.hk2.annotations.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 
 @Service
@@ -34,4 +36,17 @@ public class ServiceAnuncio {
 	public void deletarAnuncioPorId(Long idAnuncio) {
 		this.repositorioAnuncio.delete(idAnuncio);
 	}
+	
+	public void addDataAgendamento(Long idAnuncio, Date dataDeAgendamento) {
+		AnuncioServico anuncioServico = (AnuncioServico)this.repositorioAnuncio.getOne(idAnuncio);
+		
+		anuncioServico.setDataDeAgendamento(dataDeAgendamento);
+	}
+	
+	
+	public String gerarDescricaoAnuncio(Long idAnuncio) {
+		return this.repositorioAnuncio.getOne(idAnuncio).geraStringNotificacao();
+	}
+	
+	
 }

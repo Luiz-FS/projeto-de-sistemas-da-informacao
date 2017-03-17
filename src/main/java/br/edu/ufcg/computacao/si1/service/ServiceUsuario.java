@@ -1,17 +1,27 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.edu.ufcg.computacao.si1.factories.NotificacaoFactory;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 
 @Service
 public class ServiceUsuario {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    private NotificacaoFactory fabricaNotificacao;
+    
+    public ServiceUsuario() {
+    	this.fabricaNotificacao = new NotificacaoFactory();
+	}
 
     public Usuario create(Usuario usuario) {
         return usuarioRepository.save(usuario);
@@ -50,4 +60,14 @@ public class ServiceUsuario {
         usuario.getSaldoDeUsuario().creditar(valor);
         update(usuario);
     }
+    
+    public void addNovaNotificao(Long idUsuario, Long idComprador, String mensagem, TipoNotificacao tipoNotificacao) {
+    	Usuario usuario = this.getById(idUsuario);
+    	
+    	Notificacao notificacao = fabricaNotificacao.criarNotificacao(mensagem, idComprador, tipoNotificacao);
+    	
+    	usuario.getListaDeNotificacoes().add(notificacao);
+       	
+    	this.update(usuario);
+    }    
 }

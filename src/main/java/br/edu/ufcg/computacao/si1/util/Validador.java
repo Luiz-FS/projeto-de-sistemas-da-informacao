@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.util;
 
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
@@ -37,7 +39,7 @@ public class Validador {
 
     }
 
-    public static boolean isAnuncioValido(Anuncio anuncio){
+    public static boolean isAnuncioValido(Anuncio anuncio) throws AnuncioInvalidoException {
 
         if(isStringNull(anuncio.getTitulo()) ||
                 isStringVazia(anuncio.getTitulo()) ||
@@ -46,38 +48,37 @@ public class Validador {
                 isStringVazia(anuncio.getDescricao()) ||
                 isStringNull(anuncio.getDescricao()) ||
                 isValorNegativo(anuncio.getValor())){
-            return false;
+            throw new AnuncioInvalidoException();
         }
 
         return true;
 
     }
 
-    public static boolean isUsuarioValido(Usuario usuario) {
+    public static void isUsuarioValido(Usuario usuario) throws UsuarioInvalidoException {
 
         if(isStringVazia(usuario.getEmail()) ||
                 isStringNull(usuario.getEmail()) ||
                 isStringVazia(usuario.getNome()) ||
                 isStringNull(usuario.getNome())){
 
-            return false;
+            throw new UsuarioInvalidoException();
 
         }
 
-        return true;
 
     }
 
-    public static boolean isAnuncioServicoValido(Anuncio anuncio) {
+    public static void isAnuncioServicoValido(Anuncio anuncio) throws AnuncioInvalidoException {
 
         if(isAnuncioValido(anuncio) &&
                 !(isStringVazia(((AnuncioServico)anuncio).getDataDeAgendamento())) ||
                 isStringNull(((AnuncioServico)anuncio).getDataDeAgendamento())){
-            return true;
+
+
+        }else {
+            throw new AnuncioInvalidoException();
         }
-
-        return false;
-
     }
 
 

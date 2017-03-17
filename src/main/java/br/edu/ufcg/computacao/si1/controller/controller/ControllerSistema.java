@@ -62,12 +62,6 @@ public class ControllerSistema {
         return usuarioDtos;
     }
 
-    public UsuarioDto obterUsuarioPorId(Long id) {
-        Usuario usuario = usuarioService.getById(id);
-
-        return UsuarioFactory.criaUsuarioDto(usuario);
-    }
-
     public UsuarioDto adicionarUsuario(Usuario usuario) {
         usuarioService.create(usuario);
 

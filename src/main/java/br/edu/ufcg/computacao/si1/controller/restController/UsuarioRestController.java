@@ -19,7 +19,6 @@ import java.util.List;
 public class UsuarioRestController {
 
     private final String OBTER_TODOS_USUARIOS = "/usuarios";
-    private final String OBTER_USUARIO_POR_ID = "/usuarios/{id}";
     private final String ADICIONAR_USUARIO = "/adicionarUsuario";
     private final String ATUALIZAR_USUARIO = "/atualizarUsuario";
     private final String DELETAR_USUARIO = "/deletarUsuario/{id}";
@@ -35,13 +34,6 @@ public class UsuarioRestController {
         List<UsuarioDto> usuarioDtos = controllerSistema.obterTodosUsuarios();
 
         return new ResponseEntity<>(usuarioDtos, HttpStatus.OK);
-    }
-
-    @GetMapping(value = OBTER_USUARIO_POR_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> obterUsuarioPorId(@PathVariable(ID) Long id) {
-        UsuarioDto usuarioDto = controllerSistema.obterUsuarioPorId(id);
-
-        return new ResponseEntity<>(usuarioDto, HttpStatus.OK);
     }
 
     @PostMapping(value = ADICIONAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -25,10 +25,9 @@ public class ControllerSistema {
     
     @Autowired
     private ServiceUsuario usuarioService;
-    
-    // não quer injetar.
-    /*@Autowired
-    private ServiceSistema sistemaService;*/
+
+    @Autowired
+    private ServiceSistema sistemaService;
     
     /**
      * Método que autentica o usuário caso suas credenciais esteja corretas.
@@ -74,8 +73,7 @@ public class ControllerSistema {
         return UsuarioFactory.criaUsuarioDto(usuario);
     }
 
-    // sistemaService, não funciona, não quer injetar
-   /* public void contratarAnuncio(Long idComprador, Long idAnuncio) {
+    public void contratarAnuncio(Long idComprador, Long idAnuncio) {
     	this.sistemaService.contratarAnuncio(idComprador, idAnuncio);
-    }*/
+    }
 }

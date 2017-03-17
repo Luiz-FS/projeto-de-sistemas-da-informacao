@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.util;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
@@ -64,6 +65,18 @@ public class Validador {
         }
 
         return true;
+
+    }
+
+    public static boolean isAnuncioServicoValido(Anuncio anuncio) {
+
+        if(isAnuncioValido(anuncio) &&
+                !(isStringVazia(((AnuncioServico)anuncio).getDataDeAgendamento())) ||
+                isStringNull(((AnuncioServico)anuncio).getDataDeAgendamento())){
+            return true;
+        }
+
+        return false;
 
     }
 

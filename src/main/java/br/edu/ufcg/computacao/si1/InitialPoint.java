@@ -38,7 +38,7 @@ public class InitialPoint {
 
 			repository.save(usuarioDavi);
 
-			usuarioLucas.getListaDeAvaliacoes().add(new Avaliacao(ConceitoDoAnuncio.NOTA_CINCO, "massa"));
+			usuarioLucas.getListaDeAvaliacoes().add(new Avaliacao(ConceitoAnuncio.NOTA_CINCO, "massa"));
 			usuarioLucas.getListaDeNotificacoes().add(new Notificacao("Hora do Show", usuarioDavi.getId(), TipoNotificacao.COMPRA));
 
 			repository.save(usuarioLucas);
@@ -56,7 +56,7 @@ public class InitialPoint {
 			anuncioRepository.save(anuncioServico);
 			anuncioRepository.save(anuncioProduto);
 
-			anuncioEmprego.getAvaliacoes().add( new Avaliacao(ConceitoDoAnuncio.NOTA_CINCO, "EMPREGO MUITO BOM"));
+			anuncioEmprego.getAvaliacoes().add( new Avaliacao(ConceitoAnuncio.NOTA_CINCO, "EMPREGO MUITO BOM"));
 
 			anuncioRepository.save(anuncioEmprego);
 

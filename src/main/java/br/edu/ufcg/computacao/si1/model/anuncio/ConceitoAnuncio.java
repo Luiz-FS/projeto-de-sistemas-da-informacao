@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-public enum ConceitoDoAnuncio {
+public enum ConceitoAnuncio {
 
     NOTA_ZERO,
     NOTA_UM,

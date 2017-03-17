@@ -28,4 +28,15 @@ public class AnuncioServico extends Anuncio {
 	public void setDataDeAgendamento(Date dataDeAgendamento) {
 		this.dataDeAgendamento = dataDeAgendamento;
 	}
+	
+	@Override
+	public String geraStringNotificacao() {
+		String gerarDescricao = "";
+		
+		gerarDescricao += "O seu anuncio: "+ this.getTitulo() + FIM_LINHA
+						  + "Do tipo: Servico, foi contratado" + FIM_LINHA 
+						  + "Com data de agendamento para: "+ this.getDataDeAgendamento();
+		
+		return gerarDescricao;
+	}
 }

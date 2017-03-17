@@ -29,4 +29,15 @@ public class AnuncioProduto extends Anuncio {
 	public void setCategoria(CategoriaAnuncioProduto categoria) {
 		this.categoria = categoria;
 	}
+	
+	@Override
+	public String geraStringNotificacao() {
+		String gerarDescricao = "";
+		
+		gerarDescricao += "O seu anuncio: " + this.getTitulo() + FIM_LINHA
+						  + "Do tipo: Produto, foi contratado" + FIM_LINHA 
+						  + "Com valor: "+ this.getValor();
+		
+		return gerarDescricao;
+	}
 }

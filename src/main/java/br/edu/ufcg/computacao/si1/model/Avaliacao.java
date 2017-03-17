@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.model;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.ConceitoDoAnuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.ConceitoAnuncio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,12 +19,12 @@ public class Avaliacao {
 	private Long id;
 	
 	@Column(name = "nota")
-	private ConceitoDoAnuncio nota;
+	private ConceitoAnuncio nota;
 	
 	@Column(name = "comentarios")
 	private String comentarios;
 	
-	public Avaliacao(ConceitoDoAnuncio nota, String comentarios) {
+	public Avaliacao(ConceitoAnuncio nota, String comentarios) {
 		this.nota = nota;
 		this.comentarios = comentarios;
 	}
@@ -33,11 +33,11 @@ public class Avaliacao {
 
 	}
 
-	public ConceitoDoAnuncio getNota() {
+	public ConceitoAnuncio getNota() {
 		return nota;
 	}
 
-	public void setNota(ConceitoDoAnuncio nota) {
+	public void setNota(ConceitoAnuncio nota) {
 		this.nota = nota;
 	}
 

@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.util;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
@@ -32,6 +33,37 @@ public class Validador {
 
     public static boolean isAutorizado(Usuario usuario, Permissao permissao) {
         return (usuario.getPermissao() == permissao);
+
+    }
+
+    public static boolean isAnuncioValido(Anuncio anuncio){
+
+        if(isStringNull(anuncio.getTitulo()) ||
+                isStringVazia(anuncio.getTitulo()) ||
+                isStringNull(anuncio.getDataDeCriacao()) ||
+                isStringVazia(anuncio.getDataDeCriacao())||
+                isStringVazia(anuncio.getDescricao()) ||
+                isStringNull(anuncio.getDescricao()) ||
+                isValorNegativo(anuncio.getValor())){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static boolean isUsuarioValido(Usuario usuario) {
+
+        if(isStringVazia(usuario.getEmail()) ||
+                isStringNull(usuario.getEmail()) ||
+                isStringVazia(usuario.getNome()) ||
+                isStringNull(usuario.getNome())){
+
+            return false;
+
+        }
+
+        return true;
 
     }
 

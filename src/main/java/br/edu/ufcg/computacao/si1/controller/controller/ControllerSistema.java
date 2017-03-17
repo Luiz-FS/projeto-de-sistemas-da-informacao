@@ -25,8 +25,8 @@ public class ControllerSistema {
      * @throws UsuarioInvalidoException - Gera uma exceção caso as cedenciais do usuário recebido
      * sejam inválidas.
      */
-    public String login(Usuario usuario) throws UsuarioInvalidoException {
-        return autenticacao.autenticarUsuario(usuario);
+    public String login(String email, String senha) throws UsuarioInvalidoException {
+        return autenticacao.autenticarUsuario(email, senha);
     }
 
     /**

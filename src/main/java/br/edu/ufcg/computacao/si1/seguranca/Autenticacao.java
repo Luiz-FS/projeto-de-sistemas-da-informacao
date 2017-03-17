@@ -31,15 +31,15 @@ public class Autenticacao {
      * @return - Retora uma String representando o token de login do usuário caso os dados sejam válidos.
      * @throws UsuarioInvalidoException Gera uma exceção caso os dados do usuário recebidos sejam inválidos.
      */
-    public String autenticarUsuario(Usuario usuario) throws UsuarioInvalidoException {
+    public String autenticarUsuario(String email, String senha) throws UsuarioInvalidoException {
 
-        Usuario usuarioEncontrado = serviceUsuario.getByEmail(usuario.getEmail());
+        Usuario usuarioEncontrado = serviceUsuario.getByEmail(email);
 
         String token = "";
 
         if(usuarioEncontrado != null) {
 
-            if (usuarioEncontrado.isSenhaValida(usuario.getSenha())) {
+            if (usuarioEncontrado.isSenhaValida(senha)) {
 
                 token = tokenCodificadorDecodificador.criarToken(usuarioEncontrado.getId());
 

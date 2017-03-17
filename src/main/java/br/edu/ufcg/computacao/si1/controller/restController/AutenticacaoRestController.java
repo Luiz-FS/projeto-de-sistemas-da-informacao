@@ -18,12 +18,12 @@ public class AutenticacaoRestController {
     @Autowired
     private ControllerSistema controllerSistema;
 
-    @PatchMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+    @PatchMapping(value = "/login/{usrEmail}/{usrPassword}")
+    public ResponseEntity<String> login(@PathVariable("usrEmail") String email, @PathVariable("usrPassword") String senha) {
 
         try {
 
-            String token = controllerSistema.login(usuario);
+            String token = controllerSistema.login(email, senha);
             return new ResponseEntity<String>(token, HttpStatus.OK);
 
         } catch (UsuarioInvalidoException e) {

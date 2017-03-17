@@ -1,18 +1,27 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
-import br.edu.ufcg.computacao.si1.model.Avaliacao;
-
-import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+
 @Entity
 @Table(name = "tb_anuncio")
 public abstract class Anuncio {
-
+	
+	protected static final String FIM_LINHA = System.lineSeparator();
 	protected final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
 	@Id
@@ -110,7 +119,7 @@ public abstract class Anuncio {
 		return avaliacoes;
 	}
 
-	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}
+	public abstract String geraStringNotificacao();
+	
+	
 }

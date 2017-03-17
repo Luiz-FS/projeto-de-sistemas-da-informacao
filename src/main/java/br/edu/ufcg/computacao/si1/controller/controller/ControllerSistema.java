@@ -18,7 +18,9 @@ public class ControllerSistema {
     /**
      * Método que autentica o usuário caso suas credenciais esteja corretas.
      *
-     * @param usuario Recebe o usuário que será comparado com um já existente no sistema
+     * @param email Recebe o email do usuário que será comparado com um já existente no sistema
+     *                Para verificar se as credenciais estão corretas.
+     * @param senha  Recebe a senha do usuário que será comparado com uma já existente no sistema
      *                Para verificar se as credenciais estão corretas.
      * @return - Retorna uma String que representa o token do usuário, caso as credenciais
      * estejam corretas.

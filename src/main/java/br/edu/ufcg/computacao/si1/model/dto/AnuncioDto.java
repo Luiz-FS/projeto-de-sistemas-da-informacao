@@ -1,6 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.dto;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.CategoriaAnuncioProduto;
 import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
 

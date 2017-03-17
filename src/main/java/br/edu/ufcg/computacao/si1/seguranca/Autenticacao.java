@@ -4,7 +4,6 @@ import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
-import br.edu.ufcg.computacao.si1.util.TokenCodificadorDecodificador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.util;
+package br.edu.ufcg.computacao.si1.seguranca;
 
 
 import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;

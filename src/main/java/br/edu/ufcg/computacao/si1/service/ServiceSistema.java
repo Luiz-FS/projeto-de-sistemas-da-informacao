@@ -49,6 +49,14 @@ public class ServiceSistema {
 		return this.serviceAnuncio.getAnunciosPorUsuario(idUsuario);
 	}
 	
+	public List<Usuario> getUsuarios() {
+		return this.serviceUsuario.getAll();
+	}
+	
+	public void criarUsuario(Usuario usuario) {
+		this.serviceUsuario.create(usuario);
+	}
+	
 	private String gerarDescricaoAvaliacaoCompra(Long idComprador) {
 		Usuario comprador = this.serviceUsuario.getById(idComprador);
 		

@@ -1,15 +1,19 @@
 package br.edu.ufcg.computacao.si1.controller.restController;
 
-import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
-import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 /**
  * Created by lucas on 11/03/17.
@@ -20,8 +24,6 @@ public class UsuarioRestController {
 
     private final String OBTER_TODOS_USUARIOS = "/usuarios";
     private final String ADICIONAR_USUARIO = "/adicionarUsuario";
-    private final String ATUALIZAR_USUARIO = "/atualizarUsuario";
-    private final String DELETAR_USUARIO = "/deletarUsuario/{id}";
 
     private final String ID = "id";
 
@@ -43,17 +45,4 @@ public class UsuarioRestController {
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = ATUALIZAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> atualizarUsuario(@RequestBody Usuario usuario) {
-        UsuarioDto usuarioDto = controllerSistema.atualizarUsuario(usuario);
-
-        return new ResponseEntity<>(usuarioDto, HttpStatus.GONE);
-    }
-
-    @DeleteMapping(value = DELETAR_USUARIO, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deletarUsuario(@PathVariable(ID) Long id) {
-        controllerSistema.deletarUsuario(id);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

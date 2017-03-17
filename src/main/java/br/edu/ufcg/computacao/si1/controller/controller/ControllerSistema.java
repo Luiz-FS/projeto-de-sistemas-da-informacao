@@ -1,16 +1,18 @@
 package br.edu.ufcg.computacao.si1.controller.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
+import br.edu.ufcg.computacao.si1.service.ServiceSistema;
 import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by luiz on 13/03/17.
@@ -20,10 +22,14 @@ public class ControllerSistema {
 
     @Autowired
     private Autenticacao autenticacao;
-
+    
     @Autowired
     private ServiceUsuario usuarioService;
-
+    
+    // não quer injetar.
+    /*@Autowired
+    private ServiceSistema sistemaService;*/
+    
     /**
      * Método que autentica o usuário caso suas credenciais esteja corretas.
      *
@@ -53,7 +59,7 @@ public class ControllerSistema {
     public List<UsuarioDto> obterTodosUsuarios() {
         List<UsuarioDto> usuarioDtos = new ArrayList<>();
 
-        List<Usuario> usuarios = usuarioService.getAll();
+        List<Usuario> usuarios = this.usuarioService.getAll();
 
         for (Usuario usuario : usuarios) {
             usuarioDtos.add(UsuarioFactory.criaUsuarioDto(usuario));
@@ -63,18 +69,13 @@ public class ControllerSistema {
     }
 
     public UsuarioDto adicionarUsuario(Usuario usuario) {
-        usuarioService.create(usuario);
+        this.usuarioService.create(usuario);
 
         return UsuarioFactory.criaUsuarioDto(usuario);
     }
 
-    public UsuarioDto atualizarUsuario(Usuario usuario) {
-        usuarioService.update(usuario);
-
-        return UsuarioFactory.criaUsuarioDto(usuario);
-    }
-
-    public void deletarUsuario(Long id) {
-        usuarioService.delete(id);
-    }
+    // sistemaService, não funciona, não quer injetar
+   /* public void contratarAnuncio(Long idComprador, Long idAnuncio) {
+    	this.sistemaService.contratarAnuncio(idComprador, idAnuncio);
+    }*/
 }

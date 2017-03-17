@@ -76,6 +76,16 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		if (! this.senha.equals(senha)) {
+			this.senha = senha;
+		}
+	}
+
 	public Permissao getPermissao() {
 		return permissao;
 	}
@@ -86,10 +96,6 @@ public class Usuario {
 
 	public SaldoDeUsuario getSaldoDeUsuario() {
 		return saldoDeUsuario;
-	}
-
-	public String getSenha() {
-		return senha;
 	}
 
 	public void setSaldoDeUsuario(SaldoDeUsuario saldoDeUsuario) {

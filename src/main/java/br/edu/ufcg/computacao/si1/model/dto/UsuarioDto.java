@@ -1,40 +1,35 @@
 package br.edu.ufcg.computacao.si1.model.dto;
 
-import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.usuario.SaldoDeUsuario;
+import br.edu.ufcg.computacao.si1.model.usuario.TiposPermissao;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
-/**
- * Created by antonioabreu on 08/03/17.
- */
+import java.util.List;
 
 public class UsuarioDto {
 
     private Long id;
     private String nome;
     private String email;
-    private Permissao permissao;
+    private TiposPermissao permissao;
+    private SaldoDeUsuario saldoDeUsuario;
+    private List<Avaliacao> listaDeAvaliacoes;
+    private List<Notificacao> listaDeNotificacoes;
 
-    public UsuarioDto(Long id, String nome, String email, Permissao permissao) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.permissao = permissao;
-    }
-
-    public UsuarioDto(Usuario usuario){
+    public UsuarioDto(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
-        this.permissao = usuario.getPermissao();
+        this.permissao = usuario.getPermissao().getTipoPermissao();
+        this.saldoDeUsuario = usuario.getSaldoDeUsuario();
+        this.listaDeAvaliacoes = usuario.getListaDeAvaliacoes();
+        this.listaDeNotificacoes = usuario.getListaDeNotificacoes();
     }
-
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -53,11 +48,35 @@ public class UsuarioDto {
         this.email = email;
     }
 
-    public Permissao getPermissao() {
+    public TiposPermissao getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(Permissao permissao) {
+    public void setPermissao(TiposPermissao permissao) {
         this.permissao = permissao;
+    }
+
+    public SaldoDeUsuario getSaldoDeUsuario() {
+        return saldoDeUsuario;
+    }
+
+    public void setSaldoDeUsuario(SaldoDeUsuario saldoDeUsuario) {
+        this.saldoDeUsuario = saldoDeUsuario;
+    }
+
+    public List<Avaliacao> getListaDeAvaliacoes() {
+        return listaDeAvaliacoes;
+    }
+
+    public void setListaDeAvaliacoes(List<Avaliacao> listaDeAvaliacoes) {
+        this.listaDeAvaliacoes = listaDeAvaliacoes;
+    }
+
+    public List<Notificacao> getListaDeNotificacoes() {
+        return listaDeNotificacoes;
+    }
+
+    public void setListaDeNotificacoes(List<Notificacao> listaDeNotificacoes) {
+        this.listaDeNotificacoes = listaDeNotificacoes;
     }
 }

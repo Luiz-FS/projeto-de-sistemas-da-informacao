@@ -38,7 +38,7 @@ public class ServiceSistema {
 	}
 	
 	public void salvarUsuario(Usuario usuario) {
-		this.serviceUsuario.create(usuario);
+		this.serviceUsuario.criarUsuario(usuario);
 	}
 	
 	public void salvarAnuncio(Anuncio anuncio) {
@@ -54,7 +54,7 @@ public class ServiceSistema {
 	}
 	
 	public void criarUsuario(Usuario usuario) {
-		this.serviceUsuario.create(usuario);
+		this.serviceUsuario.criarUsuario(usuario);
 	}
 	
 	private String gerarDescricaoAvaliacaoCompra(Long idComprador) {

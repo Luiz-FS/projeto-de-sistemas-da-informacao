@@ -22,9 +22,6 @@ public class ControllerSistema {
 
     @Autowired
     private Autenticacao autenticacao;
-    
-    @Autowired
-    private ServiceUsuario usuarioService;
 
     @Autowired
     private ServiceSistema sistemaService;
@@ -58,7 +55,7 @@ public class ControllerSistema {
     public List<UsuarioDto> obterTodosUsuarios() {
         List<UsuarioDto> usuarioDtos = new ArrayList<>();
 
-        List<Usuario> usuarios = this.usuarioService.getAll();
+        List<Usuario> usuarios = this.sistemaService.getUsuarios();
 
         for (Usuario usuario : usuarios) {
             usuarioDtos.add(UsuarioFactory.criaUsuarioDto(usuario));
@@ -68,7 +65,7 @@ public class ControllerSistema {
     }
 
     public UsuarioDto adicionarUsuario(Usuario usuario) {
-        this.usuarioService.create(usuario);
+        this.sistemaService.criarUsuario(usuario);
 
         return UsuarioFactory.criaUsuarioDto(usuario);
     }

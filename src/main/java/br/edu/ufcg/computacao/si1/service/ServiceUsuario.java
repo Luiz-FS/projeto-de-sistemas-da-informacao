@@ -23,7 +23,7 @@ public class ServiceUsuario {
     	this.fabricaNotificacao = new NotificacaoFactory();
 	}
 
-    public Usuario create(Usuario usuario) {
+    public Usuario criarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
@@ -39,7 +39,7 @@ public class ServiceUsuario {
         return usuarioRepository.findAll();
     }
 
-    public void update(Usuario usuario) {
+    public void atualizar(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
 
@@ -51,14 +51,14 @@ public class ServiceUsuario {
         Usuario usuario = getById(idUsuario);
 
         usuario.getSaldoDeUsuario().debitar(valor);
-        update(usuario);
+        atualizar(usuario);
     }
 
     public void creditarSaldoUsuario(Long idUsuario, double valor) {
         Usuario usuario = getById(idUsuario);
 
         usuario.getSaldoDeUsuario().creditar(valor);
-        update(usuario);
+        atualizar(usuario);
     }
     
     public void addNovaNotificao(Long idUsuario, Long idComprador, String mensagem, TipoNotificacao tipoNotificacao) {
@@ -68,6 +68,6 @@ public class ServiceUsuario {
     	
     	usuario.getListaDeNotificacoes().add(notificacao);
        	
-    	this.update(usuario);
+    	this.atualizar(usuario);
     }    
 }

@@ -88,6 +88,10 @@ public class Usuario {
 		return saldoDeUsuario;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
 	public void setSaldoDeUsuario(SaldoDeUsuario saldoDeUsuario) {
 		this.saldoDeUsuario = saldoDeUsuario;
 	}

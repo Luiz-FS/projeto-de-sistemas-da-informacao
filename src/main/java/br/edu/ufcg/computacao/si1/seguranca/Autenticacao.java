@@ -39,14 +39,7 @@ public class Autenticacao {
 
         if(usuarioEncontrado != null) {
 
-            /*
-            A verificação da senha tem que ser feita no usuário, pois
-            O usuário deve proteger sua senha e não fornecer pra qualquer
-            Objeto que pedir, estou fazendo aqui somente pra testar o método login
-             */
-
-            if (usuarioEncontrado.isSenhaValida("senha")) {
-//            if(usuarioEncontrado.getSenha().equals(usuario.getSenha())) {
+            if (usuarioEncontrado.isSenhaValida(usuario.getSenha())) {
 
                 token = tokenCodificadorDecodificador.criarToken(usuarioEncontrado.getId());
 

@@ -45,7 +45,7 @@ public class TokenCodificadorDecodificador {
      * @param token - Recebe o token a ser verificado.
      * @return - Retorna um boolean indicando se o token existe ou não.
      */
-    public boolean existeToken(String token) {
+    public boolean isTokenValido(String token) {
         return this.chavesDeAcessso.containsKey(token);
     }
 
@@ -60,7 +60,7 @@ public class TokenCodificadorDecodificador {
 
         Claims claims = null;
 
-        if (existeToken(token)) {
+        if (isTokenValido(token)) {
             Key chave = this.chavesDeAcessso.get(token);
             claims = Jwts.parser().setSigningKey(chave).parseClaimsJws(token).getBody();
         }
@@ -81,7 +81,7 @@ public class TokenCodificadorDecodificador {
      */
     public boolean removerToken(String token) {
 
-        if (existeToken(token)) {
+        if (isTokenValido(token)) {
             this.chavesDeAcessso.remove(token);
             return true;
         } else {

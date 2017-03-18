@@ -34,25 +34,19 @@ public class Autenticacao {
      */
     public String autenticarUsuario(String email, String senha) throws UsuarioInvalidoException {
 
-        Usuario usuarioEncontrado = serviceUsuario.getByEmail(email);
+        Usuario usuarioBuscado = serviceUsuario.getByEmail(email);
 
-        String token = "";
+        String tokenDeLoginValido = "";
 
-        if(usuarioEncontrado != null) {
+        if(usuarioBuscado != null && usuarioBuscado.isSenhaValida(senha)) {
 
-            if (usuarioEncontrado.isSenhaValida(senha)) {
-
-                token = tokenCodificadorDecodificador.criarToken(usuarioEncontrado.getId());
-
-            } else {
-                throw new UsuarioInvalidoException("Senha inválida!");
-            }
+            tokenDeLoginValido = tokenCodificadorDecodificador.criarToken(usuarioBuscado.getId());
 
         } else {
-            throw new UsuarioInvalidoException();
+            throw new UsuarioInvalidoException("Dados do usuário inválidos!");
         }
 
-        return token;
+        return tokenDeLoginValido;
     }
 
     /**
@@ -61,8 +55,8 @@ public class Autenticacao {
      * @param token - Recebe o token a ser verificado.
      * @return - Retorna um boolean indicando se o token existe ou não.
      */
-    public boolean existeToken(String token) {
-        return tokenCodificadorDecodificador.existeToken(token);
+    public boolean isTokenValido(String token) {
+        return tokenCodificadorDecodificador.isTokenValido(token);
     }
 
     /**

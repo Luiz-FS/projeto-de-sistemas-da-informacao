@@ -25,7 +25,7 @@ public class ServiceSistema {
 		
 		this.serviceUsuario.comprarAnuncio(idDonoAnuncio, idComprador, valorAnuncio);
 		
-		this.addNotificacoesCompra(idDonoAnuncio, idComprador, idAnuncio);
+		this.addNotificacoesContratacao(idDonoAnuncio, idComprador, idAnuncio);
 		
 		this.serviceAnuncio.deletarAnuncioPorId(idAnuncio);
 	}
@@ -50,11 +50,11 @@ public class ServiceSistema {
 		return this.serviceUsuario.getUsuarios();
 	}
 	
-	private void addNotificacoesCompra(Long idDonoAnuncio, Long idComprador, Long idAnuncio) { 
+	private void addNotificacoesContratacao(Long idDonoAnuncio, Long idComprador, Long idAnuncio) { 
 		
-		String mensagemNotificacaoCompra = this.serviceAnuncio.gerarDescricaoAnuncio(idAnuncio);
+		String mensagemNotificacaoContratacao = this.serviceAnuncio.gerarMensagemNotificacaoContratacao(idAnuncio);
 	
-		this.serviceUsuario.gerarNotificacoesDeContratacao(idDonoAnuncio, idComprador, mensagemNotificacaoCompra);
+		this.serviceUsuario.gerarNotificacoesDeContratacao(idDonoAnuncio, idComprador, mensagemNotificacaoContratacao);
 	}
 	
 }

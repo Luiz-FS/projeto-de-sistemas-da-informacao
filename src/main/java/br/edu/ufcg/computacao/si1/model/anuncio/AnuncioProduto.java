@@ -31,7 +31,7 @@ public class AnuncioProduto extends Anuncio {
 	}
 	
 	@Override
-	public String gerarStringNotificacaoCompra() {
+	public String gerarMensagemNotificacaoContratacao() {
 		String gerarDescricao = "";
 		
 		gerarDescricao += "O seu anuncio: " + this.getTitulo() + FIM_LINHA

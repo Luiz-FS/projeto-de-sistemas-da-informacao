@@ -75,13 +75,13 @@ public class ServiceUsuario {
     }
     
     public void gerarNotificacoesDeContratacao(Long idDonoAnuncio, Long idComprador, String mensagemCompra) {
-    	String mensagemAvalicao = this.gerarStringNotificacaoAvaliacao(idComprador);
+    	String mensagemAvalicao = this.gerarMensagemNotificacaoAvaliacao(idComprador);
     	
     	this.addNovaNotificao(idDonoAnuncio, idComprador, mensagemCompra, TipoNotificacao.COMPRA);
     	this.addNovaNotificao(idDonoAnuncio, idComprador, mensagemAvalicao, TipoNotificacao.AVALIACAO_COMPRA);
     }
     
-	private String gerarStringNotificacaoAvaliacao(Long idComprador) {
+	private String gerarMensagemNotificacaoAvaliacao(Long idComprador) {
 		
 		Usuario comprador = this.repositorioUsuario.findOne(idComprador);
 		

@@ -51,8 +51,7 @@ public class ServiceAnuncio {
 		anuncioServico.setDataDeAgendamento(dataDeAgendamento);
 	}
 	
-	public String gerarDescricaoAnuncio(Long idAnuncio) {
-		return this.repositorioAnuncio.getOne(idAnuncio).gerarStringNotificacaoCompra();
+	public String gerarMensagemNotificacaoContratacao(Long idAnuncio) {
+		return this.repositorioAnuncio.getOne(idAnuncio).gerarMensagemNotificacaoContratacao();
 	}
-	
 }

@@ -34,8 +34,8 @@ public class ServiceSistema {
 		this.serviceAnuncio.addDataAgendamento(idAnuncio, dataDeAgendamento);
 	}
 	
-	public void salvarUsuario(Usuario usuario) {
-		this.serviceUsuario.criarUsuario(usuario);
+	public Usuario salvarUsuario(Usuario usuario) {
+		return this.serviceUsuario.criarUsuario(usuario);
 	}
 	
 	public void salvarAnuncio(Anuncio anuncio) {

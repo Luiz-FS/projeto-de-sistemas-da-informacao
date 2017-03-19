@@ -6,16 +6,10 @@ package br.edu.ufcg.computacao.si1.excecoes;
 public class AnuncioInvalidoException extends Exception {
 
     public AnuncioInvalidoException() {
-
         super("Anuncio Invalido");
-
     }
 
     public AnuncioInvalidoException(String mensagem) {
-
         super(mensagem);
-
     }
-
-
 }

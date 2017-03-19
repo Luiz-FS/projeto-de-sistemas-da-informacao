@@ -3,17 +3,16 @@ package br.edu.ufcg.computacao.si1.controller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
 import br.edu.ufcg.computacao.si1.service.ServiceSistema;
-import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
 
 /**
  * Created by luiz on 13/03/17.
@@ -65,7 +64,7 @@ public class ControllerSistema {
         List<Usuario> usuarios = this.sistemaService.getUsuarios();
 
         for (Usuario usuario : usuarios) {
-            usuarioDtos.add(UsuarioFactory.criaUsuarioDto(usuario));
+            usuarioDtos.add(this.fabricaUsuario.criaUsuarioDto(usuario));
         }
 
         return usuarioDtos;
@@ -75,9 +74,9 @@ public class ControllerSistema {
 
         Usuario usuario = this.fabricaUsuario.criaUsuario(usuarioCriacaoDto);
 
-        this.sistemaService.salvarUsuario(usuario);
+        UsuarioDto usuarioDto = this.fabricaUsuario.criaUsuarioDto(this.sistemaService.salvarUsuario(usuario));
 
-        return UsuarioFactory.criaUsuarioDto(usuario);
+        return usuarioDto;
     }
 
     public void contratarAnuncio(Long idComprador, Long idAnuncio) {

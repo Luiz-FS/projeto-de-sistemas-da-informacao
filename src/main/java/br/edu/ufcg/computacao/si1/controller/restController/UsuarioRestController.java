@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 /**
  * Created by lucas on 11/03/17.
  *
  */
-@RestController
+@RestController(value = "/usuario")
 public class UsuarioRestController {
 
     private final String OBTER_TODOS_USUARIOS = "/usuarios";
-    private final String ADICIONAR_USUARIO = "/adicionarUsuario";
+    private final String ADICIONAR_USUARIO = "/cadastrarUsuario";
 
     private final String ID = "id";
 
@@ -39,8 +38,8 @@ public class UsuarioRestController {
     }
 
     @PostMapping(value = ADICIONAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> adicionarUsuario(@RequestBody Usuario usuario) {
-        UsuarioDto usuarioDto = controllerSistema.adicionarUsuario(usuario);
+    public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioDto usuario) {
+        UsuarioDto usuarioDto = controllerSistema.cadastrarUsuario(usuario);
 
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
     }

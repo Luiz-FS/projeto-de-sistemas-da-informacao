@@ -25,6 +25,12 @@ public class ControllerSistema {
 
     @Autowired
     private ServiceSistema sistemaService;
+
+    private UsuarioFactory usuarioFactory;
+
+    public ControllerSistema() {
+        this.usuarioFactory = new UsuarioFactory();
+    }
     
     /**
      * Método que autentica o usuário caso suas credenciais esteja corretas.
@@ -64,7 +70,7 @@ public class ControllerSistema {
         return usuarioDtos;
     }
 
-    public UsuarioDto adicionarUsuario(Usuario usuario) {
+    public UsuarioDto cadastrarUsuario(UsuarioDto usuario) {
         this.sistemaService.salvarUsuario(usuario);
 
         return UsuarioFactory.criaUsuarioDto(usuario);

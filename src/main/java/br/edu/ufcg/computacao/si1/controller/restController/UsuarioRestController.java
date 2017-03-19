@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
@@ -19,11 +16,12 @@ import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
  * Created by lucas on 11/03/17.
  *
  */
-@RestController(value = "/usuario")
+@RestController
+@RequestMapping(value = "/usuario")
 public class UsuarioRestController {
 
     private final String OBTER_TODOS_USUARIOS = "/usuarios";
-    private final String ADICIONAR_USUARIO = "/cadastrarUsuario";
+    private final String ADICIONAR_USUARIO = "/cadastro";
 
     private final String ID = "id";
 

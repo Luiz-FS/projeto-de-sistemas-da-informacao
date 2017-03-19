@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.controller.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -26,10 +27,10 @@ public class ControllerSistema {
     @Autowired
     private ServiceSistema sistemaService;
 
-    private UsuarioFactory usuarioFactory;
+    private UsuarioFactory fabricaUsuario;
 
     public ControllerSistema() {
-        this.usuarioFactory = new UsuarioFactory();
+        this.fabricaUsuario = new UsuarioFactory();
     }
     
     /**
@@ -70,7 +71,10 @@ public class ControllerSistema {
         return usuarioDtos;
     }
 
-    public UsuarioDto cadastrarUsuario(UsuarioDto usuario) {
+    public UsuarioDto adicionarUsuario(UsuarioCriacaoDto usuarioCriacaoDto) {
+
+        Usuario usuario = this.fabricaUsuario.criaUsuario(usuarioCriacaoDto);
+
         this.sistemaService.salvarUsuario(usuario);
 
         return UsuarioFactory.criaUsuarioDto(usuario);

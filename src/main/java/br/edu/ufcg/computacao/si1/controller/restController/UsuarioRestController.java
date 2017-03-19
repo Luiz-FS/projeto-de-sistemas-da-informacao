@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.controller.restController;
 
 import java.util.List;
 
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,8 +39,8 @@ public class UsuarioRestController {
     }
 
     @PostMapping(value = ADICIONAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioDto usuario) {
-        UsuarioDto usuarioDto = controllerSistema.cadastrarUsuario(usuario);
+    public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioCriacaoDto usuario) {
+        UsuarioDto usuarioDto = controllerSistema.adicionarUsuario(usuario);
 
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
     }

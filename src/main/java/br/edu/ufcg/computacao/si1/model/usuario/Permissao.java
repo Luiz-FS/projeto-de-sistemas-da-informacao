@@ -17,4 +17,7 @@ public abstract class Permissao {
 	public abstract TiposPermissao getTipoPermissao();
 	
 	public abstract List<PermissoesUsuario> getPermissoes();
+	
+	public abstract boolean temPermissao(PermissoesUsuario permissao);
+	
 }

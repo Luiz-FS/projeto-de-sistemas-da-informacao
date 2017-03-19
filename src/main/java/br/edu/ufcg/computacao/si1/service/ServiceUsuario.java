@@ -13,9 +13,11 @@ import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 
 @Service
 public class ServiceUsuario {
+	
+	private static final String FIM_LINHA = System.lineSeparator();
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepository repositorioUsuario;
     
     private NotificacaoFactory fabricaNotificacao;
     
@@ -24,50 +26,70 @@ public class ServiceUsuario {
 	}
 
     public Usuario criarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        return repositorioUsuario.save(usuario);
     }
-
-    public Usuario getById(Long id) {
-        return usuarioRepository.findOne(id);
+    
+    public List<Usuario> getUsuarios() {
+        return repositorioUsuario.findAll();
     }
-
-    public Usuario getByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
-
-    public List<Usuario> getAll() {
-        return usuarioRepository.findAll();
+    
+    public Usuario getUsuarioPorEmail(String email) {
+    	return this.repositorioUsuario.findByEmail(email);
     }
 
     public void atualizar(Usuario usuario) {
-        usuarioRepository.save(usuario);
+        repositorioUsuario.save(usuario);
     }
 
     public void delete(Long id) {
-        usuarioRepository.delete(id);
+        repositorioUsuario.delete(id);
     }
 
     public void debitarSaldoUsuario(Long idUsuario, double valor) {
-        Usuario usuario = getById(idUsuario);
+        Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
 
         usuario.getSaldoDeUsuario().debitar(valor);
         atualizar(usuario);
     }
 
     public void creditarSaldoUsuario(Long idUsuario, double valor) {
-        Usuario usuario = getById(idUsuario);
+        Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
 
         usuario.getSaldoDeUsuario().creditar(valor);
         atualizar(usuario);
     }
     
-    public void addNovaNotificao(Long idUsuario, Long idComprador, String mensagem, TipoNotificacao tipoNotificacao) {
-    	Usuario usuario = this.getById(idUsuario);
+    public void comprarAnuncio(Long idDonoAnuncio, Long idComprador, double valor) {
+    	this.debitarSaldoUsuario(idComprador, valor);
+    	this.creditarSaldoUsuario(idDonoAnuncio, valor);
+    }
+        
+    public void addNovaNotificao(Long idDonoAnuncio, Long idComprador, String mensagem, TipoNotificacao tipoNotificacao) {
+    	Usuario usuario = this.repositorioUsuario.findOne(idDonoAnuncio);
     	
     	Notificacao notificacao = fabricaNotificacao.criarNotificacao(mensagem, idComprador, tipoNotificacao);
     	
     	usuario.getListaDeNotificacoes().add(notificacao);
        	
     	this.atualizar(usuario);
-    }    
+    }
+    
+    public void gerarNotificacoesDeContratacao(Long idDonoAnuncio, Long idComprador, String mensagemCompra) {
+    	String mensagemAvalicao = this.gerarStringNotificacaoAvaliacao(idComprador);
+    	
+    	this.addNovaNotificao(idDonoAnuncio, idComprador, mensagemCompra, TipoNotificacao.COMPRA);
+    	this.addNovaNotificao(idDonoAnuncio, idComprador, mensagemAvalicao, TipoNotificacao.AVALIACAO_COMPRA);
+    }
+    
+	private String gerarStringNotificacaoAvaliacao(Long idComprador) {
+		
+		Usuario comprador = this.repositorioUsuario.findOne(idComprador);
+		
+		String string = "";
+		
+		string += "Seu anuncio foi contratado!" + FIM_LINHA 
+				  + "Avalie o usuario que contratou seu anuncio: " + comprador.getNome();
+		
+		return string;
+	}
 }

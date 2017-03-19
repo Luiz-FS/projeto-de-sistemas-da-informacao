@@ -109,4 +109,20 @@ public class Usuario {
 	public List<Notificacao> getListaDeNotificacoes() {
 		return listaDeNotificacoes;
 	}
+	
+	public List<PermissoesUsuario> getPermissoesUsuario() {
+		return this.permissao.getPermissoes();
+	}
+	
+	public boolean addNotificacao(Notificacao notificacao) {
+		return this.listaDeNotificacoes.add(notificacao);
+	}
+	
+	public boolean addAvaliacao(Avaliacao avaliacao) {
+		return this.listaDeAvaliacoes.add(avaliacao);
+	}
+	
+	public boolean temPermissao(PermissoesUsuario permissao) {
+		return this.permissao.temPermissao(permissao);
+	}
 }

@@ -4,16 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceSistema {
-	
-	private static final String FIM_LINHA = System.lineSeparator();
 	
 	@Autowired
 	private ServiceAnuncio serviceAnuncio;
@@ -22,13 +19,13 @@ public class ServiceSistema {
 	private ServiceUsuario serviceUsuario;
 	
 	public void contratarAnuncio(Long idComprador, Long idAnuncio) {
-		Anuncio anuncio = this.serviceAnuncio.getAnuncioPorId(idAnuncio);
 		
-		this.serviceUsuario.debitarSaldoUsuario(idComprador, anuncio.getValor());
+		Double valorAnuncio = this.serviceAnuncio.getValorAnuncioPorId(idAnuncio);
+		Long idDonoAnuncio = this.serviceAnuncio.getIdDonoAnuncio(idAnuncio);
 		
-		this.serviceUsuario.creditarSaldoUsuario(anuncio.getIdUsuario(), anuncio.getValor());
+		this.serviceUsuario.comprarAnuncio(idDonoAnuncio, idComprador, valorAnuncio);
 		
-		this.addNotificacoesCompra(anuncio.getIdUsuario(), idComprador, idAnuncio);
+		this.addNotificacoesCompra(idDonoAnuncio, idComprador, idAnuncio);
 		
 		this.serviceAnuncio.deletarAnuncioPorId(idAnuncio);
 	}
@@ -50,31 +47,14 @@ public class ServiceSistema {
 	}
 	
 	public List<Usuario> getUsuarios() {
-		return this.serviceUsuario.getAll();
+		return this.serviceUsuario.getUsuarios();
 	}
 	
-	public void criarUsuario(Usuario usuario) {
-		this.serviceUsuario.criarUsuario(usuario);
-	}
-	
-	private String gerarDescricaoAvaliacaoCompra(Long idComprador) {
-		Usuario comprador = this.serviceUsuario.getById(idComprador);
-		
-		String string = "";
-		
-		string += "Seu anuncio foi contratado !" + FIM_LINHA 
-				  + "Avalie o Comprador: " + comprador.getNome();
-		
-		return string;
-	}
-	
-	private void addNotificacoesCompra(Long idUsuario, Long idComprador, Long idAnuncio) { 
+	private void addNotificacoesCompra(Long idDonoAnuncio, Long idComprador, Long idAnuncio) { 
 		
 		String mensagemNotificacaoCompra = this.serviceAnuncio.gerarDescricaoAnuncio(idAnuncio);
-		String mensagemNotificacaoAvaliacaoCompra = this.gerarDescricaoAvaliacaoCompra(idComprador);
-		
-		this.serviceUsuario.addNovaNotificao(idUsuario, idComprador, mensagemNotificacaoCompra, TipoNotificacao.COMPRA);
-		this.serviceUsuario.addNovaNotificao(idUsuario, idComprador, mensagemNotificacaoAvaliacaoCompra, TipoNotificacao.AVALIACAO_COMPRA);
+	
+		this.serviceUsuario.gerarNotificacoesDeContratacao(idDonoAnuncio, idComprador, mensagemNotificacaoCompra);
 	}
 	
 }

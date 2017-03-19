@@ -30,7 +30,7 @@ public class AnuncioServico extends Anuncio {
 	}
 	
 	@Override
-	public String geraStringNotificacao() {
+	public String gerarStringNotificacaoCompra() {
 		String gerarDescricao = "";
 		
 		gerarDescricao += "O seu anuncio: "+ this.getTitulo() + FIM_LINHA

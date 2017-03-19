@@ -34,7 +34,7 @@ public class Autenticacao {
      */
     public String autenticarUsuario(String email, String senha) throws UsuarioInvalidoException {
 
-        Usuario usuarioBuscado = serviceUsuario.getByEmail(email);
+        Usuario usuarioBuscado = serviceUsuario.getUsuarioPorEmail(email);
 
         String tokenDeLoginValido = "";
 

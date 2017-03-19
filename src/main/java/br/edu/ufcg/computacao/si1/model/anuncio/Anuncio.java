@@ -119,7 +119,7 @@ public abstract class Anuncio {
 		return avaliacoes;
 	}
 
-	public abstract String geraStringNotificacao();
+	public abstract String gerarStringNotificacaoCompra();
 	
 	
 }

@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceAnuncio {
@@ -23,6 +23,14 @@ public class ServiceAnuncio {
 	
 	public Anuncio getAnuncioPorId(Long idAnuncio) {
 		return this.repositorioAnuncio.findOne(idAnuncio);
+	}
+	
+	public Double getValorAnuncioPorId(Long idAnuncio) {
+		return this.repositorioAnuncio.findOne(idAnuncio).getValor();
+	}
+	
+	public Long getIdDonoAnuncio(Long idAnuncio) {
+		return this.repositorioAnuncio.findOne(idAnuncio).getIdUsuario();
 	}
 
 	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
@@ -43,10 +51,8 @@ public class ServiceAnuncio {
 		anuncioServico.setDataDeAgendamento(dataDeAgendamento);
 	}
 	
-	
 	public String gerarDescricaoAnuncio(Long idAnuncio) {
-		return this.repositorioAnuncio.getOne(idAnuncio).geraStringNotificacao();
+		return this.repositorioAnuncio.getOne(idAnuncio).gerarStringNotificacaoCompra();
 	}
-	
 	
 }

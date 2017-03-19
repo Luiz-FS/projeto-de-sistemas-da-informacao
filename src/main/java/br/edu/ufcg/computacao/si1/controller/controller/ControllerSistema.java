@@ -65,7 +65,7 @@ public class ControllerSistema {
     }
 
     public UsuarioDto adicionarUsuario(Usuario usuario) {
-        this.sistemaService.criarUsuario(usuario);
+        this.sistemaService.salvarUsuario(usuario);
 
         return UsuarioFactory.criaUsuarioDto(usuario);
     }

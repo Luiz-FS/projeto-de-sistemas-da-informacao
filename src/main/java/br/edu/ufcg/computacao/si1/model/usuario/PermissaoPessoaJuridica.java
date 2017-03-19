@@ -27,6 +27,11 @@ public class PermissaoPessoaJuridica extends Permissao {
 		return this.listaDePermissoes;
 	}
 	
+	@Override
+	public boolean temPermissao(PermissoesUsuario permissao) {
+		return this.listaDePermissoes.contains(permissao);
+	}
+	
 	private void addPermissoes() {
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
 		this.listaDePermissoes.add(PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);

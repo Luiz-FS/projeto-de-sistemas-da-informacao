@@ -27,6 +27,9 @@ public class UsuarioDto {
         this.listaDeAvaliacoes = usuario.getListaDeAvaliacoes();
         this.listaDeNotificacoes = usuario.getListaDeNotificacoes();
     }
+    
+    public UsuarioDto() {
+    }
 
     public Long getId() {
         return id;

@@ -22,10 +22,6 @@ public class ServiceAnuncio {
 		return this.repositorioAnuncio.save(anuncio);
 	}
 	
-	public Anuncio getAnuncioPorId(Long idAnuncio) {
-		return this.repositorioAnuncio.findOne(idAnuncio);
-	}
-	
 	public Double getValorAnuncioPorId(Long idAnuncio) {
 		return this.repositorioAnuncio.findOne(idAnuncio).getValor();
 	}
@@ -36,6 +32,10 @@ public class ServiceAnuncio {
 
 	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
 		return this.repositorioAnuncio.findByIdUsuario(idUsuario);
+	}
+	
+	public List<Anuncio> getAnuncios() {
+		return this.repositorioAnuncio.findAll();
 	}
 
 	public void deletarAnuncio(Anuncio anuncio) {

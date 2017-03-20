@@ -10,24 +10,24 @@ public class AnuncioProduto extends Anuncio {
 	private static final TipoAnuncio TIPO = TipoAnuncio.PRODUTO;
 
 	@Column(name = "categoria")
-	private CategoriaAnuncioProduto categoria;
+	private CategoriaAnuncio categoriaAnuncio;
 
-	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncioProduto categoria, Long idUsuario, String descricao) {
+	public AnuncioProduto(String titulo, Date dataCriacao, double valor, CategoriaAnuncio categoria, Long idUsuario, String descricao) {
 		super(titulo, dataCriacao, valor, TIPO, idUsuario, descricao);
-		this.categoria = categoria;
+		this.categoriaAnuncio = categoria;
 	}
 
 	public AnuncioProduto() {
 		super();
-		this.categoria = CategoriaAnuncioProduto.DEFAULT;
+		this.categoriaAnuncio = CategoriaAnuncio.DEFAULT;
 	}
 
-	public CategoriaAnuncioProduto getCategoria() {
-        return this.categoria;
+	public CategoriaAnuncio getCategoria() {
+        return this.categoriaAnuncio;
     }
 
-	public void setCategoria(CategoriaAnuncioProduto categoria) {
-		this.categoria = categoria;
+	public void setCategoria(CategoriaAnuncio categoria) {
+		this.categoriaAnuncio = categoria;
 	}
 	
 	@Override

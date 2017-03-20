@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioNaoExisteException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.usuario.PermissoesUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
 @Service
@@ -40,12 +42,16 @@ public class ServiceSistema {
 		return this.serviceUsuario.criarUsuario(usuario);
 	}
 	
-	public void salvarAnuncio(Anuncio anuncio) {
-		this.serviceAnuncio.salvarAnuncio(anuncio);
+	public Anuncio salvarAnuncio(Anuncio anuncio) {
+		return this.serviceAnuncio.salvarAnuncio(anuncio);
 	}
 	
 	public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) {
 		return this.serviceAnuncio.getAnunciosPorUsuario(idUsuario);
+	}
+	
+	public List<Anuncio> getAnuncios() {
+		return this.serviceAnuncio.getAnuncios();
 	}
 	
 	public List<Usuario> getUsuarios() {
@@ -59,12 +65,15 @@ public class ServiceSistema {
 	public void idAnuncioExiste(Long idAnuncio) throws AnuncioNaoExisteException {
 		this.serviceAnuncio.idAnuncioExiste(idAnuncio);
 	}
-	
+		
+	public void usuarioTemPermissao(Long idUsuario, PermissoesUsuario permissao) throws AcessoNaoPermitidoException {
+		this.serviceUsuario.usuarioTemPermissao(idUsuario, permissao);
+	}
+
 	private void addNotificacoesContratacao(Long idDonoAnuncio, Long idComprador, Long idAnuncio) { 
 		
 		String mensagemNotificacaoContratacao = this.serviceAnuncio.gerarMensagemNotificacaoContratacao(idAnuncio);
 	
 		this.serviceUsuario.gerarNotificacoesDeContratacao(idDonoAnuncio, idComprador, mensagemNotificacaoContratacao);
 	}
-	
 }

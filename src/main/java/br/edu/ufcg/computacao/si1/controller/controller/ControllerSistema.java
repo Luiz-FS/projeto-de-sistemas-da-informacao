@@ -6,21 +6,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
-import br.edu.ufcg.computacao.si1.excecoes.AnuncioNaoExisteException;
 import br.edu.ufcg.computacao.si1.excecoes.ObjetoNaoExisteException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.factories.AnuncioFactory;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
+import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
+import br.edu.ufcg.computacao.si1.model.usuario.PermissoesUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
 import br.edu.ufcg.computacao.si1.service.ServiceSistema;
 import br.edu.ufcg.computacao.si1.util.Validador;
 
-/**
- * Created by luiz on 13/03/17.
- */
 @Controller
 public class ControllerSistema {
 
@@ -31,9 +34,12 @@ public class ControllerSistema {
     private ServiceSistema sistemaService;
 
     private UsuarioFactory fabricaUsuario;
+    
+    private AnuncioFactory facricaAnuncio;
 
     public ControllerSistema() {
         this.fabricaUsuario = new UsuarioFactory();
+        this.facricaAnuncio = new AnuncioFactory();
     }
     
     /**
@@ -83,11 +89,41 @@ public class ControllerSistema {
 
         return usuarioDto;
     }
+    
+    public Anuncio adicionarAnuncio(AnuncioCriacaoDto anuncioCriacao, Long idUsuario) throws AdExtremeException {
+    	Validador.isAnuncioValido(anuncioCriacao);
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	checaPermissaoDeCriacaoAnuncio(idUsuario, anuncioCriacao.getTipo());
+    	
+    	Anuncio anuncio = this.facricaAnuncio.criaAnuncio(anuncioCriacao, idUsuario);
+    	
+    	return this.sistemaService.salvarAnuncio(anuncio);
+    }
 
     public void contratarAnuncio(Long idComprador, Long idAnuncio) throws ObjetoNaoExisteException {
     	this.sistemaService.idUsuarioExiste(idComprador);
     	this.sistemaService.idAnuncioExiste(idAnuncio);
     	
     	this.sistemaService.contratarAnuncio(idComprador, idAnuncio);
+    }
+    
+    public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) throws UsuarioNaoExisteException {
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	
+      	return this.sistemaService.getAnunciosPorUsuario(idUsuario);
+    }
+    
+    public List<Anuncio> getAnuncios() {
+    	return this.sistemaService.getAnuncios();
+    }
+    
+    private void checaPermissaoDeCriacaoAnuncio(Long idUsuario, TipoAnuncio tipoAnuncio) throws AcessoNaoPermitidoException {
+    	if(tipoAnuncio.equals(TipoAnuncio.EMPREGO)) {
+    		this.sistemaService.usuarioTemPermissao(idUsuario, PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
+    	} else if(tipoAnuncio.equals(TipoAnuncio.SERVICO)) {
+    		this.sistemaService.usuarioTemPermissao(idUsuario, PermissoesUsuario.CRIAR_ANUNCIO_SERVICO);
+    	} else if(tipoAnuncio.equals(TipoAnuncio.PRODUTO)) {
+    		this.sistemaService.usuarioTemPermissao(idUsuario, PermissoesUsuario.CRIAR_ANUNCIO_PRODUTO);
+    	}
     }
 }

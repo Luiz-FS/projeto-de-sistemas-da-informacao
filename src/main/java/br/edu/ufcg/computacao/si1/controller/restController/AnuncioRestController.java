@@ -1,83 +1,78 @@
 package br.edu.ufcg.computacao.si1.controller.restController;
 
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
+import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
+import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 
 /**
  * Created by pedro on 12/03/17.
  */
 @RestController
+@RequestMapping(value="/anuncios")
 public class AnuncioRestController {
 
-    private final String OBTER_TODOS_ANUNCIOS = "/anuncios";
-    private final String OBTER_ANUNCIO_POR_ID = "/anuncios/{id}";
-    private final String OBTER_ANUNCIO_POR_USUARIO = "/usuarios/anuncios/{id}";
-    private final String OBTER_ANUNCIO_POR_TITULO = "/anuncios/{titulo}";
-    private final String ATUALIZAR_ANUNCIO = "/anuncios/atualizarAnuncio";
-    private final String ADICIONAR_ANUNCIO = "/anuncios/adicionar";
-    private final String REMOVER_ANUNCIO = "/anuncios/remover";
-    private final String REMOVER_TODOS_ANUNCIOS_USUARIO = "/anuncios/remover";
+	private final String ADICIONAR_ANUNCIO = "/cadastro/{idUsuario}";
+	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}";
+	
+    @Autowired
+    private ControllerSistema controllerSistema;
 
-
-    @GetMapping(value = OBTER_TODOS_ANUNCIOS, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Anuncio>> obterTodosAnuncios(){
-
-        return new ResponseEntity<List<Anuncio>>(HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<Anuncio>> getTodosAnuncios(){
+    	
+    	List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
+    	
+        return new ResponseEntity<List<Anuncio>>(anuncios ,HttpStatus.OK);
+    }
+    
+    @GetMapping(value = ANUNCIO_POR_USUARIO)
+    public ResponseEntity<List<Anuncio>> getAnunciosPorUsuario(@PathVariable("idUsuario")Long idUsuario) {
+    	
+    	List<Anuncio> anuncios;
+		
+    	try {
+			anuncios = this.controllerSistema.getAnunciosPorUsuario(idUsuario);
+		} catch (UsuarioNaoExisteException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+    	
+    	return new ResponseEntity<List<Anuncio>>(anuncios, HttpStatus.OK);
     }
 
-    @GetMapping(value = OBTER_ANUNCIO_POR_ID, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> obterAnuncio(@PathVariable("id") Long id){
-        Anuncio anuncios = null;
+    @PostMapping(value = ADICIONAR_ANUNCIO)
+    public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao, @PathVariable("idUsuario")Long idUsuario) {
+    	
+    	Anuncio anuncio;
+    	
+    	try {
+    		anuncio = this.controllerSistema.adicionarAnuncio(anuncioCriacao, idUsuario);
+    	    		
+    	} catch (AnuncioInvalidoException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		} catch (UsuarioNaoExisteException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (AcessoNaoPermitidoException e) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		} catch (AdExtremeException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		}
 
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
+        return new ResponseEntity<Anuncio>(anuncio, HttpStatus.OK);
     }
-
-
-    @GetMapping(value = OBTER_ANUNCIO_POR_USUARIO , produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> obterAnuncioPorUsuario(@PathVariable("id") Long id){
-
-
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
-    }
-
-    @GetMapping(value = OBTER_ANUNCIO_POR_TITULO , produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Anuncio>> obterAnuncioPorTitulo(@PathVariable("titulo") String titulo){
-
-
-        return new ResponseEntity<List<Anuncio>>(HttpStatus.OK);
-    }
-
-
-    @PostMapping(value = ATUALIZAR_ANUNCIO , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> atualizarAnuncio(@RequestBody Anuncio anuncio){
-
-
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
-    }
-
-    @PostMapping(value = ADICIONAR_ANUNCIO , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody Anuncio anuncio){
-
-
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
-    }
-
-    @PostMapping(value = REMOVER_ANUNCIO , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anuncio> removerAnuncio(@RequestBody Anuncio anuncio){
-        return new ResponseEntity<Anuncio>(HttpStatus.OK);
-    }
-
-
-
-
-
-
-
-
-
 }

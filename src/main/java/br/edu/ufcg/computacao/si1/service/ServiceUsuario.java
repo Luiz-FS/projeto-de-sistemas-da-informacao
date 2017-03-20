@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
 import br.edu.ufcg.computacao.si1.factories.NotificacaoFactory;
 import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
+import br.edu.ufcg.computacao.si1.model.usuario.PermissoesUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 
@@ -70,7 +72,7 @@ public class ServiceUsuario {
     	
     	Notificacao notificacao = fabricaNotificacao.criarNotificacao(mensagem, idComprador, tipoNotificacao);
     	
-    	usuario.getListaDeNotificacoes().add(notificacao);
+    	usuario.addNotificacao(notificacao);
        	
     	this.atualizar(usuario);
     }
@@ -78,6 +80,14 @@ public class ServiceUsuario {
     public void idUsuarioExiste(Long idUsuario) throws UsuarioNaoExisteException {
     	if(!this.repositorioUsuario.exists(idUsuario)) {
     		throw new UsuarioNaoExisteException();
+    	}
+    }
+    
+    public void usuarioTemPermissao(Long idUsuario, PermissoesUsuario permissao) throws AcessoNaoPermitidoException {
+    	Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
+   
+    	if(!usuario.temPermissao(permissao)) {
+    		throw new AcessoNaoPermitidoException();
     	}
     }
     

@@ -46,7 +46,7 @@ public class InitialPoint {
 
 			Anuncio anuncioEmprego = new AnuncioEmprego("titulo padrao", new Date(), usuarioDavi.getId(), "Programador");
 
-			Anuncio anuncioProduto = new AnuncioProduto("titulo padrao", new Date(), 30, CategoriaAnuncioProduto.IMOVEL, usuarioDavi.getId(),"DVDS && CDS");
+			Anuncio anuncioProduto = new AnuncioProduto("titulo padrao", new Date(), 30, CategoriaAnuncio.IMOVEL, usuarioDavi.getId(),"DVDS && CDS");
 
 			Anuncio anuncioServico = new AnuncioServico("titulo padrao", new Date(), 49, usuarioDavi.getId() , "Programador");
 
@@ -59,7 +59,6 @@ public class InitialPoint {
 			anuncioEmprego.getAvaliacoes().add( new Avaliacao(ConceitoAnuncio.NOTA_CINCO, "EMPREGO MUITO BOM"));
 
 			anuncioRepository.save(anuncioEmprego);
-
 
 		};
 	}

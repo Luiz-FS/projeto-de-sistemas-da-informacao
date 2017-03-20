@@ -1,6 +1,10 @@
 package br.edu.ufcg.computacao.si1.util;
 
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.model.anuncio.CategoriaAnuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
+import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 
 public class Validador {
@@ -39,12 +43,32 @@ public class Validador {
     }
     
 	public static void isUsuarioValido(UsuarioCriacaoDto usuario) throws UsuarioInvalidoException {
-        if(!isStringValida(usuario.getNome()) ||
-            isEmailValido(usuario.getEmail()) ||
+        if( isObjetoNulo(usuario) ||
+        	!isStringValida(usuario.getNome()) ||
+            !isEmailValido(usuario.getEmail()) ||
             !isStringValida(usuario.getSenha()) ||
             isObjetoNulo(usuario.getTiposPermissao())){
 
             throw new UsuarioInvalidoException();
         }
     }
+	
+	public static void isAnuncioValido(AnuncioCriacaoDto anuncio) throws AnuncioInvalidoException {
+		
+		if( isObjetoNulo(anuncio) ||
+			!isStringValida(anuncio.getTitulo()) ||
+			isValorNegativo(anuncio.getValor()) ||
+			isObjetoNulo(anuncio.getTipo()) ||
+			!isStringValida(anuncio.getDescricao()) ||
+			isObjetoNulo(anuncio.getCategoriaAnuncio())) {
+			
+			throw new AnuncioInvalidoException();
+		}
+		
+		if(anuncio.getTipo().equals(TipoAnuncio.PRODUTO)) {
+			if(anuncio.getCategoriaAnuncio().equals(CategoriaAnuncio.DEFAULT)) {
+				throw new AnuncioInvalidoException();
+			}
+		}
+	}
 }

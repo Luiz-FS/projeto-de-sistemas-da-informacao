@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
 import br.edu.ufcg.computacao.si1.factories.NotificacaoFactory;
 import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
@@ -72,6 +73,12 @@ public class ServiceUsuario {
     	usuario.getListaDeNotificacoes().add(notificacao);
        	
     	this.atualizar(usuario);
+    }
+    
+    public void idUsuarioExiste(Long idUsuario) throws UsuarioNaoExisteException {
+    	if(!this.repositorioUsuario.exists(idUsuario)) {
+    		throw new UsuarioNaoExisteException();
+    	}
     }
     
     public void gerarNotificacoesDeContratacao(Long idDonoAnuncio, Long idComprador, String mensagemCompra) {

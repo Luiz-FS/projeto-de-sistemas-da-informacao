@@ -61,10 +61,6 @@ public abstract class Anuncio {
 	}
 
 	public Anuncio() {
-		this.titulo = "";
-		this.dataDeCriacao = new Date();
-		this.valor = 0;
-		this.tipo = TipoAnuncio.DEFAULT;
 	}
 
 	public Long getId() {

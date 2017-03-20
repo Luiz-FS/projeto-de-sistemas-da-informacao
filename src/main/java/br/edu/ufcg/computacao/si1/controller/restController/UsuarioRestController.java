@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
 
 /**
@@ -38,8 +39,13 @@ public class UsuarioRestController {
 
     @PostMapping(value = ADICIONAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioCriacaoDto usuario) {
-        UsuarioDto usuarioDto = controllerSistema.adicionarUsuario(usuario);
-
+        UsuarioDto usuarioDto;
+		
+        try {
+			usuarioDto = controllerSistema.adicionarUsuario(usuario);
+		} catch (UsuarioInvalidoException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
     }
 

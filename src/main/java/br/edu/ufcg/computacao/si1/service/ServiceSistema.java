@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 
@@ -48,6 +50,14 @@ public class ServiceSistema {
 	
 	public List<Usuario> getUsuarios() {
 		return this.serviceUsuario.getUsuarios();
+	}
+	
+	public void idUsuarioExiste(Long idUsuario) throws UsuarioNaoExisteException {
+		this.serviceUsuario.idUsuarioExiste(idUsuario);
+	}
+	
+	public void idAnuncioExiste(Long idAnuncio) throws AnuncioNaoExisteException {
+		this.serviceAnuncio.idAnuncioExiste(idAnuncio);
 	}
 	
 	private void addNotificacoesContratacao(Long idDonoAnuncio, Long idComprador, Long idAnuncio) { 

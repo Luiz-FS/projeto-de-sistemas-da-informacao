@@ -1,11 +1,7 @@
 package br.edu.ufcg.computacao.si1.util;
 
-import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
-import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
-import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
-import br.edu.ufcg.computacao.si1.model.usuario.Permissao;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 
 public class Validador {
 
@@ -21,65 +17,34 @@ public class Validador {
     public static boolean isStringVazia(String string){
         return string.isEmpty();
     }
+    
+    public static boolean isStringValida(String string) {
+    	return !isStringNull(string) && !isStringVazia(string);
+    }
 
     public static boolean isValorNegativo(double valor){
         return (valor < 0);
+    }
+    
+    public static boolean isObjetoNulo(Object objeto) {
+    	return (objeto == null);
     }
 
     public static boolean isPalavrasInvalidas(String string) {
         return string.matches(REGEX_PALAVRAS);
     }
 
-    public static boolean isEmailInvalido(String email) {
-        return email.matches(REGEX_EMAIL);
+    public static boolean isEmailValido(String email) {
+        return isStringValida(email) && email.matches(REGEX_EMAIL);
     }
-
-    public static boolean isAutorizado(Usuario usuario, Permissao permissao) {
-        return (usuario.getPermissao() == permissao);
-
-    }
-
-    public static boolean isAnuncioValido(Anuncio anuncio) throws AnuncioInvalidoException {
-
-        if(isStringNull(anuncio.getTitulo()) ||
-                isStringVazia(anuncio.getTitulo()) ||
-                isStringNull(anuncio.getDataDeCriacao()) ||
-                isStringVazia(anuncio.getDataDeCriacao())||
-                isStringVazia(anuncio.getDescricao()) ||
-                isStringNull(anuncio.getDescricao()) ||
-                isValorNegativo(anuncio.getValor())){
-            throw new AnuncioInvalidoException();
-        }
-
-        return true;
-
-    }
-
-    public static void isUsuarioValido(Usuario usuario) throws UsuarioInvalidoException {
-
-        if(isStringVazia(usuario.getEmail()) ||
-                isStringNull(usuario.getEmail()) ||
-                isStringVazia(usuario.getNome()) ||
-                isStringNull(usuario.getNome())){
+    
+	public static void isUsuarioValido(UsuarioCriacaoDto usuario) throws UsuarioInvalidoException {
+        if(!isStringValida(usuario.getNome()) ||
+            isEmailValido(usuario.getEmail()) ||
+            !isStringValida(usuario.getSenha()) ||
+            isObjetoNulo(usuario.getTiposPermissao())){
 
             throw new UsuarioInvalidoException();
-
-        }
-
-
-    }
-
-    public static void isAnuncioServicoValido(Anuncio anuncio) throws AnuncioInvalidoException {
-
-        if(isAnuncioValido(anuncio) &&
-                !(isStringVazia(((AnuncioServico)anuncio).getDataDeAgendamento())) ||
-                isStringNull(((AnuncioServico)anuncio).getDataDeAgendamento())){
-
-
-        }else {
-            throw new AnuncioInvalidoException();
         }
     }
-
-
 }

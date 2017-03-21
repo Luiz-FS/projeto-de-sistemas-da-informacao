@@ -7,7 +7,7 @@ app.config(function($routeProvider) {
 
 	$routeProvider
 	.when("/cadastrar-se", {
-		templateUrl : "/templates/cadastro.html",
+		templateUrl : "cadastro.html",
 		controller : ""
 	})
 	.otherwise({

@@ -1,21 +1,46 @@
 <!DOCTYPE html>
-<html
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/layout">
+<html lang="pt">
     <head>
+        <meta charset="UTF-8"/>
         <title>.:: ad-extreme ::. - index</title>
+
+        <script src="./lib/angularjs/angular.min.js"></script>
+        <script src="./lib/jquery/jquery.js"></script>
+        <script src="./lib/bootstrap/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap-theme.css"/>
+        <link rel="stylesheet" href="./css/estilo-pgInicial.css"/>
+
     </head>
-    <th:block layout:fragment="conteudo">
-        <!-- init jumbotron -->
-        <div class="container">
-            <div class="jumbotron">
-                <div class="container">
-                    <h1><i class="fa fa-usd" aria-hidden="true"></i> ad-extreme</h1>
-                    <p>Negociar é nosso lema !!</p>
+
+    <body>
+
+        <nav id="menu" class="navbar navbar-default" role="navigation">
+
+            <div class="container-fluid">
+
+                <div class="navbar-header"><a class="navbar-brand" href="/">ad-extreme</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-menubuilder">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/cadastrar-se">Cadastra-se</a>
+                        </li>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <!-- end jumbotron -->
-    </th:block>
+
+        </nav>
+
+    </body>
 </html>

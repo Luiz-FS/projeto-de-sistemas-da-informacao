@@ -42,7 +42,8 @@ public class FiltroSistema implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 	    	    
-	    if(!httpRequest.getServletPath().equals("/login") && !httpRequest.getServletPath().equals("/logout")) {
+	    if(!httpRequest.getServletPath().equals("/login") && !httpRequest.getServletPath().equals("/logout")
+				&& !httpRequest.getServletPath().equals("/")) {
 	    	try {
 	    		// testando ainda, seria melhor com Cookies.
 				//autenticador.decodificarToken(httpRequest.getReader().readLine());

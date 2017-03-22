@@ -1,33 +1,26 @@
 package br.edu.ufcg.computacao.si1.controller.restController;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.dto.UsuarioDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/usuarios")
 public class UsuarioRestController {
 
-    private final String OBTER_TODOS_USUARIOS = "/usuarios";
     private final String ADICIONAR_USUARIO = "/cadastro";
 
     @Autowired
     private ControllerSistema controllerSistema;
 
-    @GetMapping(value = OBTER_TODOS_USUARIOS, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public ResponseEntity<List<UsuarioDto>> obterTodosUsuarios() {
 
         List<UsuarioDto> usuarioDtos = controllerSistema.obterTodosUsuarios();
@@ -35,7 +28,7 @@ public class UsuarioRestController {
         return new ResponseEntity<>(usuarioDtos, HttpStatus.OK);
     }
 
-    @PostMapping(value = ADICIONAR_USUARIO, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = ADICIONAR_USUARIO)
     public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioCriacaoDto usuario) {
         UsuarioDto usuarioDto;
 		
@@ -46,5 +39,4 @@ public class UsuarioRestController {
 		}
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
     }
-
 }

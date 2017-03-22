@@ -4,14 +4,16 @@
  */
 var app = angular.module("menuPrincipal", ["ngRoute"]);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
 
 	$routeProvider
 	.when("/cadastrar-se", {
-		templateUrl : "/html/cadastro.html",
+		templateUrl : "/view/cadastro.html",
 		controller: "controllerCadastro"	
 	})
 	.when("/sobre", {
-	    templateUrl : "/html/sobre.html"
+	    templateUrl : "/view/sobre.html"
 	});
+
+	$locationProvider.html5Mode(true);
 });

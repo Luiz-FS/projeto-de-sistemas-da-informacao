@@ -19,6 +19,7 @@ public class UsuarioDto {
     private List<Notificacao> listaDeNotificacoes;
 
     public UsuarioDto(Usuario usuario) {
+        this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.permissao = usuario.getPermissao().getTipoPermissao();

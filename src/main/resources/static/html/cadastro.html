@@ -26,12 +26,17 @@
 				</div>	
 				
 				<div class="row">
-					<label class="control-label col-lg-1" for="opcaoPessoa">- </label>
+					<label class="control-label col-lg-1" for="opcaoPessoa"> </label>
 					<div class="col-lg-3">
 						 <select class="form-control" ng-model="opcaoPessoa">
 						 	<option value="">Pessoa Fisica</option>
 						 	<option>Pessoa Juridica</option>
 						 </select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-10">
+						<button ng-disabled="!cadastroUsuario.nomeUsuario.$valid || !cadastroUsuario.emailUsuario.$valid || !cadastroUsuario.senhaUsuario.$valid" class="pull-right btn btn-success btn-default"><span class="glyphicon glyphicon-ok"></span> Cadastrar</button>
 					</div>
 				</div>
 			</div>

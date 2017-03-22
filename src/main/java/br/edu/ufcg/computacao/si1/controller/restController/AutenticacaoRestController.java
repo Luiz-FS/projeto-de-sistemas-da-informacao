@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
 
+import javax.servlet.ServletException;
+
 /**
  * Created by luiz on 15/03/17.
  */
@@ -22,15 +24,16 @@ public class AutenticacaoRestController {
     private ControllerSistema controllerSistema;
 
     @PatchMapping(value = "/login/{usrEmail}/{usrPassword}")
-    public ResponseEntity<String> login(@PathVariable("usrEmail") String email, @PathVariable("usrPassword") String senha) {
+    public ResponseToken login(@PathVariable("usrEmail") String email, @PathVariable("usrPassword") String senha)
+            throws ServletException {
 
         try {
 
             String token = controllerSistema.login(email, senha);
-            return new ResponseEntity<String>(token, HttpStatus.OK);
+            return new ResponseToken(token);
 
         } catch (UsuarioInvalidoException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+            throw new ServletException(e.getMessage());
         }
     }
 
@@ -41,6 +44,15 @@ public class AutenticacaoRestController {
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return  new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    private class ResponseToken {
+
+        public String token;
+
+        public ResponseToken(String token) {
+            this.token = token;
         }
     }
 }

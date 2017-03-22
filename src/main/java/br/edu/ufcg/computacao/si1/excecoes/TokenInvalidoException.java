@@ -6,6 +6,6 @@ package br.edu.ufcg.computacao.si1.excecoes;
 public class TokenInvalidoException extends ObjetoInvalidoException {
 
     public TokenInvalidoException() {
-        super("Token inválido!");
+        super("ResponseToken inválido!");
     }
 }

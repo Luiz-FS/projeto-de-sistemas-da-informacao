@@ -13,7 +13,7 @@ public class UsuarioCriacaoDto {
 
     private String senha;
 
-    private TiposPermissao tiposPermissao;
+    private TiposPermissao permissao;
 
     public  UsuarioCriacaoDto() {
     }
@@ -42,11 +42,11 @@ public class UsuarioCriacaoDto {
         this.senha = senha;
     }
 
-    public TiposPermissao getTiposPermissao() {
-        return tiposPermissao;
+    public TiposPermissao getPermissao() {
+        return permissao;
     }
 
-    public void setTiposPermissao(TiposPermissao tiposPermissao) {
-        this.tiposPermissao = tiposPermissao;
+    public void setPermissao(TiposPermissao permissao) {
+        this.permissao = permissao;
     }
 }

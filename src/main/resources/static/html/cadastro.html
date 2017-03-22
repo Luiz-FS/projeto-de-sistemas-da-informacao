@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>cadastro</h1>
-</body>
-</html>
+<div class="container">	
+	<h3>Cadastrar Usuario</h3>
+	<div class="container">
+		<form name="cadastroUsuario" class="form-horizontal" novalidate ng-submit="">
+			<div class="form-group">
+				
+				<div class="row">
+					<label class="control-label col-lg-1" for="nomeUsuario">Nome: </label>	
+					<div class="col-lg-9">
+						<input name="nomeUsuario" ng-model="nomeUsuario" id="nomeUsuario" type="text" class="form-control" placeholder="Seu nome" autocomplete="off" pattern="" title="" required>
+					</div>
+				</div>	
+				
+				<div class="row">
+					<label class="control-label col-lg-1" for="emailUsuario">Email: </label>	
+					<div class="col-lg-9">
+						<input name="emailUsuario" ng-model="emailUsuario" id="emailUsuario" type="email" class="form-control" placeholder="Seu email" autocomplete="off" pattern="" title="" required>
+					</div>
+				</div>
+				
+				<div class="row">	
+					<label class="control-label col-lg-1" for="senhaUsuario">Senha: </label>	
+					<div class="col-lg-9">
+						<input name="senhaUsuario" ng-model="senhaUsuario" id="senhaUsuario" type="password" class="form-control" placeholder="Sua senha" autocomplete="off" pattern="" title="" required>
+					</div>
+				</div>	
+				
+				<div class="row">
+					<label class="control-label col-lg-1" for="opcaoPessoa">- </label>
+					<div class="col-lg-3">
+						 <select class="form-control" ng-model="opcaoPessoa">
+						 	<option value="">Pessoa Fisica</option>
+						 	<option>Pessoa Juridica</option>
+						 </select>
+					</div>
+				</div>
+			</div>
+		</form>	
+	</div>	
+</div>

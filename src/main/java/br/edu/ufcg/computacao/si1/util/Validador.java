@@ -47,7 +47,7 @@ public class Validador {
         	!isStringValida(usuario.getNome()) ||
             !isEmailValido(usuario.getEmail()) ||
             !isStringValida(usuario.getSenha()) ||
-            isObjetoNulo(usuario.getTiposPermissao())){
+            isObjetoNulo(usuario.getPermissao())){
 
             throw new UsuarioInvalidoException();
         }

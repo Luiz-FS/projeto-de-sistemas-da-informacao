@@ -11,13 +11,13 @@ app.factory("tokenInterceptador", function ($q, $location) {
             return config;
         },
 
-        'reponseError' : function (rejection) {
+        'responseError' : function (rejection) {
 
             if (rejection.status == 401) {
-                $location.path = "/login";
+                $location.path("/login");
             }
 
-            return response;
+            return $q.reject(rejection);
         }
     };
 });

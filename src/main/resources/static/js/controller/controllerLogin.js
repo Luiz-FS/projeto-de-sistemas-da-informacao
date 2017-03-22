@@ -11,14 +11,15 @@ app.controller("controllerLogin", function($scope, $http) {
     $scope.autencitar = function () {
 
         $http.path("http://" + location.host + "/login", $scope.usuario)
-            .then(function (response) {
+            .success(function (data, status) {
 
                 console.log("Sucesso" + response);
-                $scope.token = response.data.token;
-                localStorage.setItem("userToken", response.data.token);
+                $scope.token = data.token;
+                localStorage.setItem("userToken", data.token);
 
-            }, function (response) {
-                console.log("falha", response)
-            })       
+            })
+            .error(function (response) {
+                console.log("falha" + response);
+            });
     }
 })

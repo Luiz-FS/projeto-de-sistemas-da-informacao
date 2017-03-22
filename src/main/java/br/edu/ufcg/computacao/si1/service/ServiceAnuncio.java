@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufcg.computacao.si1.excecoes.AnuncioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioInexistenteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
@@ -46,9 +46,9 @@ public class ServiceAnuncio {
 		this.repositorioAnuncio.delete(idAnuncio);
 	}
 	
-	public void idAnuncioExiste(Long idAnuncio) throws AnuncioNaoExisteException {
+	public void idAnuncioExiste(Long idAnuncio) throws AnuncioInexistenteException {
 		if(!this.repositorioAnuncio.exists(idAnuncio)) {
-			throw new AnuncioNaoExisteException();
+			throw new AnuncioInexistenteException();
 		}
 	}
 	

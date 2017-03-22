@@ -26,7 +26,7 @@ public class UsuarioFactory {
     	String nome = usuarioCriacao.getNome();
     	String email = usuarioCriacao.getEmail();
     	String senha = usuarioCriacao.getSenha();
-    	TiposPermissao tipoPermissao = usuarioCriacao.getTiposPermissao();
+    	TiposPermissao tipoPermissao = usuarioCriacao.getPermissao();
     	
     	Permissao permissao = criaPermissaoUsuario(tipoPermissao);
         

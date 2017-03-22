@@ -1,45 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>.:: ad-extreme ::. - index</title>
 
-        <script src="./lib/angularjs/angular.min.js"></script>
-        <script src="./lib/jquery/jquery.js"></script>
-        <script src="./lib/bootstrap/js/bootstrap.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script> -->
+<html lang="en">
 
-        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css"/>
-        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap-theme.css"/>
-        <link rel="stylesheet" href="./css/estilo-pgInicial.css"/>
-        
-        <script src="./js/app.js"></script>
-
-    </head>
-
-    <body ng-app="menuPrincipal">
-		<div class="container" id="menuPrincipal">
-			<nav class="navbar navbar-inverse">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">Menu</a>
-					</div>
-					<ul class="nav navbar-nav">
-						<li class=""><a href="#login">Login</a></li>
-						<li class=""><a href="#cadastra-se">Cadastra-Se</a></li>
-						<li class=""><a href="#sobre">Sobre </a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						 <li><a><span class="fa fa-file-o"></span><b> Saldo: 0 </b></a></li>
-					</ul>
-				</div>
-			</nav>
+<head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1"></meta>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 		
-			<ng-view></ng-view>
-			
-			<footer class="footer">
-				Copyright © MITOS E JAVEIROS 2017. All right reserved.
-			</footer>	
-		</div>
-    </body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    
+    <script src="/js/app.js"></script>
+   	
+   	<title>AdExtreme</title>
+
+</head>
+
+<body ng-app="menuPrincipal">
+	<div class="container" id="menuPrincipal">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Menu</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class=""><a href="#login">login</a></li>
+					<li class=""><a href="#cadastrar-se">cadastra-se</a></li>
+					<li class=""><a href="#sobre">Sobre </a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					 <li><a><span class="fa fa-file-o"></span><b> Saldo: 0</b></a></li>
+				</ul>
+			</div>
+		</nav>
+	
+		<ng-view></ng-view>
+		
+		<footer class="footer">
+			Copyright © MITOS E JAVEIROS 2017. All right reserved.
+		</footer>	
+	</div>
+</body>
+
 </html>

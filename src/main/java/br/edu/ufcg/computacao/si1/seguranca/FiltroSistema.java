@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.seguranca;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class FiltroSistema implements Filter {
 	
 	@Autowired
 	private Autenticacao autenticador;
+
+	private List<String> requisicoesLiberadas = new ArrayList(Arrays.asList("/", "/login", "/logout"));
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -42,8 +45,7 @@ public class FiltroSistema implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 	    	    
-	    if(!httpRequest.getServletPath().equals("/login") && !httpRequest.getServletPath().equals("/logout")
-				&& !httpRequest.getServletPath().equals("/")) {
+	    if(!requisicoesLiberadas.contains(httpRequest.getServletPath())) {
 	    	try {
 	    		// testando ainda, seria melhor com Cookies.
 				//autenticador.decodificarToken(httpRequest.getReader().readLine());

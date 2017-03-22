@@ -16,7 +16,7 @@ import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 
@@ -48,7 +48,7 @@ public class AnuncioRestController {
 		
     	try {
 			anuncios = this.controllerSistema.getAnunciosPorUsuario(idUsuario);
-		} catch (UsuarioNaoExisteException e) {
+		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
     	
@@ -65,7 +65,7 @@ public class AnuncioRestController {
     	    		
     	} catch (AnuncioInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		} catch (UsuarioNaoExisteException e) {
+		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (AcessoNaoPermitidoException e) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 
 import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
-import br.edu.ufcg.computacao.si1.excecoes.ObjetoNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.ObjetoInexistenteException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.factories.AnuncioFactory;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
@@ -100,14 +100,14 @@ public class ControllerSistema {
     	return this.sistemaService.salvarAnuncio(anuncio);
     }
 
-    public void contratarAnuncio(Long idComprador, Long idAnuncio) throws ObjetoNaoExisteException {
+    public void contratarAnuncio(Long idComprador, Long idAnuncio) throws ObjetoInexistenteException {
     	this.sistemaService.idUsuarioExiste(idComprador);
     	this.sistemaService.idAnuncioExiste(idAnuncio);
     	
     	this.sistemaService.contratarAnuncio(idComprador, idAnuncio);
     }
     
-    public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) throws UsuarioNaoExisteException {
+    public List<Anuncio> getAnunciosPorUsuario(Long idUsuario) throws UsuarioInexistenteException {
     	this.sistemaService.idUsuarioExiste(idUsuario);
     	
       	return this.sistemaService.getAnunciosPorUsuario(idUsuario);

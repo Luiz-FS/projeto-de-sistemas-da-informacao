@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.factories.NotificacaoFactory;
 import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
@@ -77,9 +77,9 @@ public class ServiceUsuario {
     	this.atualizar(usuario);
     }
     
-    public void idUsuarioExiste(Long idUsuario) throws UsuarioNaoExisteException {
+    public void idUsuarioExiste(Long idUsuario) throws UsuarioInexistenteException {
     	if(!this.repositorioUsuario.exists(idUsuario)) {
-    		throw new UsuarioNaoExisteException();
+    		throw new UsuarioInexistenteException();
     	}
     }
     

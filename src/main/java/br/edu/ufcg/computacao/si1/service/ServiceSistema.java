@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
-import br.edu.ufcg.computacao.si1.excecoes.AnuncioNaoExisteException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioNaoExisteException;
+import br.edu.ufcg.computacao.si1.excecoes.AnuncioInexistenteException;
+import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.PermissoesUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
@@ -58,11 +58,11 @@ public class ServiceSistema {
 		return this.serviceUsuario.getUsuarios();
 	}
 	
-	public void idUsuarioExiste(Long idUsuario) throws UsuarioNaoExisteException {
+	public void idUsuarioExiste(Long idUsuario) throws UsuarioInexistenteException {
 		this.serviceUsuario.idUsuarioExiste(idUsuario);
 	}
 	
-	public void idAnuncioExiste(Long idAnuncio) throws AnuncioNaoExisteException {
+	public void idAnuncioExiste(Long idAnuncio) throws AnuncioInexistenteException {
 		this.serviceAnuncio.idAnuncioExiste(idAnuncio);
 	}
 		

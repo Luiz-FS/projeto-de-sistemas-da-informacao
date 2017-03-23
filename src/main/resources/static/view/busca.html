@@ -1,0 +1,43 @@
+<div class="container">
+
+    <h1>Busca</h1>
+
+
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+        <input id="edtBusca" name="edtBusca" ng-model="valorBusca" type="text" class="form-control" placeholder="Buscar por palavra-chave" required/>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="buscaAll()">Buscar</button></span>
+
+
+
+    <!--TABELA DE ANUNCIOS-->
+
+    <div style="width: 65%" >
+
+        <table class="table" id="listaAtividade">
+
+            <tr>
+                <th>Titulo</th>
+                <th>Data De Criacao</th>
+                <th>Valor</th>
+                <th>Descricao</th>
+                <th>Tipo</th>
+
+
+            </tr>
+
+            <tr ng-repeat="anuncio in anuncios">
+                <td>{{anuncio.titulo}}</td>
+                <td>{{anuncio.dataDeCriacao}}</td>
+                <td>{{anuncio.valor}}</td>
+                <td>{{anuncio.descricao}}</td>
+                <td>{{anuncio.tipo}}</td>
+
+            </tr>
+        </table>
+    </div>
+
+
+</div>

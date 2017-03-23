@@ -1,25 +1,24 @@
-/**
- * Created by luiz on 22/03/17.
- */
-
 app.controller("controllerLogin", function($scope, $http) {
 
-    $scope.usuario = {};
-    
     $scope.token = "";
+    $scope.mensagemLogin = "";
     
     $scope.autencitar = function () {
 
-        $http.path("http://" + location.host + "/login", $scope.usuario)
+        $http.patch("http://" + location.host + "/login", $scope.usuario)
             .success(function (data, status) {
 
-                console.log("Sucesso" + response);
+                console.log("Sucesso: " + status + ", " + data);
                 $scope.token = data.token;
                 localStorage.setItem("userToken", data.token);
 
+                $scope.mensagemLogin = "Login feito com sucesso!";
+
             })
             .error(function (response) {
-                console.log("falha" + response);
-            });
+                $scope.mensagemLogin = "Login não efetuado!";
+
+                console.log("Falha: " + response);
+           });
     }
-})
+});

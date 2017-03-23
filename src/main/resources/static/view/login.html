@@ -1,6 +1,39 @@
 <div class="container">
-    <h3>Login</h3>
+    <h3>Entrar no Sistema</h3>
+
     <div class="container">
-        Tela de login a ser feita...
+        <form name="cadastroUsuario" class="form-horizontal" novalidate ng-submit="autencitar()">
+            <div class="form-group">
+
+                <div class="row">
+                    <label class="control-label col-lg-1" for="emailUsuario">Email: </label>
+                    <div class="col-lg-9">
+                        <input name="emailUsuario" ng-model="usuario.email" id="emailUsuario"
+                               type="email" class="form-control" placeholder="Seu email" pattern="" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="control-label col-lg-1" for="senhaUsuario">Senha: </label>
+                    <div class="col-lg-9">
+                        <input name="senhaUsuario" ng-model="usuario.senha" id="senhaUsuario"
+                               type="password" class="form-control" placeholder="Sua senha" pattern="" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10">
+                        <button ng-disabled="!cadastroUsuario.emailUsuario.$valid || !cadastroUsuario.senhaUsuario.$valid"
+                                type="submit" class="pull-right btn btn-success btn-default">
+                            <span class="glyphicon glyphicon-ok"></span> Entrar</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info" role="alert" ng-show="mensagemLogin.length > 0 ">
+                    {{mensagemLogin}}
+                </div>
+
+            </div>
+        </form>
     </div>
 </div>

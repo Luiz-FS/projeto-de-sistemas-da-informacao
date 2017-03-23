@@ -13,7 +13,7 @@ app.config(function($routeProvider, $locationProvider) {
 		})
 		.when("/login", {
 			templateUrl: "/view/login.html",
-			controller: ""
+			controller: "controllerLogin"
 		})
 		.when("/sobre", {
 	    	templateUrl : "/view/sobre.html"
@@ -24,4 +24,4 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.config(function ($httpProvider) {
 	$httpProvider.interceptors.push("tokenInterceptador");
-})
+});

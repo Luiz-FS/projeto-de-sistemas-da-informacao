@@ -19,6 +19,10 @@ app.controller("controllerCadastro", function($scope, $http, $location, $routePa
 			console.log(data);
 			console.log(status);
 		});
-		
+
+        delete $scope.nomeUsuario;
+        delete $scope.emailUsuario;
+        delete $scope.senhaUsuario;
+        delete $scope.opcaoPessoa;
 	}
 });

@@ -12,14 +12,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;
 /**
  * 
  * Classe para filtrar as mensagens http do sistema,
@@ -31,7 +29,12 @@ public class FiltroSistema implements Filter {
 	@Autowired
 	private Autenticacao autenticador;
 
-	private List<String> requisicoesLiberadas = new ArrayList(Arrays.asList("/", "/login", "/logout"));
+	private List<String> requisicoesNaoLiberadas;
+
+	public FiltroSistema() {
+		this.requisicoesNaoLiberadas = new ArrayList(Arrays.asList("/anuncios/cadastro/",
+				"/anuncios/usuario/"));
+	}
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -44,13 +47,18 @@ public class FiltroSistema implements Filter {
 		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
-	    	    
-	    if(!requisicoesLiberadas.contains(httpRequest.getServletPath())) {
+
+		if(verificarRequisicao(httpRequest.getServletPath())) {
 	    	try {
-	    		// testando ainda, seria melhor com Cookies.
-				//autenticador.decodificarToken(httpRequest.getReader().readLine());
-				//httpRequest.getReader().close();
-				chain.doFilter(request, response);
+
+				long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
+				long idToken = autenticador.decodificarToken(httpRequest.getHeader("Authorization"));
+
+				if (idRequisicao == idToken)
+					chain.doFilter(request, response);
+				else
+					unauthorized(httpResponse);
+
 	    	} catch (Exception e) {
 	    		unauthorized(httpResponse);
 			}
@@ -62,6 +70,38 @@ public class FiltroSistema implements Filter {
 	@Override
 	public void destroy() {
 		// sem implementacao por enquanto
+	}
+
+	private boolean verificarRequisicao(String requisicao) {
+		for (String requisicaoNaoLiberada : this. requisicoesNaoLiberadas) {
+
+			if(requisicao.contains(requisicaoNaoLiberada)) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+	private long pegarIdRequisicao(String requisicao) {
+
+		long id;
+
+		for (String requisicaoNaoLiberada : this. requisicoesNaoLiberadas) {
+
+			if(requisicao.contains(requisicaoNaoLiberada)) {
+				requisicao = requisicao.replace(requisicaoNaoLiberada, "");
+
+				String idRequisicao = requisicao;
+
+				id = Long.parseLong(idRequisicao);
+				return id;
+			}
+
+		}
+
+		return -1;
+
 	}
 	
 	private List<String> toStringDoParaguai(Enumeration<String> enumeration) {

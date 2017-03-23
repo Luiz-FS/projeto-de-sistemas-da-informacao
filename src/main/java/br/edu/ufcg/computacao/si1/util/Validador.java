@@ -1,7 +1,9 @@
 package br.edu.ufcg.computacao.si1.util;
 
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.ObjetoInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.CategoriaAnuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
@@ -69,6 +71,15 @@ public class Validador {
 			if(anuncio.getCategoriaAnuncio().equals(CategoriaAnuncio.DEFAULT)) {
 				throw new AnuncioInvalidoException();
 			}
+		}
+	}
+	
+	public static void isAvaliacaoValida(Avaliacao avaliacao) throws ObjetoInvalidoException {
+		if(isObjetoNulo(avaliacao) ||
+		   isObjetoNulo(avaliacao.getNota()) ||	
+		   !isStringValida(avaliacao.getComentarios())) {
+			
+			throw new ObjetoInvalidoException();
 		}
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
-import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
+import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
@@ -27,8 +27,8 @@ import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 @RequestMapping(value="/anuncios")
 public class AnuncioRestController {
 
-	private final String ADICIONAR_ANUNCIO = "/cadastro/{idUsuario}";
-	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}";
+	private final String ADICIONAR_ANUNCIO = "/cadastro/{idUsuarioLogado}";
+	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}/{idUsuarioLogado}";
 	
     @Autowired
     private ControllerSistema controllerSistema;
@@ -56,7 +56,7 @@ public class AnuncioRestController {
     }
 
     @PostMapping(value = ADICIONAR_ANUNCIO)
-    public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao, @PathVariable("idUsuario")Long idUsuario) {
+    public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao, @PathVariable("idUsuarioLogado")Long idUsuario) {
     	
     	Anuncio anuncio;
     	
@@ -67,7 +67,7 @@ public class AnuncioRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} catch (AcessoNaoPermitidoException e) {
+		} catch (AcaoNaoPermitidaException e) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		} catch (AdExtremeException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);

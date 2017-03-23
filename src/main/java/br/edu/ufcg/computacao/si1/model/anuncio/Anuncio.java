@@ -116,4 +116,8 @@ public abstract class Anuncio {
 	}
 
 	public abstract String gerarMensagemNotificacaoContratacao();
+	
+	public boolean addAvaliacao(Avaliacao avaliacao) {
+		return this.avaliacoes.add(avaliacao);
+	}
 }

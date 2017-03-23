@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
+import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.factories.NotificacaoFactory;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
 import br.edu.ufcg.computacao.si1.model.usuario.PermissoesUsuario;
@@ -83,11 +84,11 @@ public class ServiceUsuario {
     	}
     }
     
-    public void usuarioTemPermissao(Long idUsuario, PermissoesUsuario permissao) throws AcessoNaoPermitidoException {
+    public void usuarioTemPermissao(Long idUsuario, PermissoesUsuario permissao) throws AcaoNaoPermitidaException {
     	Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
    
     	if(!usuario.temPermissao(permissao)) {
-    		throw new AcessoNaoPermitidoException();
+    		throw new AcaoNaoPermitidaException();
     	}
     }
     
@@ -98,6 +99,27 @@ public class ServiceUsuario {
     	this.addNovaNotificao(idDonoAnuncio, idComprador, mensagemAvalicao, TipoNotificacao.AVALIACAO_COMPRA);
     }
     
+    public void addAvaliacao(Long idUsuario, Long idNotificacao, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
+    	Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
+    	
+    	if(usuario.contemNotificacaoAvaliacao(idNotificacao)) {
+    		usuario.addAvaliacao(avaliacao);
+    		usuario.removeNotificacao(idNotificacao);
+    		
+    		this.atualizar(usuario);
+    	} else {
+    		throw new AcaoNaoPermitidaException();
+    	}
+    }
+    
+    public List<Notificacao> getNotificacoes(Long idUsuario) {
+    	return this.repositorioUsuario.findOne(idUsuario).getListaDeNotificacoes();
+    }
+    
+    public List<Avaliacao> getAvaliacoes(Long idUsuario) {
+    	return this.repositorioUsuario.findOne(idUsuario).getListaDeAvaliacoes();
+    }
+        
 	private String gerarMensagemNotificacaoAvaliacao(Long idComprador) {
 		
 		Usuario comprador = this.repositorioUsuario.findOne(idComprador);

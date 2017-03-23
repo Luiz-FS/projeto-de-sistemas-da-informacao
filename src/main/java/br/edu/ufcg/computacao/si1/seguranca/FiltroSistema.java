@@ -51,8 +51,17 @@ public class FiltroSistema implements Filter {
 
 		if(verificarRequisicao(httpRequest.getServletPath())) {
 	    	try {
+
+	    		String header = httpRequest.getHeader("Autorizacao");
+
+	    		if (!header.startsWith("Bearer ")) {
+	    			throw new ServletException("Token inválido!");
+				}
+
+				String token = header.substring(7);
+
 	    		long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
-				long idToken = autenticador.decodificarToken(httpRequest.getHeader("Authorization"));
+				long idToken = autenticador.decodificarToken(token);
 								
 				if (idRequisicao == idToken)
 					chain.doFilter(request, response);
@@ -87,24 +96,15 @@ public class FiltroSistema implements Filter {
 
 		long id;
 
-		for (String requisicaoNaoLiberada : this.requisicoesNaoLiberadas) {
+		String[] teste = requisicao.split("/");
 
-			if(requisicao.contains(requisicaoNaoLiberada)) {
-				requisicao = requisicao.replace(requisicaoNaoLiberada, "");
+		id = Long.parseLong(teste[teste.length - 1]);
 
-				String idRequisicao = requisicao;
-
-				id = Long.parseLong(idRequisicao);
-				return id;
-			}
-
-		}
-
-		return -1;
+		return id;
 	}
 	
 	private void addRequisicoesNaoLiberadas() {
-		//this.requisicoesNaoLiberadas.add("/anuncios");
+		this.requisicoesNaoLiberadas.add("/anuncios/");
 	}
 	
 	private void unauthorized(HttpServletResponse response) throws IOException {

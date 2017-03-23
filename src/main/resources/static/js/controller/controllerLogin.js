@@ -10,7 +10,7 @@ app.controller("controllerLogin", function($scope, $http) {
 
                 console.log("Sucesso: " + status + ", " + data);
                 $scope.token = data.token;
-                localStorage.setItem("userToken", data.token);
+                localStorage.setItem("tokenUsuario", data.token);
 
                 $scope.mensagemLogin = "Login feito com sucesso!";
 

@@ -17,7 +17,11 @@ app.config(function($routeProvider, $locationProvider) {
 		})
 		.when("/sobre", {
 	    	templateUrl : "/view/sobre.html"
-		});
+		})
+		.when("/busca", {
+        	templateUrl : "/view/busca.html",
+			controller: "controllerBuscaAnuncio"
+    	});
 
 	$locationProvider.html5Mode(true);
 });

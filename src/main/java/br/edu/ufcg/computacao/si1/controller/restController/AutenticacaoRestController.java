@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller.restController;
 
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,13 @@ public class AutenticacaoRestController {
     private ControllerSistema controllerSistema;
 
     @PatchMapping(value = "/login")
-    public ResponseToken login(@RequestBody Usuario usuario)
+    public ResponseToken login(@RequestBody UsuarioCriacaoDto usuario)
             throws ServletException {
 
         try {
 
-            String token ="fjhdkjshkjfs";
-            controllerSistema.login("", "");
+            String token = controllerSistema.login(usuario);
+
             return new ResponseToken(token);
 
         } catch (UsuarioInvalidoException e) {

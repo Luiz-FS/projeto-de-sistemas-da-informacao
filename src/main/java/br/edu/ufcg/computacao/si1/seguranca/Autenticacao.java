@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1.seguranca;
 
 import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +26,16 @@ public class Autenticacao {
     /**
      * Método que verifica e autentica os dados do usuário que está tentando logar no sistema.
      *
-     * @param email - Recebe um email, o qual será comparado com um email que já existe no sistema
-     *                e verifica se os dados são iguais, em caso positivo, autentica o usuário.
-     * @param senha - Recebe uma senha, a qual será comparada com a senha que já existe no sistema
-     *                e verifica se os dados são iguais, em caso positivo, autentica o usuário.
      * @return - Retora uma String representando o token de login do usuário caso os dados sejam válidos.
      * @throws UsuarioInvalidoException Gera uma exceção caso os dados do usuário recebidos sejam inválidos.
      */
-    public String autenticarUsuario(String email, String senha) throws UsuarioInvalidoException {
+    public String autenticarUsuario(UsuarioCriacaoDto usuario) throws UsuarioInvalidoException {
 
-        Usuario usuarioBuscado = serviceUsuario.getUsuarioPorEmail(email);
+        Usuario usuarioBuscado = serviceUsuario.getUsuarioPorEmail(usuario.getEmail());
 
         String tokenDeLoginValido = "";
 
-        if(usuarioBuscado != null && usuarioBuscado.isSenhaValida(senha)) {
+        if(usuarioBuscado != null && usuarioBuscado.isSenhaValida(usuario.getSenha())) {
 
             tokenDeLoginValido = tokenCodificadorDecodificador.criarToken(usuarioBuscado.getId());
 

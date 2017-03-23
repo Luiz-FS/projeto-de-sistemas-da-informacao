@@ -51,10 +51,9 @@ public class FiltroSistema implements Filter {
 
 		if(verificarRequisicao(httpRequest.getServletPath())) {
 	    	try {
-
-				long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
+	    		long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
 				long idToken = autenticador.decodificarToken(httpRequest.getHeader("Authorization"));
-
+								
 				if (idRequisicao == idToken)
 					chain.doFilter(request, response);
 				else
@@ -105,7 +104,7 @@ public class FiltroSistema implements Filter {
 	}
 	
 	private void addRequisicoesNaoLiberadas() {
-		this.requisicoesNaoLiberadas.add("/anuncios");
+		//this.requisicoesNaoLiberadas.add("/anuncios");
 	}
 	
 	private void unauthorized(HttpServletResponse response) throws IOException {

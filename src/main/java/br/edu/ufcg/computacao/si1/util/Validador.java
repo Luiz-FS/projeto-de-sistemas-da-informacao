@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.util;
 
+import java.util.Date;
+
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.ObjetoInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
@@ -81,5 +83,11 @@ public class Validador {
 			
 			throw new ObjetoInvalidoException();
 		}
+	}
+	
+	public static void isDataValida(Date data) throws ObjetoInvalidoException {
+		if(Validador.isObjetoNulo(data)) {
+    		throw new ObjetoInvalidoException();
+    	}
 	}
 }

@@ -42,7 +42,7 @@ public class ServiceUsuario {
     }
 
     public void atualizar(Usuario usuario) {
-        repositorioUsuario.save(usuario);
+        this.repositorioUsuario.save(usuario);
     }
 
     public void delete(Long id) {
@@ -53,14 +53,14 @@ public class ServiceUsuario {
         Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
 
         usuario.getSaldoDeUsuario().debitar(valor);
-        atualizar(usuario);
+        this.atualizar(usuario);
     }
 
     public void creditarSaldoUsuario(Long idUsuario, double valor) {
         Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
 
         usuario.getSaldoDeUsuario().creditar(valor);
-        atualizar(usuario);
+        this.atualizar(usuario);
     }
     
     public void comprarAnuncio(Long idDonoAnuncio, Long idComprador, double valor) {

@@ -27,9 +27,9 @@ public class ServiceSistema {
 	public void contratarAnuncio(Long idComprador, Long idAnuncio) throws AcaoNaoPermitidaException {
 		Long idDonoAnuncio = this.serviceAnuncio.getIdDonoAnuncio(idAnuncio);
 		
-		if(idComprador != idDonoAnuncio) {
+		if(!idComprador.equals(idDonoAnuncio)) {
 			Double valorAnuncio = this.serviceAnuncio.getValorAnuncioPorId(idAnuncio);
-			
+						
 			this.serviceUsuario.comprarAnuncio(idDonoAnuncio, idComprador, valorAnuncio);
 			
 			this.addNotificacoesContratacao(idDonoAnuncio, idComprador, idAnuncio);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.ObjetoInexistenteException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
@@ -29,6 +31,7 @@ public class AnuncioRestController {
 
 	private final String ADICIONAR_ANUNCIO = "/cadastro/{idUsuarioLogado}";
 	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}/{idUsuarioLogado}";
+	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}/{idComprador}";
 	
     @Autowired
     private ControllerSistema controllerSistema;
@@ -75,4 +78,22 @@ public class AnuncioRestController {
 
         return new ResponseEntity<Anuncio>(anuncio, HttpStatus.OK);
     }
+    
+    @DeleteMapping(value=CONTRATAR_ANUNCIO)
+    public ResponseEntity<?> contratarAnuncio(@PathVariable("idComprador")Long idComprador, @PathVariable("idAnuncio")Long idAnuncio) {
+    	 
+    	try {
+			this.controllerSistema.contratarAnuncio(idComprador, idAnuncio);
+		} catch (ObjetoInexistenteException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (AcaoNaoPermitidaException e) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}  catch (AdExtremeException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		}
+    	
+    	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    
 }

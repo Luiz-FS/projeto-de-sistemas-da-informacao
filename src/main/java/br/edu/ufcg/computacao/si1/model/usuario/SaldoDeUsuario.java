@@ -26,7 +26,7 @@ public class SaldoDeUsuario {
     }
 
     public void debitar(double valor) {
-        this.debito += valor;
+        this.debito -= valor;
     }
 
     public void creditar(double valor) {

@@ -54,7 +54,7 @@ public class FiltroSistema implements Filter {
 
 	    		String header = httpRequest.getHeader("Autorizacao");
 
-	    		if (!header.startsWith("Bearer ")) {
+	    		if (header == null || !header.startsWith("Bearer ")) {
 	    			throw new ServletException("Token inválido!");
 				}
 

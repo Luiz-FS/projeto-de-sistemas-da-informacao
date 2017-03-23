@@ -32,8 +32,9 @@ public class FiltroSistema implements Filter {
 	private List<String> requisicoesNaoLiberadas;
 
 	public FiltroSistema() {
-		this.requisicoesNaoLiberadas = new ArrayList(Arrays.asList("/anuncios/cadastro/",
-				"/anuncios/usuario/"));
+		this.requisicoesNaoLiberadas = new ArrayList<>();
+		
+		addRequisicoesNaoLiberadas();
 	}
 	
 	@Override
@@ -73,7 +74,7 @@ public class FiltroSistema implements Filter {
 	}
 
 	private boolean verificarRequisicao(String requisicao) {
-		for (String requisicaoNaoLiberada : this. requisicoesNaoLiberadas) {
+		for (String requisicaoNaoLiberada : this.requisicoesNaoLiberadas) {
 
 			if(requisicao.contains(requisicaoNaoLiberada)) {
 				return true;
@@ -87,7 +88,7 @@ public class FiltroSistema implements Filter {
 
 		long id;
 
-		for (String requisicaoNaoLiberada : this. requisicoesNaoLiberadas) {
+		for (String requisicaoNaoLiberada : this.requisicoesNaoLiberadas) {
 
 			if(requisicao.contains(requisicaoNaoLiberada)) {
 				requisicao = requisicao.replace(requisicaoNaoLiberada, "");
@@ -101,17 +102,10 @@ public class FiltroSistema implements Filter {
 		}
 
 		return -1;
-
 	}
 	
-	private List<String> toStringDoParaguai(Enumeration<String> enumeration) {
-		List<String> lista = new ArrayList<>();
-	
-		while(enumeration.hasMoreElements()) {
-			lista.add(enumeration.nextElement());
-		}
-		
-		return lista;
+	private void addRequisicoesNaoLiberadas() {
+		this.requisicoesNaoLiberadas.add("/anuncios");
 	}
 	
 	private void unauthorized(HttpServletResponse response) throws IOException {

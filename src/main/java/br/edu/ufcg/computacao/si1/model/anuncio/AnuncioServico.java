@@ -33,9 +33,10 @@ public class AnuncioServico extends Anuncio {
 	public String gerarMensagemNotificacaoContratacao() {
 		String gerarDescricao = "";
 		
-		gerarDescricao += "O anuncio: "+ this.getTitulo() + FIM_LINHA
-						  + "Do tipo: Servico, foi contratado" + FIM_LINHA 
-						  + "Com data de agendamento para: "+ this.getDataDeAgendamento();
+		gerarDescricao += "O anuncio: "+ this.getTitulo() +
+				          " criado:" + super.getDataDeCriacao() +	 
+						  "do tipo: Servico, foi contratado" + 
+						  "com data de agendamento para: "+ this.getDataDeAgendamento();
 		
 		return gerarDescricao;
 	}

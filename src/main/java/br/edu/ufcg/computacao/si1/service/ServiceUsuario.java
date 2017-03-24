@@ -18,9 +18,7 @@ import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 @Service
 public class ServiceUsuario {
 	
-	private static final String FIM_LINHA = System.lineSeparator();
-
-    @Autowired
+	@Autowired
     private UsuarioRepository repositorioUsuario;
     
     private NotificacaoFactory fabricaNotificacao;
@@ -126,8 +124,8 @@ public class ServiceUsuario {
 		
 		String string = "";
 		
-		string += "Seu anuncio foi contratado!" + FIM_LINHA 
-				  + "Avalie o usuario que contratou seu anuncio: " + comprador.getNome();
+		string += "Seu anuncio foi contratado por :" + comprador.getNome() +
+				  ", avalie o usuario que contratou seu anuncio: " ;
 		
 		return string;
 	}

@@ -24,9 +24,7 @@ import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 
-/**
- * Created by pedro on 12/03/17.
- */
+
 @RestController
 @RequestMapping(value = "/anuncios")
 public class AnuncioRestController {

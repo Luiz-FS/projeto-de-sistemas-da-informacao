@@ -1,18 +1,6 @@
 package br.edu.ufcg.computacao.si1.controller.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
-import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
-import br.edu.ufcg.computacao.si1.excecoes.AnuncioInexistenteException;
-import br.edu.ufcg.computacao.si1.excecoes.ObjetoInvalidoException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
+import br.edu.ufcg.computacao.si1.excecoes.*;
 import br.edu.ufcg.computacao.si1.factories.AnuncioFactory;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
 import br.edu.ufcg.computacao.si1.model.Avaliacao;
@@ -27,6 +15,12 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
 import br.edu.ufcg.computacao.si1.service.ServiceSistema;
 import br.edu.ufcg.computacao.si1.util.Validador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ControllerSistema {

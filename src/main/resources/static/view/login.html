@@ -5,6 +5,10 @@
         <form name="cadastroUsuario" class="form-horizontal" novalidate ng-submit="autencitar()">
             <div class="form-group">
 
+                <div class="alert alert-danger" role="alert" ng-show="loginFalhou">
+                    <strong>Ops!</strong> O login falhou, por favor tente novamente.
+                </div>
+
                 <div class="row">
                     <label class="control-label col-lg-1" for="emailUsuario">Email: </label>
                     <div class="col-lg-9">
@@ -27,10 +31,6 @@
                                 type="submit" class="pull-right btn btn-success btn-default">
                             <span class="glyphicon glyphicon-ok"></span> Entrar</button>
                     </div>
-                </div>
-
-                <div class="alert alert-info" role="alert" ng-show="mensagemLogin.length > 0 ">
-                    {{mensagemLogin}}
                 </div>
 
             </div>

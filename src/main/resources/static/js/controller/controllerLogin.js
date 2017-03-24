@@ -1,22 +1,17 @@
 app.controller("controllerLogin", function($scope, $http) {
 
-    $scope.token = "";
-    $scope.mensagemLogin = "";
+    $scope.loginFalhou = false;
     
     $scope.autencitar = function () {
 
         $http.patch("http://" + location.host + "/login", $scope.usuario)
             .success(function (data, status) {
+                $scope.loginFalhou = false;
 
-                console.log("Sucesso: " + status + ", " + data);
-                $scope.token = data.token;
-                localStorage.setItem("userToken", data.token);
-
-                $scope.mensagemLogin = "Login feito com sucesso!";
-
+                console.log("Sucesso: " + status);
             })
             .error(function (response) {
-                $scope.mensagemLogin = "Login não efetuado!";
+                $scope.loginFalhou = true;
 
                 console.log("Falha: " + response);
            });

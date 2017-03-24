@@ -1,18 +1,10 @@
 package br.edu.ufcg.computacao.si1.controller.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import br.edu.ufcg.computacao.si1.excecoes.AcessoNaoPermitidoException;
-import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
-import br.edu.ufcg.computacao.si1.excecoes.ObjetoInexistenteException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioInvalidoException;
-import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
+import br.edu.ufcg.computacao.si1.excecoes.*;
 import br.edu.ufcg.computacao.si1.factories.AnuncioFactory;
 import br.edu.ufcg.computacao.si1.factories.UsuarioFactory;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
@@ -23,6 +15,12 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.seguranca.Autenticacao;
 import br.edu.ufcg.computacao.si1.service.ServiceSistema;
 import br.edu.ufcg.computacao.si1.util.Validador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ControllerSistema {
@@ -96,7 +94,7 @@ public class ControllerSistema {
     	return this.sistemaService.salvarAnuncio(anuncio);
     }
 
-    public void contratarAnuncio(Long idComprador, Long idAnuncio) throws ObjetoInexistenteException {
+    public void contratarAnuncio(Long idComprador, Long idAnuncio) throws AdExtremeException {
     	this.sistemaService.idUsuarioExiste(idComprador);
     	this.sistemaService.idAnuncioExiste(idAnuncio);
     	
@@ -113,7 +111,47 @@ public class ControllerSistema {
     	return this.sistemaService.getAnuncios();
     }
     
-    private void checaPermissaoDeCriacaoAnuncio(Long idUsuario, TipoAnuncio tipoAnuncio) throws AcessoNaoPermitidoException {
+    public void addAvaliacaoAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AdExtremeException {
+    	Validador.isAvaliacaoValida(avaliacao);
+    	this.sistemaService.idAnuncioExiste(idAnuncio);
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	
+    	this.sistemaService.addAvaliacaAnuncio(idAnuncio, idUsuario, avaliacao);
+    }
+    
+    public List<Avaliacao> getAvaliacoesAnuncio(Long idAnuncio) throws AnuncioInexistenteException {
+    	this.sistemaService.idAnuncioExiste(idAnuncio);
+    	
+    	return this.sistemaService.getAvaliacoesAnuncio(idAnuncio);
+    }
+    
+    public void addAvaliacaoUsuario(Long idUsuario, Long idNotificacao, Avaliacao avaliacao) throws AdExtremeException {
+    	Validador.isAvaliacaoValida(avaliacao);
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	
+    	this.sistemaService.addAvaliacaoUsuario(idUsuario, idNotificacao, avaliacao);
+    }
+    
+    public List<Notificacao> getNotificacoesUsuario(Long idUsuario) throws UsuarioInexistenteException {
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	
+    	return this.sistemaService.getNotificacoesUsuario(idUsuario);
+    }
+    
+    public List<Avaliacao> getAvaliacoesUsuario(Long idUsuario) throws UsuarioInexistenteException {
+    	this.sistemaService.idUsuarioExiste(idUsuario);
+    	
+    	return this.sistemaService.getAvaliacoesUsuario(idUsuario);
+    }
+    
+    public void addDataDeAgendamento(Long idAnuncio, Date dataDeAgendamento) throws AdExtremeException {
+    	Validador.isDataValida(dataDeAgendamento);
+       	this.sistemaService.idAnuncioExiste(idAnuncio);
+    	
+    	this.sistemaService.addDataDeAgendamento(idAnuncio, dataDeAgendamento);
+    }
+    
+    private void checaPermissaoDeCriacaoAnuncio(Long idUsuario, TipoAnuncio tipoAnuncio) throws AcaoNaoPermitidaException {
     	if(tipoAnuncio.equals(TipoAnuncio.EMPREGO)) {
     		this.sistemaService.usuarioTemPermissao(idUsuario, PermissoesUsuario.CRIAR_ANUNCIO_EMPREGO);
     	} else if(tipoAnuncio.equals(TipoAnuncio.SERVICO)) {

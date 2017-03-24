@@ -34,9 +34,10 @@ public class AnuncioProduto extends Anuncio {
 	public String gerarMensagemNotificacaoContratacao() {
 		String gerarDescricao = "";
 		
-		gerarDescricao += "O seu anuncio: " + this.getTitulo() + FIM_LINHA
-						  + "Do tipo: Produto, foi contratado" + FIM_LINHA 
-						  + "Com valor: "+ this.getValor();
+		gerarDescricao += "O anuncio: " + this.getTitulo() + 
+				          " criado:" + super.getDataDeCriacao() +	
+						  "Do tipo: Produto, foi contratado" + 
+						  "Pelo valor de: R$"+ this.getValor();
 		
 		return gerarDescricao;
 	}

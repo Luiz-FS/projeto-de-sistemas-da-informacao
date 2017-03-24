@@ -1,11 +1,21 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import br.edu.ufcg.computacao.si1.model.Avaliacao;
-import br.edu.ufcg.computacao.si1.model.Notificacao;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
+import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.TipoNotificacao;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
@@ -116,6 +126,31 @@ public class Usuario {
 	
 	public boolean addNotificacao(Notificacao notificacao) {
 		return this.listaDeNotificacoes.add(notificacao);
+	}
+	
+	public boolean contemNotificacaoAvaliacao(Long idNotificacao) {
+		
+		for (int i = 0; i < this.listaDeNotificacoes.size(); i++) {
+			if(this.listaDeNotificacoes.get(i).getId().equals(idNotificacao) &&
+				this.listaDeNotificacoes.get(i).getTipoNotificacao().equals(TipoNotificacao.AVALIACAO_COMPRA)) {
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean removeNotificacao(Long idNotificacao) {
+		
+		for (int i = 0; i < this.listaDeNotificacoes.size(); i++) {
+			if(this.listaDeNotificacoes.get(i).getId().equals(idNotificacao)){
+				
+				this.listaDeNotificacoes.remove(i);
+				return true;
+			}
+		}
+	
+		return false;
 	}
 	
 	public boolean addAvaliacao(Avaliacao avaliacao) {

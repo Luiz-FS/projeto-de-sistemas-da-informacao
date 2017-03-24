@@ -21,8 +21,9 @@ public class AnuncioEmprego extends Anuncio {
 	public String gerarMensagemNotificacaoContratacao() {
 		String gerarDescricao = "";
 		
-		gerarDescricao += "O seu anuncio: "+ this.getTitulo() + FIM_LINHA
-						  + "Do tipo: Emprego, foi contratado";
+		gerarDescricao += "O anuncio: "+ this.getTitulo() +
+						  " criado:" + super.getDataDeCriacao() +	
+						  "Do tipo: Emprego, foi contratado";
 		
 		return gerarDescricao;
 	}

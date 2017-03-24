@@ -21,7 +21,6 @@ import br.edu.ufcg.computacao.si1.model.Avaliacao;
 @Table(name = "tb_anuncio")
 public abstract class Anuncio {
 	
-	protected static final String FIM_LINHA = System.lineSeparator();
 	protected final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
 	@Id
@@ -116,4 +115,8 @@ public abstract class Anuncio {
 	}
 
 	public abstract String gerarMensagemNotificacaoContratacao();
+	
+	public boolean addAvaliacao(Avaliacao avaliacao) {
+		return this.avaliacoes.add(avaliacao);
+	}
 }

@@ -11,7 +11,7 @@ public class AnuncioServico extends Anuncio {
 	private static final TipoAnuncio TIPO = TipoAnuncio.SERVICO;
 
 	@Column(name = "data_agendamento")
-	protected Date dataDeAgendamento;
+	private Date dataDeAgendamento;
 
 	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario, String descricao) {
 		super(titulo, dataDeCriacao, valor, TIPO, idUsuario, descricao);
@@ -33,9 +33,10 @@ public class AnuncioServico extends Anuncio {
 	public String gerarMensagemNotificacaoContratacao() {
 		String gerarDescricao = "";
 		
-		gerarDescricao += "O seu anuncio: "+ this.getTitulo() + FIM_LINHA
-						  + "Do tipo: Servico, foi contratado" + FIM_LINHA 
-						  + "Com data de agendamento para: "+ this.getDataDeAgendamento();
+		gerarDescricao += "O anuncio: "+ this.getTitulo() +
+				          " criado:" + super.getDataDeCriacao() +	 
+						  "do tipo: Servico, foi contratado" + 
+						  "com data de agendamento para: "+ this.getDataDeAgendamento();
 		
 		return gerarDescricao;
 	}

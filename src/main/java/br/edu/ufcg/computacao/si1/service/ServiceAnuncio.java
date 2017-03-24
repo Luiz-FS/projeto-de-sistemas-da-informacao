@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInexistenteException;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
@@ -56,9 +58,27 @@ public class ServiceAnuncio {
 		AnuncioServico anuncioServico = (AnuncioServico)this.repositorioAnuncio.getOne(idAnuncio);
 		
 		anuncioServico.setDataDeAgendamento(dataDeAgendamento);
+		
+		this.salvarAnuncio(anuncioServico);
 	}
 	
 	public String gerarMensagemNotificacaoContratacao(Long idAnuncio) {
 		return this.repositorioAnuncio.getOne(idAnuncio).gerarMensagemNotificacaoContratacao();
+	}
+	
+	public void addAvaliacao(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
+		Anuncio anuncio = this.repositorioAnuncio.findOne(idAnuncio);
+		
+		if(anuncio.getIdUsuario() != idUsuario) {
+			anuncio.addAvaliacao(avaliacao);
+			
+			this.salvarAnuncio(anuncio);
+		} else {
+			throw new AcaoNaoPermitidaException();
+		}
+	}
+	
+	public List<Avaliacao> getAvaliacoesAnuncio(Long idAnuncio) {
+		return this.repositorioAnuncio.findOne(idAnuncio).getAvaliacoes();
 	}
 }

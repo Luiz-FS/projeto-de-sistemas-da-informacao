@@ -8,6 +8,8 @@ app.controller("controllerLogin", function($scope, $http) {
             .success(function (data, status) {
                 $scope.loginFalhou = false;
 
+                localStorage.setItem("tokenUsuario", data.token);
+
                 console.log("Sucesso: " + status);
             })
             .error(function (response) {

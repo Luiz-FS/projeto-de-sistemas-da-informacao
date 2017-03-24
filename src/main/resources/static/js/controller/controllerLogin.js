@@ -1,4 +1,4 @@
-app.controller("controllerLogin", function($scope, $http) {
+app.controller("controllerLogin", function($scope, $location, $http) {
 
     $scope.loginFalhou = false;
     
@@ -11,6 +11,8 @@ app.controller("controllerLogin", function($scope, $http) {
                 localStorage.setItem("tokenUsuario", data.token);
 
                 console.log("Sucesso: " + status);
+
+                $location.path("/busca");
             })
             .error(function (response) {
                 $scope.loginFalhou = true;

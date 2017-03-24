@@ -7,7 +7,7 @@ app.factory("tokenInterceptador", function ($q, $location) {
     return {
 
         'request': function(config) {
-            config.headers.Autorizacao = 'Bearer ' + localStorage.getItem("tokenUsuario");
+            config.headers.Authorization = 'Bearer ' + localStorage.getItem("tokenUsuario");
             return config;
         },
 

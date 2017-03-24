@@ -52,7 +52,7 @@ public class FiltroSistema implements Filter {
 		if(verificarRequisicao(httpRequest.getServletPath())) {
 	    	try {
 
-	    		String header = httpRequest.getHeader("Autorizacao");
+	    		String header = httpRequest.getHeader("Authorization");
 	    			    		
 	    		if (header == null || !header.startsWith("Bearer ")) {
 	    			throw new ServletException("Token inválido!");

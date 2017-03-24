@@ -57,9 +57,7 @@ public class FiltroSistema implements Filter {
 
 				String token = header.substring(7);
 
-	    		httpRequest = adicionarIdNoHeader(httpRequest, token);
-
-				System.out.println(httpRequest.getHeader("IdUsuario"));
+	    		request = adicionarIdNoHeader(httpRequest, token);
 
 				chain.doFilter(request, response);
 

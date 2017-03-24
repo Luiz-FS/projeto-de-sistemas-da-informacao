@@ -6,13 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.SocketUtils;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufcg.computacao.si1.controller.controller.ControllerSistema;
 import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
@@ -31,20 +26,22 @@ import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 @RequestMapping(value = "/anuncios")
 public class AnuncioRestController {
 
-	private final String ID_USUARIO_LOGADO = "/{idUsuarioLogado}";
-	private final String ADICIONAR_ANUNCIO = "/cadastro" + ID_USUARIO_LOGADO;
-	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}" + ID_USUARIO_LOGADO;
-	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}" + ID_USUARIO_LOGADO;
-	private final String ADICIONAR_AVALIACAO = "/avaliacao/{idAnuncio}" + ID_USUARIO_LOGADO;
-	private final String OBTER_AVALIACOES_ANUNCIO = "/avaliacoes/{idAnuncio}" + ID_USUARIO_LOGADO;
-	private final String MUDAR_DATA_AGEDAMENTO = "/data/{idAnuncio}" + ID_USUARIO_LOGADO;
+	private final String ADICIONAR_ANUNCIO = "/cadastro";
+	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}";
+	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}";
+	private final String ADICIONAR_AVALIACAO = "/avaliacao/{idAnuncio}";
+	private final String OBTER_AVALIACOES_ANUNCIO = "/avaliacoes/{idAnuncio}";
+	private final String MUDAR_DATA_AGEDAMENTO = "/data/{idAnuncio}";
 
 	@Autowired
 	private ControllerSistema controllerSistema;
 
 
-	@GetMapping(value=ID_USUARIO_LOGADO)
-	public ResponseEntity<List<Anuncio>> getTodosAnuncios() {
+	@GetMapping
+	public ResponseEntity<List<Anuncio>> getTodosAnuncios(@RequestHeader(value = "IdUsuario") String idUsuario) {
+
+		System.out.println("Aeeeeeeeeeeeeeee Deu Certooooooooooo!");
+		System.out.println(idUsuario);
 
 		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
 
@@ -67,12 +64,14 @@ public class AnuncioRestController {
 
 	@PostMapping(value = ADICIONAR_ANUNCIO)
 	public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao,
-			@PathVariable("idUsuarioLogado") Long idUsuario) {
+													@RequestHeader(value = "IdUsuario") String idUsuario) {
+
+		long idUsuarioLogado = Long.parseLong(idUsuario);
 
 		Anuncio anuncio;
 
 		try {
-			anuncio = this.controllerSistema.adicionarAnuncio(anuncioCriacao, idUsuario);
+			anuncio = this.controllerSistema.adicionarAnuncio(anuncioCriacao, idUsuarioLogado);
 
 		} catch (AnuncioInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

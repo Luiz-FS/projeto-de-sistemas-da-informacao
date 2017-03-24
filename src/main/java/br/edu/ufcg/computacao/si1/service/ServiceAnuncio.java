@@ -11,6 +11,7 @@ import br.edu.ufcg.computacao.si1.excecoes.AnuncioInexistenteException;
 import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.AnuncioServico;
+import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 
 @Service
@@ -54,12 +55,19 @@ public class ServiceAnuncio {
 		}
 	}
 	
-	public void addDataAgendamento(Long idAnuncio, Date dataDeAgendamento) {
-		AnuncioServico anuncioServico = (AnuncioServico)this.repositorioAnuncio.getOne(idAnuncio);
+	public void addDataAgendamento(Long idAnuncio, Date dataDeAgendamento) throws AcaoNaoPermitidaException {
+		Anuncio anuncio = this.repositorioAnuncio.findOne(idAnuncio);
 		
-		anuncioServico.setDataDeAgendamento(dataDeAgendamento);
+		if(anuncio.getTipo().equals(TipoAnuncio.SERVICO)){
+			AnuncioServico anuncioServico = (AnuncioServico)anuncio;
+			
+			anuncioServico.setDataDeAgendamento(dataDeAgendamento);
+			
+			this.salvarAnuncio(anuncioServico);
 		
-		this.salvarAnuncio(anuncioServico);
+		} else {
+			throw new AcaoNaoPermitidaException();
+		}
 	}
 	
 	public String gerarMensagemNotificacaoContratacao(Long idAnuncio) {
@@ -72,7 +80,7 @@ public class ServiceAnuncio {
 		if(anuncio.getIdUsuario() != idUsuario) {
 			anuncio.addAvaliacao(avaliacao);
 			
-			return this.salvarAnuncio(anuncio).getAvaliacao(avaliacao);
+			return this.salvarAnuncio(anuncio).ObterUltimaAvaliacao();
 		} else {
 			throw new AcaoNaoPermitidaException();
 		}

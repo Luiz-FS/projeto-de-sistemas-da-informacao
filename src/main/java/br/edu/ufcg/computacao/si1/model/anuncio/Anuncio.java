@@ -120,9 +120,11 @@ public abstract class Anuncio {
 		return this.avaliacoes.add(avaliacao);
 	}
 	
-	public Avaliacao getAvaliacao(Avaliacao avaliacao) {
-		int indice = this.avaliacoes.indexOf(avaliacao);
+	public Avaliacao ObterUltimaAvaliacao() {
+		if(this.avaliacoes.isEmpty()) {
+			return null;
+		}
 		
-		return this.avaliacoes.get(indice) ;
+		return this.avaliacoes.get(this.avaliacoes.size()-1) ;
 	}
 }

@@ -53,14 +53,13 @@ public class FiltroSistema implements Filter {
 	    	try {
 
 	    		String header = httpRequest.getHeader("Autorizacao");
-
+	    			    		
 	    		if (header == null || !header.startsWith("Bearer ")) {
 	    			throw new ServletException("Token inválido!");
 				}
 
 				String token = header.substring(7);
-
-	    		long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
+				long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
 				long idToken = autenticador.decodificarToken(token);
 								
 				if (idRequisicao == idToken)

@@ -41,7 +41,7 @@ public class ServiceSistema {
 		}
 	}
 	
-	public void addDataDeAgendamento(Long idAnuncio, Date dataDeAgendamento) {
+	public void addDataDeAgendamento(Long idAnuncio, Date dataDeAgendamento) throws AcaoNaoPermitidaException {
 		this.serviceAnuncio.addDataAgendamento(idAnuncio, dataDeAgendamento);
 	}
 	

@@ -2,8 +2,6 @@ package br.edu.ufcg.computacao.si1.seguranca;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -15,6 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.ufcg.computacao.si1.excecoes.TokenInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,22 +49,19 @@ public class FiltroSistema implements Filter {
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		if(verificarRequisicao(httpRequest.getServletPath())) {
+
 	    	try {
 
 	    		String header = httpRequest.getHeader("Authorization");
-	    			    		
-	    		if (header == null || !header.startsWith("Bearer ")) {
-	    			throw new ServletException("Token inválido!");
-				}
+				verificarHeaderAuthorization(header);
 
 				String token = header.substring(7);
-				long idRequisicao = pegarIdRequisicao(httpRequest.getServletPath());
-				long idToken = autenticador.decodificarToken(token);
-								
-				if (idRequisicao == idToken)
-					chain.doFilter(request, response);
-				else
-					unauthorized(httpResponse);
+
+	    		httpRequest = adicionarIdNoHeader(httpRequest, token);
+
+				System.out.println(httpRequest.getHeader("IdUsuario"));
+
+				chain.doFilter(request, response);
 
 	    	} catch (Exception e) {
 	    		unauthorized(httpResponse);
@@ -73,6 +69,20 @@ public class FiltroSistema implements Filter {
 	    } else {
 	    	chain.doFilter(request, response);
 	    }
+	}
+
+	private void verificarHeaderAuthorization(String header) throws ServletException {
+		if (header == null || !header.startsWith("Bearer ")) {
+            throw new ServletException("Token inválido!");
+        }
+	}
+
+	private HeaderMapRequest adicionarIdNoHeader(HttpServletRequest httpRequest, String token) throws TokenInvalidoException {
+		Long idToken = autenticador.decodificarToken(token);
+
+		HeaderMapRequest headerMapRequest = new HeaderMapRequest(httpRequest);
+		headerMapRequest.addHeader("IdUsuario", idToken.toString());
+		return headerMapRequest;
 	}
 
 	@Override
@@ -89,17 +99,6 @@ public class FiltroSistema implements Filter {
 
 		}
 		return false;
-	}
-
-	private long pegarIdRequisicao(String requisicao) {
-
-		long id;
-
-		String[] teste = requisicao.split("/");
-
-		id = Long.parseLong(teste[teste.length - 1]);
-
-		return id;
 	}
 	
 	private void addRequisicoesNaoLiberadas() {

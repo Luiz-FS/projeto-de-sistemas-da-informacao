@@ -77,8 +77,8 @@ public class ServiceSistema {
 		this.serviceUsuario.usuarioTemPermissao(idUsuario, permissao);
 	}
 
-	public void addAvaliacaAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
-		this.serviceAnuncio.addAvaliacao(idAnuncio, idUsuario, avaliacao);
+	public Avaliacao addAvaliacaAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
+		return this.serviceAnuncio.addAvaliacao(idAnuncio, idUsuario, avaliacao);
 	}
 	
 	public List<Avaliacao> getAvaliacoesAnuncio(Long idAnuncio) {

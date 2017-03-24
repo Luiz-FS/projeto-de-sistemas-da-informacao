@@ -117,12 +117,12 @@ public class ControllerSistema {
     	return this.sistemaService.getAnuncios();
     }
     
-    public void addAvaliacaoAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AdExtremeException {
+    public Avaliacao addAvaliacaoAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AdExtremeException {
     	Validador.isAvaliacaoValida(avaliacao);
     	this.sistemaService.idAnuncioExiste(idAnuncio);
     	this.sistemaService.idUsuarioExiste(idUsuario);
     	
-    	this.sistemaService.addAvaliacaAnuncio(idAnuncio, idUsuario, avaliacao);
+    	return this.sistemaService.addAvaliacaAnuncio(idAnuncio, idUsuario, avaliacao);
     }
     
     public List<Avaliacao> getAvaliacoesAnuncio(Long idAnuncio) throws AnuncioInexistenteException {

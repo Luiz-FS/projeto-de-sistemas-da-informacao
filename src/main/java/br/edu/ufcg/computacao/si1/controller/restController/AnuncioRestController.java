@@ -18,7 +18,9 @@ import br.edu.ufcg.computacao.si1.excecoes.AcaoNaoPermitidaException;
 import br.edu.ufcg.computacao.si1.excecoes.AdExtremeException;
 import br.edu.ufcg.computacao.si1.excecoes.AnuncioInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.ObjetoInexistenteException;
+import br.edu.ufcg.computacao.si1.excecoes.ObjetoInvalidoException;
 import br.edu.ufcg.computacao.si1.excecoes.UsuarioInexistenteException;
+import br.edu.ufcg.computacao.si1.model.Avaliacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
 
@@ -26,47 +28,50 @@ import br.edu.ufcg.computacao.si1.model.dto.AnuncioCriacaoDto;
  * Created by pedro on 12/03/17.
  */
 @RestController
-@RequestMapping(value="/anuncios")
+@RequestMapping(value = "/anuncios")
 public class AnuncioRestController {
 
-	private final String ADICIONAR_ANUNCIO = "/cadastro/{idUsuarioLogado}";
-	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}/{idUsuarioLogado}";
-	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}/{idComprador}";
-	
-    @Autowired
-    private ControllerSistema controllerSistema;
+	private final String ID_USUARIO_LOGADO = "/{idUsuarioLogado}";
+	private final String ADICIONAR_ANUNCIO = "/cadastro" + ID_USUARIO_LOGADO;
+	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}" + ID_USUARIO_LOGADO;
+	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}" + ID_USUARIO_LOGADO;
+	private final String ADICIONAR_AVALIACAO = "/avaliacao/{idAnuncio}" + ID_USUARIO_LOGADO;
 
-    @GetMapping
-    public ResponseEntity<List<Anuncio>> getTodosAnuncios(){
-    	
-    	List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
-    	
-        return new ResponseEntity<List<Anuncio>>(anuncios ,HttpStatus.OK);
-    }
-    
-    @GetMapping(value = ANUNCIO_POR_USUARIO)
-    public ResponseEntity<List<Anuncio>> getAnunciosPorUsuario(@PathVariable("idUsuario")Long idUsuario) {
-    	
-    	List<Anuncio> anuncios;
-		
-    	try {
+	@Autowired
+	private ControllerSistema controllerSistema;
+
+	@GetMapping(value=ID_USUARIO_LOGADO)
+	public ResponseEntity<List<Anuncio>> getTodosAnuncios() {
+
+		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
+
+		return new ResponseEntity<List<Anuncio>>(anuncios, HttpStatus.OK);
+	}
+
+	@GetMapping(value = ANUNCIO_POR_USUARIO)
+	public ResponseEntity<List<Anuncio>> getAnunciosPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+
+		List<Anuncio> anuncios;
+
+		try {
 			anuncios = this.controllerSistema.getAnunciosPorUsuario(idUsuario);
 		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-    	
-    	return new ResponseEntity<List<Anuncio>>(anuncios, HttpStatus.OK);
-    }
 
-    @PostMapping(value = ADICIONAR_ANUNCIO)
-    public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao, @PathVariable("idUsuarioLogado")Long idUsuario) {
-    	
-    	Anuncio anuncio;
-    	
-    	try {
-    		anuncio = this.controllerSistema.adicionarAnuncio(anuncioCriacao, idUsuario);
-    	    		
-    	} catch (AnuncioInvalidoException e) {
+		return new ResponseEntity<List<Anuncio>>(anuncios, HttpStatus.OK);
+	}
+
+	@PostMapping(value = ADICIONAR_ANUNCIO)
+	public ResponseEntity<Anuncio> adicionarAnuncio(@RequestBody AnuncioCriacaoDto anuncioCriacao,
+			@PathVariable("idUsuarioLogado") Long idUsuario) {
+
+		Anuncio anuncio;
+
+		try {
+			anuncio = this.controllerSistema.adicionarAnuncio(anuncioCriacao, idUsuario);
+
+		} catch (AnuncioInvalidoException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -76,24 +81,47 @@ public class AnuncioRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 		}
 
-        return new ResponseEntity<Anuncio>(anuncio, HttpStatus.OK);
-    }
-    
-    @DeleteMapping(value=CONTRATAR_ANUNCIO)
-    public ResponseEntity<?> contratarAnuncio(@PathVariable("idComprador")Long idComprador, @PathVariable("idAnuncio")Long idAnuncio) {
-    	 
-    	try {
+		return new ResponseEntity<Anuncio>(anuncio, HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = CONTRATAR_ANUNCIO)
+	public ResponseEntity<?> contratarAnuncio(@PathVariable("idUsuarioLogado") Long idComprador,
+			@PathVariable("idAnuncio") Long idAnuncio) {
+
+		try {
 			this.controllerSistema.contratarAnuncio(idComprador, idAnuncio);
 		} catch (ObjetoInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (AcaoNaoPermitidaException e) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-		}  catch (AdExtremeException e) {
+		} catch (AdExtremeException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 		}
-    	
-    	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-    
-    
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@PostMapping(value = ADICIONAR_AVALIACAO)
+	public ResponseEntity<Avaliacao> addAvaliacaoAnuncio(@PathVariable("idAnuncio") Long idAnuncio,
+			@PathVariable("idUsuarioLogado") Long idUsuario, @RequestBody Avaliacao avaliacao) {
+		
+		Avaliacao avaliacaoSalva;
+
+		try {
+			avaliacaoSalva = this.controllerSistema.addAvaliacaoAnuncio(idAnuncio, idUsuario, avaliacao);
+
+		} catch (ObjetoInvalidoException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		} catch (ObjetoInexistenteException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (AcaoNaoPermitidaException e) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		} catch (AdExtremeException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		}
+
+		return new ResponseEntity<Avaliacao>(avaliacaoSalva, HttpStatus.OK);
+	}
+	
+	
 }

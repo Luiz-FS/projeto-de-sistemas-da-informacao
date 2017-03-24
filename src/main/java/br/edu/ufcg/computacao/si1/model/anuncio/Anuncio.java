@@ -119,4 +119,10 @@ public abstract class Anuncio {
 	public boolean addAvaliacao(Avaliacao avaliacao) {
 		return this.avaliacoes.add(avaliacao);
 	}
+	
+	public Avaliacao getAvaliacao(Avaliacao avaliacao) {
+		int indice = this.avaliacoes.indexOf(avaliacao);
+		
+		return this.avaliacoes.get(indice) ;
+	}
 }

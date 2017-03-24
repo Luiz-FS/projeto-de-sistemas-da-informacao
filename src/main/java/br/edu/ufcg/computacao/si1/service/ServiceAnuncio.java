@@ -66,13 +66,13 @@ public class ServiceAnuncio {
 		return this.repositorioAnuncio.getOne(idAnuncio).gerarMensagemNotificacaoContratacao();
 	}
 	
-	public void addAvaliacao(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
+	public Avaliacao addAvaliacao(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
 		Anuncio anuncio = this.repositorioAnuncio.findOne(idAnuncio);
 		
 		if(anuncio.getIdUsuario() != idUsuario) {
 			anuncio.addAvaliacao(avaliacao);
 			
-			this.salvarAnuncio(anuncio);
+			return this.salvarAnuncio(anuncio).getAvaliacao(avaliacao);
 		} else {
 			throw new AcaoNaoPermitidaException();
 		}

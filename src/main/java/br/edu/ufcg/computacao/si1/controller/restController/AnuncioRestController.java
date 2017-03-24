@@ -42,8 +42,18 @@ public class AnuncioRestController {
 	@Autowired
 	private ControllerSistema controllerSistema;
 
+	@GetMapping
+	public ResponseEntity<List<Anuncio>> getTodosAnuncios(){
+
+		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
+
+		return new ResponseEntity<List<Anuncio>>(anuncios ,HttpStatus.OK);
+	}
+
+
+
 	@GetMapping(value=ID_USUARIO_LOGADO)
-	public ResponseEntity<List<Anuncio>> getTodosAnuncios() {
+	public ResponseEntity<List<Anuncio>> getAnunciosPorId() {
 
 		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
 

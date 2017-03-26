@@ -28,7 +28,7 @@ app.config(function($routeProvider) {
     	})
     	.when("/addAnuncio", {
         	templateUrl : "/view/addAnuncio.html",
-			controller: ""
+			controller: "controllerAddAnuncio"
     	})
     	.when("/notificacoes", {
         	templateUrl : "/view/notificacoes.html",

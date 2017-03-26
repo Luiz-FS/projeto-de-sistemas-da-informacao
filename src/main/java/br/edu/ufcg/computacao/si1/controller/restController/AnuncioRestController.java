@@ -40,9 +40,6 @@ public class AnuncioRestController {
 	@GetMapping
 	public ResponseEntity<List<Anuncio>> getTodosAnuncios() {
 
-		//System.out.println("Aeeeeeeeeeeeeeee Deu Certooooooooooo!");
-		//System.out.println(idUsuario);
-
 		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
 
 		return new ResponseEntity<List<Anuncio>>(anuncios, HttpStatus.OK);

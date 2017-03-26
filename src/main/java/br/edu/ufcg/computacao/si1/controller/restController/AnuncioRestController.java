@@ -38,10 +38,10 @@ public class AnuncioRestController {
 
 
 	@GetMapping
-	public ResponseEntity<List<Anuncio>> getTodosAnuncios(@RequestHeader(value = "IdUsuario") String idUsuario) {
+	public ResponseEntity<List<Anuncio>> getTodosAnuncios() {
 
-		System.out.println("Aeeeeeeeeeeeeeee Deu Certooooooooooo!");
-		System.out.println(idUsuario);
+		//System.out.println("Aeeeeeeeeeeeeeee Deu Certooooooooooo!");
+		//System.out.println(idUsuario);
 
 		List<Anuncio> anuncios = this.controllerSistema.getAnuncios();
 
@@ -87,9 +87,11 @@ public class AnuncioRestController {
 	}
 
 	@DeleteMapping(value = CONTRATAR_ANUNCIO)
-	public ResponseEntity<?> contratarAnuncio(@PathVariable("idUsuarioLogado") Long idComprador,
+	public ResponseEntity<?> contratarAnuncio(@RequestHeader(value = "IdUsuario") String idUsuario,
 			@PathVariable("idAnuncio") Long idAnuncio) {
-
+		
+		long idComprador = Long.parseLong(idUsuario);
+		
 		try {
 			this.controllerSistema.contratarAnuncio(idComprador, idAnuncio);
 		} catch (ObjetoInexistenteException e) {
@@ -105,7 +107,9 @@ public class AnuncioRestController {
 
 	@PostMapping(value = ADICIONAR_AVALIACAO)
 	public ResponseEntity<Avaliacao> addAvaliacaoAnuncio(@PathVariable("idAnuncio") Long idAnuncio,
-			@PathVariable("idUsuarioLogado") Long idUsuario, @RequestBody Avaliacao avaliacao) {
+			@RequestHeader(value = "IdUsuario") String idUsuarioLogado, @RequestBody Avaliacao avaliacao) {
+		
+		long idUsuario = Long.parseLong(idUsuarioLogado);
 		
 		Avaliacao avaliacaoSalva;
 

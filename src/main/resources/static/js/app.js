@@ -21,7 +21,22 @@ app.config(function($routeProvider, $locationProvider) {
 		.when("/busca", {
         	templateUrl : "/view/busca.html",
 			controller: "controllerBuscaAnuncio"
-    	});
+    	})
+    	.when("/perfil", {
+        	templateUrl : "/view/perfil.html",
+			controller: ""
+    	})
+    	.when("/addAnuncio", {
+        	templateUrl : "/view/addAnuncio.html",
+			controller: ""
+    	})
+    	.when("/notificacoes", {
+        	templateUrl : "/view/notificacoes.html",
+			controller: ""
+    	})
+    	.otherwise({
+          redirectTo: '/'
+        });
 
 	$locationProvider.html5Mode(true);
 });

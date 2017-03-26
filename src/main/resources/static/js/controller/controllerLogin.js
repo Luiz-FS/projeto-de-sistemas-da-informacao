@@ -1,4 +1,4 @@
-app.controller("controllerLogin", function($scope, $location, $http) {
+app.controller("controllerLogin", function($scope, $location, $http, loginService) {
 
     $scope.loginFalhou = false;
     
@@ -13,6 +13,8 @@ app.controller("controllerLogin", function($scope, $location, $http) {
                 console.log("Sucesso: " + status);
 
                 $location.path("/busca");
+               
+                loginService.usuarioEstaLogado = true;
             })
             .error(function (response) {
                 $scope.loginFalhou = true;

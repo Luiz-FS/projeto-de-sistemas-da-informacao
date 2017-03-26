@@ -1,7 +1,6 @@
-/**
- * 
- */
-app.controller("controllerCadastro", function($scope, $http, $location, $routeParams) {
+
+app.controller("controllerCadastro", function($scope, $http, $location, $routeParams,
+		CONFIGURACAO, ROTA, SUB_ROTA) {
 	
 	
 	
@@ -15,7 +14,7 @@ app.controller("controllerCadastro", function($scope, $http, $location, $routePa
 		
 		console.log(usuario);
 		
-		$http.post("http://" + location.host + "/usuarios/cadastro", usuario).success(function (data, status) {
+		$http.post(CONFIGURACAO.URL + ROTA.USUARIO + SUB_ROTA.CADASTRO, usuario).success(function (data, status) {
 			console.log(data);
 			console.log(status);
 		});

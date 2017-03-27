@@ -7,12 +7,81 @@
         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         <input id="edtBusca" name="edtBusca" ng-model="valorBusca" type="text" class="form-control" placeholder="Buscar por palavra-chave" required/>
     </div>
-
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="buscaAll()">Buscar</button></span>
-
-
-
-    <!--TABELA DE ANUNCIOS-->
+    
+    <!-- Modal Adicionar Subtarefa -->
+	<div id="modalAdicionarAvalicao" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+						
+			<div class="modal-content">
+				<form name="formAddAvaliacao" class="form-horizontal" novalidate ng-submit="addAvaliacao()">
+						<div class="modal-header">
+					   		<button type="button" class="close" data-dismiss="modal">&times;</button>
+					       	<h4 class="modal-title">Adicionar Avaliacao</h4>
+					   	</div>
+					<div class="modal-body">
+			     		<div class="row">
+				     		<div class="form-group">
+								<label class="control-label col-lg-3" for="novaAvalicao">Comentarios: </label>	
+								<div class="col-lg-8">
+									<input name="novaAvalicao" ng-model="novaAvalicao" id="novaAvalicao" type="text" class="form-control" autocomplete="off" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+                    		<label class="control-label col-lg-1" for="notaAvaliacao">Nota: </label>
+                    		<div class="col-lg-3">
+			                	<select name="notaAvaliacao" ng-model="notaAvaliacao" id="notaAvaliacao" class="form-control" required>
+			                    	<option selected disabled value="">Escolha Uma Nota</option>
+			                        <option value="NOTA_ZERO">0</option>
+			                        <option value="NOTA_UM">1</option>
+			                        <option value="NOTA_DOIS">2</option>
+			                        <option value="NOTA_TRES">3</option>
+			                        <option value="NOTA_QUATRO">4</option>
+			                        <option value="NOTA_CINCO">5</option>
+			                    </select>
+                   			</div>
+                		</div>
+					</div>
+					<div class="modal-footer">
+			    		<button ng-disabled="" type="submit" class="btn btn-success btn-default"><span class="fa fa-arrow-circle-o-down"></span> Adicionar</button>
+					</div>
+			    </form>
+			</div>
+		</div>
+	</div>
+	
+	<ul class="list-group" id="" >
+		<li ng-repeat="anuncio in anuncios | filter: {titulo: valorBusca}" class="lista-anuncios-item list-group-item">
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Titulo: {{anuncio.titulo}}</div>
+   				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Tipo: {{anuncio.tipo}}</div>
+    			<div class="col-lg-4 col-md-4 col-sm-5 col-xs-5">Data de criacao: {{anuncio.dataDeCriacao}}</div>
+    			<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">Valor: {{anuncio.valor}}</div>
+    		</div>
+    		<div class="row">
+   				<div class="col-lg-7 col-md-7 col-sm-10 col-xs-10">Descricao: {{anuncio.descricao}}</div>
+   				<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"><span ng-show="anuncio.tipo == 'PRODUTO'">Categoria: {{anuncio.categoria}}</span></div>
+   				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><i class="{{mostrarAvaliacoes ? 'icone-subtarefa fa fa-chevron-up':'icone-subtarefa fa fa-chevron-down'}}" title="Mostrar Avaliacoes" ng-click="mostrarAvaliacoes = !mostrarAvaliacoes"></i></div>
+   				<div class="col-lg-2 col-md-2 col-sm-10 col-xs-10"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAdicionarSubtarefa" data-backdrop="static" ng-click="iniciaFormAddSubtarefa(tarefa)"><span class="fa fa-plus-square-o"></span> Contratar</button></div>
+   			</div>
+   			<div ng-show="mostrarAvaliacoes">
+	   			<ul class="list-group">
+	   				<div class="row">
+	   					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Avaliacoes: </div>
+	   					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Media Avaliacoes: {{calculaMediaAvaliacao(anuncio)}}</div>
+	   				</div>
+	    			<li ng-repeat="avaliacao in anuncio.avaliacoes" class="lista-avaliacoes-item list-group-item">
+	    				<div class="linha-avaliacao row">
+							<div class="col-lg-10 col-md-10 col-sm-10 col-xs-11">Avaliacao: {{avaliacao.comentarios}} </div>
+	   						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">Nota: {{avaliacao.nota}}</div>
+	    				</div>
+	    			</li>
+	    		</ul>
+	    		<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#modalAdicionarAvalicao" data-backdrop="static" ng-click="setAnuncioAvaliado(anuncio)"><span class="fa fa-plus-square-o"></span> Adicionar Avaliacao</button>
+    		</div>
+    	</li>
+    </ul>
+    <!--TABELA DE ANUNCIOS
     <div>
 
         <table class="table" id="listaAnuncios" align="center">
@@ -27,7 +96,7 @@
                 <th> </th>
             </tr>
 
-            <tr ng-repeat="anuncio in anuncios | filter :{titulo : valorBusca}">
+            <tr ng-repeat="anuncio in anuncios | filter: {titulo: valorBusca}">
 
                 <td>{{anuncio.titulo}}</td>
                 <td>{{anuncio.dataDeCriacao}}</td>
@@ -43,7 +112,5 @@
                 </td>
             </tr>
         </table>
-
-    </div>
-
+    </div>-->
 </div>

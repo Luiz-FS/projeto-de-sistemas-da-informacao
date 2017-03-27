@@ -5,7 +5,11 @@ app.controller("controllerAddAnuncio", function($scope, $http, CONFIGURACAO, ROT
     $scope.anuncioCriado = false;
 
 	$scope.cadastrarAnuncio = function() {
-
+		
+		if($scope.anuncio.tipo != "PRODUTO") {
+			$scope.anuncio.categoriaAnuncio = "DEFAULT";
+		}
+				
 		$http.post(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.CADASTRO, $scope.anuncio)
 		    .success(function (data, status) {
                 $scope.anuncioNaoCriado = false;

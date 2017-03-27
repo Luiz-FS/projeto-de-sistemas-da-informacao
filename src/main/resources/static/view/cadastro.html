@@ -29,7 +29,8 @@
 				<div class="row">
 					<label class="control-label col-lg-1" for="opcaoPessoa"> </label>
 					<div class="col-lg-3">
-						 <select class="form-control" ng-model="opcaoPessoa">
+						 <select  name="opcaoPessoa" ng-model="opcaoPessoa" id="opcaoPessoa" class="form-control" required>
+						 	<option selected disabled value="">Escolha Um Tipo De Usuario</option>
 						 	<option value="PERMISSAO_PESSOA_FISICA">Pessoa Fisica</option>
 						 	<option value="PERMISSAO_PESSOA_JURIDICA">Pessoa Juridica</option>
 						 </select>
@@ -38,7 +39,7 @@
 				
 				<div class="row">
 					<div class="col-lg-10">
-						<button ng-disabled="!cadastroUsuario.nomeUsuario.$valid || !cadastroUsuario.emailUsuario.$valid || !cadastroUsuario.senhaUsuario.$valid" type="submit" class="pull-right btn btn-success btn-default"><span class="glyphicon glyphicon-ok"></span> Cadastrar</button>
+						<button ng-disabled="!cadastroUsuario.nomeUsuario.$valid || !cadastroUsuario.emailUsuario.$valid || !cadastroUsuario.senhaUsuario.$valid || !cadastroUsuario.opcaoPessoa.$valid" type="submit" class="pull-right btn btn-success btn-default"><span class="glyphicon glyphicon-ok"></span> Cadastrar</button>
 					</div>
 				</div>
 			

@@ -28,16 +28,9 @@
                 </div>
 
                 <div class="row">
-                    <label class="control-label col-lg-1" for="valor">Valor: </label>
-                    <div class="col-lg-9">
-                        <input name="valor" ng-model="anuncio.valor" id="valor" class="form-control" placeholder="Valor do anuncio" type="number" step="any" min="0" max="100000000" required>
-                    </div>
-                </div>
-
-                <div class="row">
                     <label class="control-label col-lg-1" for="tipo">Tipo: </label>
                     <div class="col-lg-3">
-                        <select class="form-control" ng-model="anuncio.tipo" id="tipo">
+                        <select name="tipo" ng-model="anuncio.tipo" id="tipo" class="form-control" required>
                             <option selected disabled value="">Escolha um tipo</option>
                             <option value="EMPREGO">Emprego</option>
                             <option value="PRODUTO">Produto</option>
@@ -46,26 +39,32 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" ng-show="anuncio.tipo == 'PRODUTO' || anuncio.tipo == 'SERVICO'">
+                    <label class="control-label col-lg-1" for="valor">Valor: </label>
+                    <div class="col-lg-9">
+                        <input name="valor" ng-model="anuncio.valor" id="valor" class="form-control" placeholder="Valor do anuncio" type="number" step="any" min="0" max="100000000" required>
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="anuncio.tipo == 'PRODUTO'">
                     <label class="control-label col-lg-1" for="categoria">Categoria: </label>
                     <div class="col-lg-3">
-                        <select class="form-control" ng-model="anuncio.categoriaAnuncio" id="categoria">
+                        <select name="categoria" ng-model="anuncio.categoriaAnuncio" id="categoria" class="form-control" required>
                             <option selected disabled value="">Escolha uma categoria</option>
                             <option value="MOVEL">Móvel</option>
                             <option value="IMOVEL">Imóvel</option>
-                            <option value="DEFAULT">Outro</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-10">
-                        <button ng-disabled="!cadastroAnuncio.titulo.$valid || !cadastroAnuncio.descricao.$valid
-                        || !cadastroAnuncio.valor.$valid" type="submit" class="pull-right btn btn-success btn-default">
-                            <span class="glyphicon glyphicon-ok"></span> Adicionar</button>
+                        <button ng-disabled="!cadastroAnuncio.titulo.$valid || !cadastroAnuncio.descricao.$valid ||
+                         !cadastroAnuncio.tipo.$valid || (anuncio.tipo == 'PRODUTO' || anuncio.tipo == 'SERVICO') && !cadastroAnuncio.valor.$valid
+                          || (anuncio.tipo == 'PRODUTO' && !cadastroAnuncio.categoria.$valid) " type="submit" class="pull-right btn btn-success btn-default">
+                            <span class="glyphicon glyphicon-ok-circle"></span> Adicionar</button>
                     </div>
                 </div>
-
             </div>
         </form>
     </div>

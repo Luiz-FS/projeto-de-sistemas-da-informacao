@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.lista-anuncios-item {
+	margin-top: 10px;
+	color: dimgray;
+	padding: 12px 8px 12px 40px;
+	overflow: hidden;
+	background-color: lightyellow;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+	border-radius: 5px 15px;
+}
+
+.lista-avaliacoes-item {
+	overflow: hidden;
+	margin-top: 10px;
+	padding: 4px;
+	background-color: PaleGoldenrod;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+	border-radius: 5px 15px;
+}
+
+.linha-avaliacao {
+	margin-bottom: 8px;
+}

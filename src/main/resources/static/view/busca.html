@@ -13,10 +13,9 @@
 
 
     <!--TABELA DE ANUNCIOS-->
+    <div>
 
-    <div style="width: 65%" >
-
-        <table class="table" id="listaAnuncios">
+        <table class="table" id="listaAnuncios" align="center">
 
             <tr>
                 <th>Titulo</th>
@@ -24,18 +23,27 @@
                 <th>Valor</th>
                 <th>Descricao</th>
                 <th>Tipo</th>
+                <th>Avaliação</th>
+                <th> </th>
             </tr>
 
             <tr ng-repeat="anuncio in anuncios | filter :{titulo : valorBusca}">
+
                 <td>{{anuncio.titulo}}</td>
                 <td>{{anuncio.dataDeCriacao}}</td>
                 <td>{{anuncio.valor}}</td>
                 <td>{{anuncio.descricao}}</td>
                 <td>{{anuncio.tipo}}</td>
-
+                <td>{{calculaMediaAvaliacao(anuncio)}}</td>
+                <td>
+                    <div class="col-lg-10">
+                        <button class="pull-right btn btn-success btn-default" ng-click="contratarAnuncio(anuncio)">
+                            <span class="glyphicon glyphicon-ok"></span> Contratar </button>
+                    </div>
+                </td>
             </tr>
         </table>
-    </div>
 
+    </div>
 
 </div>

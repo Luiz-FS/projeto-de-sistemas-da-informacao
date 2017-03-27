@@ -101,6 +101,8 @@ public class FiltroSistema implements Filter {
 	
 	private void addRequisicoesNaoLiberadas() {
 		this.requisicoesNaoLiberadas.add("/anuncios");
+		this.requisicoesNaoLiberadas.add("/usuarios/perfil");
+
 	}
 	
 	private void unauthorized(HttpServletResponse response) throws IOException {

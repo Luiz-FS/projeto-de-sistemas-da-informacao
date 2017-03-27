@@ -16,17 +16,10 @@ import java.util.List;
 public class UsuarioRestController {
 
     private final String ADICIONAR_USUARIO = "/cadastro";
+    private final String PERFIL_USUARIO = "/perfil";
 
     @Autowired
     private ControllerSistema controllerSistema;
-
-    @GetMapping
-    public ResponseEntity<List<UsuarioDto>> obterTodosUsuarios() {
-
-        List<UsuarioDto> usuarioDtos = controllerSistema.obterTodosUsuarios();
-
-        return new ResponseEntity<>(usuarioDtos, HttpStatus.OK);
-    }
 
     @PostMapping(value = ADICIONAR_USUARIO)
     public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody UsuarioCriacaoDto usuario) {
@@ -38,5 +31,12 @@ public class UsuarioRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
         return new ResponseEntity<>(usuarioDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = PERFIL_USUARIO)
+    public UsuarioDto obterPerfilUsuario(@RequestHeader("IdUsuario") String idUsuario) {
+
+        long idUsuarioLogado = Long.parseLong(idUsuario);
+        return controllerSistema.obterPerfilUsuario(idUsuarioLogado);
     }
 }

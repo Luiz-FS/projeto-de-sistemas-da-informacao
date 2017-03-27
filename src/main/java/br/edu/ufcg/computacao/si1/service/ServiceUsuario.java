@@ -129,4 +129,8 @@ public class ServiceUsuario {
 		
 		return string;
 	}
+
+    public Usuario getUsuarioPorId(long idUsuario) {
+        return this.repositorioUsuario.getOne(idUsuario);
+    }
 }

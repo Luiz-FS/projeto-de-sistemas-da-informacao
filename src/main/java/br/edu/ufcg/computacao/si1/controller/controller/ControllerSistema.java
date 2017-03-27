@@ -62,16 +62,13 @@ public class ControllerSistema {
         return autenticacao.fazerLogout(token);
     }
 
-    public List<UsuarioDto> obterTodosUsuarios() {
-        List<UsuarioDto> usuarioDtos = new ArrayList<>();
+    public UsuarioDto obterPerfilUsuario(long idUsuario) {
 
-        List<Usuario> usuarios = this.sistemaService.getUsuarios();
+        Usuario usuario = this.sistemaService.getUsuarioPorId(idUsuario);
 
-        for (Usuario usuario : usuarios) {
-            usuarioDtos.add(this.fabricaUsuario.criaUsuarioDto(usuario));
-        }
+        UsuarioDto usuarioDto = fabricaUsuario.criaUsuarioDto(usuario);
 
-        return usuarioDtos;
+        return usuarioDto;
     }
 
     public UsuarioDto adicionarUsuario(UsuarioCriacaoDto usuarioCriacaoDto) throws UsuarioInvalidoException {

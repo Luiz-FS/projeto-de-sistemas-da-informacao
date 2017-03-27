@@ -14,7 +14,8 @@ app
 	 "ANUNCIO_USUARIO" : "/usuario",
 	 "ANUNCIO_CADASTRO_AVALIACAO": "/avaliacao",
 	 "ANUNCIO_AVALIACOES": "/avaliacoes",
-	 "ANUNCIO_DATA": "/data"	 
+	 "ANUNCIO_DATA": "/data",
+	 "PERFIL": "/perfil"
  }); 
 	
 

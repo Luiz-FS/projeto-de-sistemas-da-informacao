@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
     	})
     	.when("/perfil", {
         	templateUrl : "/view/perfil.html",
-			controller: ""
+			controller: "controllerPerfil"
     	})
     	.when("/addAnuncio", {
         	templateUrl : "/view/addAnuncio.html",

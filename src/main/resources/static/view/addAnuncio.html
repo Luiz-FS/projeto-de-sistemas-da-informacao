@@ -5,17 +5,25 @@
         <form name="cadastroAnuncio" class="form-horizontal" novalidate ng-submit="cadastrarAnuncio()">
             <div class="form-group">
 
+                <div class="alert alert-danger" role="alert" ng-show="anuncioNaoCriado">
+                    <strong>Ops!</strong> Anúncio não pode ser criado desta forma.
+                </div>
+
+                <div class="alert alert-success" role="alert" ng-show="anuncioCriado">
+                    <strong>Legal!</strong> Anúncio criado com sucesso.
+                </div>
+
                 <div class="row">
                     <label class="control-label col-lg-1" for="titulo">Título: </label>
                     <div class="col-lg-9">
-                        <input name="titulo" ng-model="anuncio.titulo" id="titulo" class="form-control" placeholder="Titulo do anuncio" autocomplete="off" pattern="" title="" required>
+                        <input name="titulo" ng-model="anuncio.titulo" id="titulo" class="form-control" placeholder="Titulo do anuncio" autocomplete="off" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="control-label col-lg-1" for="descricao">Descrição: </label>
                     <div class="col-lg-9">
-                        <input name="descricao" ng-model="anuncio.descricao" id="descricao" class="form-control" placeholder="Descricao do anuncio" autocomplete="off" pattern="" title="" required>
+                        <input name="descricao" ng-model="anuncio.descricao" id="descricao" class="form-control" placeholder="Descricao do anuncio" autocomplete="off" required>
                     </div>
                 </div>
 
@@ -29,7 +37,8 @@
                 <div class="row">
                     <label class="control-label col-lg-1" for="tipo">Tipo: </label>
                     <div class="col-lg-3">
-                        <select class="form-control" ng-model="anuncio.tipo">
+                        <select class="form-control" ng-model="anuncio.tipo" id="tipo">
+                            <option selected disabled value="">Escolha um tipo</option>
                             <option value="EMPREGO">Emprego</option>
                             <option value="PRODUTO">Produto</option>
                             <option value="SERVICO">Serviço</option>
@@ -40,7 +49,8 @@
                 <div class="row">
                     <label class="control-label col-lg-1" for="categoria">Categoria: </label>
                     <div class="col-lg-3">
-                        <select class="form-control" ng-model="anuncio.categoriaAnuncio">
+                        <select class="form-control" ng-model="anuncio.categoriaAnuncio" id="categoria">
+                            <option selected disabled value="">Escolha uma categoria</option>
                             <option value="MOVEL">Móvel</option>
                             <option value="IMOVEL">Imóvel</option>
                             <option value="DEFAULT">Outro</option>
@@ -48,12 +58,10 @@
                     </div>
                 </div>
 
-                {{anuncio}}
-
                 <div class="row">
                     <div class="col-lg-10">
-                        <button ng-disabled="!cadastroAnuncio.titulo.$valid ||
-                        !cadastroAnuncio.descricao.$valid || !cadastroAnuncio.valor.$valid" type="submit" class="pull-right btn btn-success btn-default">
+                        <button ng-disabled="!cadastroAnuncio.titulo.$valid || !cadastroAnuncio.descricao.$valid
+                        || !cadastroAnuncio.valor.$valid" type="submit" class="pull-right btn btn-success btn-default">
                             <span class="glyphicon glyphicon-ok"></span> Adicionar</button>
                     </div>
                 </div>

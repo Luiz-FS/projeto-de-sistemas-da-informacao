@@ -1,6 +1,5 @@
 
-app.service("loginService", function() {
-	this.usuarioEstaLogado = false;
+app.service("loginService", function($location, $http) {
 	this.caminhosUsuarioLogado = [{nome:"Perfil", rota:"#/perfil"},
     							  {nome:"Adicionar Anuncio", rota:"#/addAnuncio"},
     							  {nome:"Busca", rota:"#/busca"},
@@ -8,11 +7,40 @@ app.service("loginService", function() {
 	this.caminhosUsuarioDeslogado = [{nome:"Login", rota:"#/login"},
 	                                 {nome:"Cadastra-se", rota:"#/cadastrar-se"},
 	                                 {nome:"Sobre", rota:"#/sobre"}];
-	this.getCaminhos = function() {
-		if(this.usuarioEstaLogado) {
-			return this.caminhosUsuarioLogado;
-		} else {
-			return this.caminhosUsuarioDeslogado;
-		}
+	var loginFalhou = false;
+
+	this.getLoginFalhou = function() {
+		return loginFalhou;
+	};
+	
+	this.usuarioEstaLogado = function() {
+		return localStorage.tokenUsuario != undefined && localStorage.tokenUsuario != ""; 
+	};
+	
+	this.login = function(usuario) {
+		$http.patch("http://" + location.host + "/login", usuario)
+         	.success(function (data, status) {
+         		console.log("Sucesso: " + status);
+         		
+         		localStorage.setItem("tokenUsuario", data.token);
+    			$location.path("/perfil");
+         	})
+         	.error(function (response) {
+         		console.log("Falha: " + response);
+         		loginFalhou = true;	
+         	});
+	};
+	
+	this.deslogar = function() {
+		$http.patch("http://" + location.host + "/logout")
+			.success(function(data, status) {
+				console.log(status);
+	     		localStorage.removeItem("tokenUsuario");
+	     		loginFalhou = false;	
+	     		$location.path("/login");
+			})
+			.error(function(data, status) {
+				console.log(status);
+			});
 	};
 });

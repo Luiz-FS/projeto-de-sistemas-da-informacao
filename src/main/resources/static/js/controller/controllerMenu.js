@@ -1,15 +1,19 @@
 
-app.controller("controllerMenu", function($scope, $location, loginService) {
-	$scope.caminhos = function() {
-		return loginService.getCaminhos();
-	};
+app.controller("controllerMenu", function($scope, loginService) {
 	
 	$scope.usuarioEstaLogado = function() {
-		return loginService.usuarioEstaLogado;
+		return loginService.usuarioEstaLogado();
+	};
+	
+	$scope.caminhos = function() {
+		if($scope.usuarioEstaLogado()) {
+			return loginService.caminhosUsuarioLogado;
+		} else {
+			return loginService.caminhosUsuarioDeslogado;
+		}
 	};
 	
 	$scope.deslogar = function() {
-		 $location.path("/login");
-		 loginService.usuarioEstaLogado = false;
+		loginService.deslogar();
 	};
 });

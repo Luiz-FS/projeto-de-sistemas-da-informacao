@@ -7,7 +7,7 @@ app.controller("controllerPerfil", function ($scope, $http, CONFIGURACAO ,ROTA, 
     $scope.usuarioLogado = {};
 
 
-    $http.get(CONFIGURACAO.URL + ROTA.USUARIO + "/perfil").success(function (data, status) {
+    $http.get(CONFIGURACAO.URL + ROTA.USUARIO + SUB_ROTA.PERFIL).success(function (data, status) {
         $scope.usuarioLogado = data;
         console.log(status);
         console.log(data)

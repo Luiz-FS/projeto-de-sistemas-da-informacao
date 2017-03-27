@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,9 @@ public class AutenticacaoRestController {
     }
 
     @PatchMapping(value = "/logout")
-    public ResponseEntity logout(@RequestBody String token) {
+    public ResponseEntity logout(@RequestHeader("Authorization") String token) {
+
+        token = token.substring(7);
 
         if (controllerSistema.logout(token)) {
             return new ResponseEntity(HttpStatus.OK);

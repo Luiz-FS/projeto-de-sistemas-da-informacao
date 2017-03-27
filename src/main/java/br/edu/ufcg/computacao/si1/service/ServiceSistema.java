@@ -77,6 +77,10 @@ public class ServiceSistema {
 		this.serviceUsuario.usuarioTemPermissao(idUsuario, permissao);
 	}
 
+	public Usuario getUsuarioPorId(long idUsuario) {
+		return this.serviceUsuario.getUsuarioPorId(idUsuario);
+	}
+
 	public Avaliacao addAvaliacaAnuncio(Long idAnuncio, Long idUsuario, Avaliacao avaliacao) throws AcaoNaoPermitidaException {
 		return this.serviceAnuncio.addAvaliacao(idAnuncio, idUsuario, avaliacao);
 	}

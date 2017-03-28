@@ -103,6 +103,7 @@ public class FiltroSistema implements Filter {
 		this.requisicoesNaoLiberadas.add("/anuncios");
 		this.requisicoesNaoLiberadas.add("/usuarios/perfil");
 		this.requisicoesNaoLiberadas.add("/usuarios/notificacoes");
+		this.requisicoesNaoLiberadas.add("/usuarios/avaliacao");
 	}
 	
 	private void unauthorized(HttpServletResponse response) throws IOException {

@@ -48,6 +48,8 @@ public class FiltroSistema implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+		System.out.println(httpRequest.getServletPath());
+
 		if(verificarRequisicao(httpRequest.getServletPath())) {
 
 	    	try {

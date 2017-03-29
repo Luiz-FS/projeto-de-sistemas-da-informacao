@@ -4,7 +4,7 @@
  */
 var app = angular.module("menuPrincipal", ["ngRoute"]);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $httpProvider) {
 
 	$routeProvider
 		.when("/cadastrar-se", {

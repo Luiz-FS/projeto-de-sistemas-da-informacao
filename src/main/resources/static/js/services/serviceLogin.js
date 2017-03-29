@@ -18,7 +18,7 @@ app.service("loginService", function($location, $http) {
 	};
 	
 	this.login = function(usuario) {
-		$http.patch("http://" + location.host + "/login", usuario)
+		$http.post("https://" + location.host + "/login", usuario)
          	.success(function (data, status) {
          		console.log("Sucesso: " + status);
          		
@@ -32,7 +32,7 @@ app.service("loginService", function($location, $http) {
 	};
 	
 	this.deslogar = function() {
-		$http.patch("http://" + location.host + "/logout")
+		$http.post("https://" + location.host + "/logout")
 			.success(function(data, status) {
 				console.log(status);
 	     		localStorage.removeItem("tokenUsuario");

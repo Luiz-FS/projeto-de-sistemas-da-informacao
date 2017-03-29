@@ -6,10 +6,7 @@ import br.edu.ufcg.computacao.si1.model.dto.UsuarioCriacaoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 
@@ -19,7 +16,7 @@ public class AutenticacaoRestController {
     @Autowired
     private ControllerSistema controllerSistema;
 
-    @PatchMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResponseToken login(@RequestBody UsuarioCriacaoDto usuario)
             throws ServletException {
 
@@ -34,7 +31,7 @@ public class AutenticacaoRestController {
         }
     }
 
-    @PatchMapping(value = "/logout")
+    @PostMapping(value = "/logout")
     public ResponseEntity logout(@RequestHeader("Authorization") String token) {
 
         token = token.substring(7);

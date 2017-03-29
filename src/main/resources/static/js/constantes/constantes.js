@@ -2,7 +2,7 @@
 
 app
  .constant("CONFIGURACAO", {
-	"URL":"http://localhost:8080"
+	"URL":"https://" + location.host
  })
  .constant("ROTA",{
 	 "ANUNCIO":"/anuncios",

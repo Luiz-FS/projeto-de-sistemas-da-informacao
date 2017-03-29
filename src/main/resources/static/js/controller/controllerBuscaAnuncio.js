@@ -4,6 +4,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     $scope.valorBusca;
     $scope.anuncios = [];
     $scope.mostrarAvaliacoes = false;
+    $scope.isMeusAnuncios = false;
     $scope.anuncioContratado;
     $scope.anuncioAvaliado;
     
@@ -16,7 +17,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
         	$scope.anuncios = response.data;
 
         }, function (response) {
-            console.log(response.data);
         });
     })();
 
@@ -24,7 +24,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     	if($scope.anuncioContratado.tipo === 'SERVICO') {
     		$scope.contratarAnuncioServico();
     	} else {
-    		$scope.comprarAnuncio();
     	}
     };
     
@@ -35,7 +34,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     	  	
     	
     	}).error(function (data, status){
-    		console.log(status);
     	});
     };
     
@@ -45,7 +43,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     		$("#modalContratarAnuncio").modal("hide");    	  	
     	
     	}).error(function (data, status){
-    		console.log(status);
     	});
     };
     
@@ -101,7 +98,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     		$scope.novaAvalicao = "";
     	
     	}).error(function (data, status){
-    		console.log(status);
     	});
     };
     
@@ -113,9 +109,9 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
          }).then(function (response) {
          	console.log(response.status);
         	$scope.anuncios = response.data;
-
+        	$scope.isMeusAnuncios = true;
+        	
          }, function (response) {
-             console.log(response.data);
          });
     };
     
@@ -127,9 +123,9 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
         }).then(function (response) {
         	console.log(response.status);
         	$scope.anuncios = response.data;
+        	$scope.isMeusAnuncios = false;
 
         }, function (response) {
-            console.log(response.data);
         });
    };
 });

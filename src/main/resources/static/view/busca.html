@@ -104,7 +104,7 @@
    				<div class="col-lg-7 col-md-7 col-sm-10 col-xs-10">Descricao: {{anuncio.descricao}}</div>
    				<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"><span ng-show="anuncio.tipo == 'PRODUTO'">Categoria: {{anuncio.categoria}}</span></div>
    				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><i class="{{mostrarAvaliacoes ? 'icone-subtarefa fa fa-chevron-up':'icone-subtarefa fa fa-chevron-down'}}" title="Mostrar Avaliacoes" ng-click="mostrarAvaliacoes = !mostrarAvaliacoes"></i></div>
-   				<div class="col-lg-2 col-md-2 col-sm-10 col-xs-10"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalContratarAnuncio" data-backdrop="static" ng-click="setAnuncioContratado(anuncio)"><span class="fa fa-plus-square-o"></span> Contratar</button></div>
+   				<div ng-show="!isMeusAnuncios" class="col-lg-2 col-md-2 col-sm-10 col-xs-10"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalContratarAnuncio" data-backdrop="static" ng-click="setAnuncioContratado(anuncio)"><span class="fa fa-plus-square-o"></span> Contratar</button></div>
    			</div>
    			<div ng-show="mostrarAvaliacoes">
 	   			<ul class="list-group">
@@ -119,7 +119,7 @@
 	    				</div>
 	    			</li>
 	    		</ul>
-	    		<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#modalAdicionarAvalicao" data-backdrop="static" ng-click="setAnuncioAvaliado(anuncio)"><span class="fa fa-plus-square-o"></span> Adicionar Avaliacao</button>
+	    		<button ng-show="!isMeusAnuncios" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#modalAdicionarAvalicao" data-backdrop="static" ng-click="setAnuncioAvaliado(anuncio)"><span class="fa fa-plus-square-o"></span> Adicionar Avaliacao</button>
     		</div>
     	</li>
     </ul>

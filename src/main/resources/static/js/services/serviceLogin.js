@@ -20,13 +20,11 @@ app.service("loginService", function($location, $http, CONFIGURACAO) {
 	this.login = function(usuario) {
 		$http.post(CONFIGURACAO.URL + "/login", usuario)
          	.success(function (data, status) {
-         		console.log("Sucesso: " + status);
          		
          		localStorage.setItem("tokenUsuario", data.token);
     			$location.path("/perfil");
          	})
          	.error(function (response) {
-         		console.log("Falha: " + response);
          		loginFalhou = true;	
          	});
 	};
@@ -34,7 +32,6 @@ app.service("loginService", function($location, $http, CONFIGURACAO) {
 	this.deslogar = function() {
 		$http.post(CONFIGURACAO.URL + "/logout")
 			.success(function(data, status) {
-				console.log(status);
 	     		localStorage.removeItem("tokenUsuario");
 	     		loginFalhou = false;	
 	     		$location.path("/login");
@@ -43,7 +40,6 @@ app.service("loginService", function($location, $http, CONFIGURACAO) {
 				localStorage.removeItem("tokenUsuario");
 				$location.path("/login");
 				loginFalhou = true;
-				console.log(status);
 			});
 	};
 });

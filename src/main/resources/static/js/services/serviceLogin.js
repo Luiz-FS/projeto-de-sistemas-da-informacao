@@ -1,5 +1,5 @@
 
-app.service("loginService", function($location, $http) {
+app.service("loginService", function($location, $http, CONFIGURACAO) {
 	this.caminhosUsuarioLogado = [{nome:"Perfil", rota:"#/perfil"},
     							  {nome:"Adicionar Anuncio", rota:"#/addAnuncio"},
     							  {nome:"Busca", rota:"#/busca"},
@@ -18,7 +18,7 @@ app.service("loginService", function($location, $http) {
 	};
 	
 	this.login = function(usuario) {
-		$http.post("https://" + location.host + "/login", usuario)
+		$http.post(CONFIGURACAO.URL + "/login", usuario)
          	.success(function (data, status) {
          		console.log("Sucesso: " + status);
          		
@@ -32,7 +32,7 @@ app.service("loginService", function($location, $http) {
 	};
 	
 	this.deslogar = function() {
-		$http.post("https://" + location.host + "/logout")
+		$http.post(CONFIGURACAO.URL + "/logout")
 			.success(function(data, status) {
 				console.log(status);
 	     		localStorage.removeItem("tokenUsuario");

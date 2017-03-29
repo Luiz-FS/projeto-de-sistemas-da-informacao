@@ -15,6 +15,7 @@ public class AnuncioServico extends Anuncio {
 
 	public AnuncioServico(String titulo, Date dataDeCriacao, double valor, Long idUsuario, String descricao) {
 		super(titulo, dataDeCriacao, valor, TIPO, idUsuario, descricao);
+		this.dataDeAgendamento = new Date();
 	}
 
     public AnuncioServico() {

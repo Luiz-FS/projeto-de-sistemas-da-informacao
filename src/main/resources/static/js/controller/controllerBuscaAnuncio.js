@@ -24,7 +24,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     	if($scope.anuncioContratado.tipo === 'SERVICO') {
     		$scope.contratarAnuncioServico();
     	} else {
-    		$scope.comprarAnuncio();
+    		$scope.comprarAnuncio
     	}
     };
     
@@ -34,6 +34,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     	  	
     	
     	}).error(function (data, status){
+    		$scope.comprarAnuncio();
     	});
     };
     

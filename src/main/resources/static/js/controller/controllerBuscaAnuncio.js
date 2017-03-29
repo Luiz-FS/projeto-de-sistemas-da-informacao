@@ -48,29 +48,33 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     		console.log(status);
     	});
     };
+    
+    $scope.getNotaAvaliacao = function(nota) {
+    	if(nota === "NOTA_CINCO"){
+            return 5;
+        }else if(nota === "NOTA_QUATRO"){
+            return 4;
+        }else if(nota === "NOTA_TRES"){
+            return 3;
+        }else if(nota === "NOTA_DOIS"){
+            return 2;
+        }else if(nota === "NOTA_UM"){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
     $scope.calculaMediaAvaliacao = function (anuncio) {
     	var media = 0;
         var avaliacoes = anuncio.avaliacoes;
-
-        if(avaliacoes.length == 0){
-            return 0;
+        
+        if(avaliacoes.length == 0) {
+        	return 0;
         }
 
-        for(avaliacao in avaliacoes){
-            if(avaliacao.nota === "NOTA_CINCO"){
-                media += 5;
-            }else if(avaliacao.nota === "NOTA_QUATRO"){
-                media += 4;
-            }else if(avaliacao.nota === "NOTA_TRES"){
-                media += 3;
-            }else if(avaliacao.nota === "NOTA_DOIS"){
-                media += 2;
-            }else if(avaliacao.nota === "NOTA_UM"){
-                media += 1;
-            }else{
-                media += 0;
-            }
+        for (i = 0; i < avaliacoes.length; i++) { 
+        	media += $scope.getNotaAvaliacao(avaliacoes[i].nota);	
         }
 
         return media/avaliacoes.length;

@@ -6,9 +6,7 @@ app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, R
 	
 	(function(){
 		$http.get(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.NOTIFICACOES).success(function (data, status) {
-    		console.log(status);
-    		console.log('aki eu');
-    		$scope.notificacoes = data;    	  	
+			$scope.notificacoes = data;    	  	
     	
     	}).error(function (data, status){
     		console.log(status);

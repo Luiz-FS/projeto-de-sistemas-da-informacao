@@ -5,7 +5,7 @@ app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, R
 	$scope.notificaoAvaliada;
 	
 	(function(){
-		$http.get(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.NOTIFICACOES).success(function (data, status) {
+		$http.get(CONFIGURACAO.URL + ROTA.USUARIO + SUB_ROTA.NOTIFICACOES).success(function (data, status) {
 			$scope.notificacoes = data;    	  	
     	
     	}).error(function (data, status){

@@ -19,7 +19,7 @@ import java.util.List;
 public class AnuncioRestController {
 
 	private final String ADICIONAR_ANUNCIO = "/cadastro";
-	private final String ANUNCIO_POR_USUARIO = "/usuario/{idUsuario}";
+	private final String ANUNCIO_POR_USUARIO = "/usuario";
 	private final String CONTRATAR_ANUNCIO = "/contrato/{idAnuncio}";
 	private final String ADICIONAR_AVALIACAO = "/avaliacao/{idAnuncio}";
 	private final String OBTER_AVALIACOES_ANUNCIO = "/avaliacoes/{idAnuncio}";
@@ -38,12 +38,14 @@ public class AnuncioRestController {
 	}
 
 	@GetMapping(value = ANUNCIO_POR_USUARIO)
-	public ResponseEntity<List<Anuncio>> getAnunciosPorUsuario(@PathVariable("idUsuario")Long idUsuario) {
+	public ResponseEntity<List<Anuncio>> getAnunciosPorUsuario(@RequestHeader(value = "IdUsuario") String idUsuario) {
 
+		long idUsuarioLogado = Long.parseLong(idUsuario);
+		
 		List<Anuncio> anuncios;
 
 		try {
-			anuncios = this.controllerSistema.getAnunciosPorUsuario(idUsuario);
+			anuncios = this.controllerSistema.getAnunciosPorUsuario(idUsuarioLogado);
 		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

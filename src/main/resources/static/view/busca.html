@@ -2,10 +2,21 @@
 
     <h1>Busca</h1>
 
-
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input id="edtBusca" name="edtBusca" ng-model="valorBusca" type="text" class="form-control" placeholder="Buscar por palavra-chave" required/>
+	<div class="container">
+	    <div class="row">
+		    <div class="input-group">
+		        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+		        <input id="edtBusca" name="edtBusca" ng-model="valorBusca" type="text" class="form-control" placeholder="Buscar por palavra-chave" required/>
+		    </div>
+	    </div>
+	    <div class="row">
+	    	<div class="col-lg-6">
+	    		<button class="btn btn-success btn-block btn-warning" ng-click="mostrarTodosAnunciosUsuario()"><span class="fa fa-minus-square"></span> Meus Anuncios</button>
+	    	</div>
+	    	<div class="col-lg-6">
+	    		<button class="btn btn-success btn-block btn-info" ng-click="mostrarTodosAnuncios()"><span class="fa fa-plus-square"></span> Todos Os Anuncios</button>
+	    	</div>
+	    </div>
     </div>
     
     <!-- Modal Adicionar Avaliacao -->
@@ -112,36 +123,4 @@
     		</div>
     	</li>
     </ul>
-    <!--TABELA DE ANUNCIOS
-    <div>
-
-        <table class="table" id="listaAnuncios" align="center">
-
-            <tr>
-                <th>Titulo</th>
-                <th>Data De Criacao</th>
-                <th>Valor</th>
-                <th>Descricao</th>
-                <th>Tipo</th>
-                <th>Avaliação</th>
-                <th> </th>
-            </tr>
-
-            <tr ng-repeat="anuncio in anuncios | filter: {titulo: valorBusca}">
-
-                <td>{{anuncio.titulo}}</td>
-                <td>{{anuncio.dataDeCriacao}}</td>
-                <td>{{anuncio.valor}}</td>
-                <td>{{anuncio.descricao}}</td>
-                <td>{{anuncio.tipo}}</td>
-                <td>{{calculaMediaAvaliacao(anuncio)}}</td>
-                <td>
-                    <div class="col-lg-10">
-                        <button class="pull-right btn btn-success btn-default" ng-click="contratarAnuncio(anuncio)">
-                            <span class="glyphicon glyphicon-ok"></span> Contratar </button>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>-->
 </div>

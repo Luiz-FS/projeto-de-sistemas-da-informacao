@@ -104,4 +104,32 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     		console.log(status);
     	});
     };
+    
+    $scope.mostrarTodosAnunciosUsuario = function() {
+    	 $http({
+             method:'GET',
+             url: CONFIGURACAO.URL + ROTA.ANUNCIO +"/usuario"
+        
+         }).then(function (response) {
+         	console.log(response.status);
+        	$scope.anuncios = response.data;
+
+         }, function (response) {
+             console.log(response.data);
+         });
+    };
+    
+    $scope.mostrarTodosAnuncios = function() {
+   	 $http({
+            method:'GET',
+            url: CONFIGURACAO.URL + ROTA.ANUNCIO
+       
+        }).then(function (response) {
+        	console.log(response.status);
+        	$scope.anuncios = response.data;
+
+        }, function (response) {
+            console.log(response.data);
+        });
+   };
 });

@@ -9,7 +9,6 @@ app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, R
 			$scope.notificacoes = data;    	  	
     	
     	}).error(function (data, status){
-    		console.log(status);
     	});
 	})();
 	
@@ -22,7 +21,6 @@ app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, R
 				comentarios: $scope.novaAvalicao}
 	
 		$http.post(CONFIGURACAO.URL + ROTA.USUARIO + SUB_ROTA.ANUNCIO_AVALIACOES + "/" + $scope.notificaoAvaliada.id, avaliacao).success(function (data, status) {
-			console.log(status);    		
 			
     		$("#modalAdicionarAvalicao").modal("hide");
     	
@@ -30,7 +28,6 @@ app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, R
     		$scope.novaAvalicao = "";
     	
     	}).error(function (data, status){
-    		console.log(status);
     	});	
 	};
 });

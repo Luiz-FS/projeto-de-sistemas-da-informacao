@@ -14,14 +14,10 @@ app.controller("controllerAddAnuncio", function($scope, $http, CONFIGURACAO, ROT
 		    .success(function (data, status) {
                 $scope.anuncioNaoCriado = false;
                 $scope.anuncioCriado = true;
-
-                console.log("Sucesso: " + status);
 		    })
 		    .error(function (response) {
                 $scope.anuncioNaoCriado = true;
                 $scope.anuncioCriado = false;
-
-                console.log("Falha: " + response);
             });
 
             delete $scope.anuncio;

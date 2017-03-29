@@ -23,7 +23,7 @@ public class AnuncioEmprego extends Anuncio {
 		
 		gerarDescricao += "O anuncio: "+ this.getTitulo() +
 						  " criado:" + super.getDataDeCriacao() +	
-						  "Do tipo: Emprego, foi contratado";
+						  " Do tipo: Emprego, foi contratado";
 		
 		return gerarDescricao;
 	}

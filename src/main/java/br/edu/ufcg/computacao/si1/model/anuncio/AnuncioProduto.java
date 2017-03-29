@@ -36,8 +36,8 @@ public class AnuncioProduto extends Anuncio {
 		
 		gerarDescricao += "O anuncio: " + this.getTitulo() + 
 				          " criado:" + super.getDataDeCriacao() +	
-						  "Do tipo: Produto, foi contratado" + 
-						  "Pelo valor de: R$"+ this.getValor();
+						  " Do tipo: Produto, foi contratado" + 
+						  " Pelo valor de: R$"+ this.getValor();
 		
 		return gerarDescricao;
 	}

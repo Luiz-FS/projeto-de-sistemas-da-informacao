@@ -35,8 +35,8 @@ public class AnuncioServico extends Anuncio {
 		
 		gerarDescricao += "O anuncio: "+ this.getTitulo() +
 				          " criado:" + super.getDataDeCriacao() +	 
-						  "do tipo: Servico, foi contratado" + 
-						  "com data de agendamento para: "+ this.getDataDeAgendamento();
+						  " do tipo: Servico, foi contratado" + 
+						  " com data de agendamento para: "+ this.getDataDeAgendamento();
 		
 		return gerarDescricao;
 	}

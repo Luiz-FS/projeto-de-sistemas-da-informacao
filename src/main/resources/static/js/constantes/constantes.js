@@ -2,7 +2,7 @@
 
 app
  .constant("CONFIGURACAO", {
-	"URL":"https://" + location.host
+	"URL":"http://" + location.host
  })
  .constant("ROTA",{
 	 "ANUNCIO":"/anuncios",
@@ -15,7 +15,8 @@ app
 	 "ANUNCIO_CADASTRO_AVALIACAO": "/avaliacao",
 	 "ANUNCIO_AVALIACOES": "/avaliacoes",
 	 "ANUNCIO_DATA": "/data",
-	 "PERFIL": "/perfil"
+	 "PERFIL": "/perfil",
+	 "NOTIFICACOES": "/notificacoes"
  }); 
 	
 

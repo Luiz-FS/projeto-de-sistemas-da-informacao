@@ -1,11 +1,11 @@
 
-app.controller("controllerNotificacoes", function($scope, $http, $location, $routeParams) {
+app.controller("controllerNotificacoes", function($scope, $http, CONFIGURACAO, ROTA, SUB_ROTA) {
 	
 	$scope.notificacoes = [];
 	$scope.notificaoAvaliada;
 	
 	(function(){
-		$http.get("http://" + location.host + "/usuarios/notificacoes").success(function (data, status) {
+		$http.get(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.NOTIFICACOES).success(function (data, status) {
     		console.log(status);
     		console.log('aki eu');
     		$scope.notificacoes = data;    	  	
@@ -23,7 +23,7 @@ app.controller("controllerNotificacoes", function($scope, $http, $location, $rou
 		var avaliacao = {nota: $scope.notaAvaliacao,
 				comentarios: $scope.novaAvalicao}
 	
-		$http.post("http://" + location.host + "/usuarios/avaliacao/" + $scope.notificaoAvaliada.id, avaliacao).success(function (data, status) {
+		$http.post(CONFIGURACAO.URL + ROTA.USUARIO + SUB_ROTA.ANUNCIO_AVALIACOES + "/" + $scope.notificaoAvaliada.id, avaliacao).success(function (data, status) {
 			console.log(status);    		
 			
     		$("#modalAdicionarAvalicao").modal("hide");

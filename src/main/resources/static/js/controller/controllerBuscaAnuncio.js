@@ -1,4 +1,4 @@
-app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $routeParams) {
+app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, ROTA, SUB_ROTA) {
 
 
     $scope.valorBusca;
@@ -10,7 +10,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     (function () {
         $http({
             method:'GET',
-            url:"http://" + location.host + "/anuncios"
+            url: CONFIGURACAO.URL + ROTA.ANUNCIO
        
         }).then(function (response) {
         	$scope.anuncios = response.data;
@@ -29,7 +29,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     };
     
     $scope.contratarAnuncioServico = function() {
-    	$http.post("http://" + location.host + "/anuncios/data/"+  $scope.anuncioContratado.id, $scope.novaData).success(function (data, status) {
+    	$http.post(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.ANUNCIO_DATA + "/"+  $scope.anuncioContratado.id, $scope.novaData).success(function (data, status) {
     		console.log(status);
     		$scope.comprarAnuncio();
     	  	
@@ -40,7 +40,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     };
     
     $scope.comprarAnuncio = function() {
-    	$http.delete("http://" + location.host + "/anuncios/contrato/"+  $scope.anuncioContratado.id).success(function (data, status) {
+    	$http.delete(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.ANUNCIO_CONTRATO + "/"+  $scope.anuncioContratado.id).success(function (data, status) {
     		console.log(status);
     		$("#modalContratarAnuncio").modal("hide");    	  	
     	
@@ -58,15 +58,15 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
         }
 
         for(avaliacao in avaliacoes){
-            if(avaliacao.nota = "NOTA_CINCO"){
+            if(avaliacao.nota === "NOTA_CINCO"){
                 media += 5;
-            }else if(avaliacao.nota = "NOTA_QUATRO"){
+            }else if(avaliacao.nota === "NOTA_QUATRO"){
                 media += 4;
-            }else if(avaliacao.nota = "NOTA_TRES"){
+            }else if(avaliacao.nota === "NOTA_TRES"){
                 media += 3;
-            }else if(avaliacao.nota = "NOTA_DOIS"){
+            }else if(avaliacao.nota === "NOTA_DOIS"){
                 media += 2;
-            }else if(avaliacao.nota = "NOTA_UM"){
+            }else if(avaliacao.nota === "NOTA_UM"){
                 media += 1;
             }else{
                 media += 0;
@@ -88,7 +88,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     	var avaliacao = {nota: $scope.notaAvaliacao,
     					comentarios: $scope.novaAvalicao}
     	
-    	$http.post("http://" + location.host + "/anuncios/avaliacao/"+ $scope.anuncioAvaliado.id, avaliacao).success(function (data, status) {
+    	$http.post(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.ANUNCIO_CADASTRO_AVALIACAO + "/"+ $scope.anuncioAvaliado.id, avaliacao).success(function (data, status) {
     		$scope.anuncioAvaliado.avaliacoes.push(data);
     		
     		$("#modalAdicionarAvalicao").modal("hide");

@@ -140,6 +140,17 @@ public class Usuario {
 		return false;
 	}
 	
+	public Long getIdComprador(Long idNotificacao) {
+		
+		for (int i = 0; i < this.listaDeNotificacoes.size(); i++) {
+			if(this.listaDeNotificacoes.get(i).getId().equals(idNotificacao)) {
+				
+				return this.listaDeNotificacoes.get(i).getIdComprador();
+			}
+		}
+		return null;
+	}
+	
 	public boolean removeNotificacao(Long idNotificacao) {
 		
 		for (int i = 0; i < this.listaDeNotificacoes.size(); i++) {

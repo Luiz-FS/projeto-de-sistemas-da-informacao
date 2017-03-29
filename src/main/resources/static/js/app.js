@@ -32,7 +32,7 @@ app.config(function($routeProvider, $httpProvider) {
     	})
     	.when("/notificacoes", {
         	templateUrl : "/view/notificacoes.html",
-			controller: ""
+			controller: "controllerNotificacoes"
     	})
     	.otherwise({
           redirectTo: '/'

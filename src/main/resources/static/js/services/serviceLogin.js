@@ -40,6 +40,9 @@ app.service("loginService", function($location, $http) {
 	     		$location.path("/login");
 			})
 			.error(function(data, status) {
+				localStorage.removeItem("tokenUsuario");
+				$location.path("/login");
+				loginFalhou = true;
 				console.log(status);
 			});
 	};

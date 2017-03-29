@@ -8,7 +8,7 @@
         <input id="edtBusca" name="edtBusca" ng-model="valorBusca" type="text" class="form-control" placeholder="Buscar por palavra-chave" required/>
     </div>
     
-    <!-- Modal Adicionar Subtarefa -->
+    <!-- Modal Adicionar Avaliacao -->
 	<div id="modalAdicionarAvalicao" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 						
@@ -43,13 +43,44 @@
                 		</div>
 					</div>
 					<div class="modal-footer">
-			    		<button ng-disabled="" type="submit" class="btn btn-success btn-default"><span class="fa fa-arrow-circle-o-down"></span> Adicionar</button>
+			    		<button ng-disabled="!formAddAvaliacao.novaAvalicao.$valid || !formAddAvaliacao.notaAvaliacao.$valid" type="submit" class="btn btn-success btn-default"><span class="fa fa-arrow-circle-o-down"></span> Adicionar</button>
 					</div>
 			    </form>
 			</div>
 		</div>
 	</div>
 	
+	<!-- Modal Contratar Anuncio -->
+	<div id="modalContratarAnuncio" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+						
+			<div class="modal-content">
+				<form name="formContratarAnuncio" class="form-horizontal" novalidate ng-submit="contratarAnuncio()">
+						<div class="modal-header">
+					   		<button type="button" class="close" data-dismiss="modal">&times;</button>
+					       	<h4 class="modal-title">Contratar Anuncio</h4>
+					   	</div>
+					<div class="modal-body">
+			     		
+			     		<h5>Deseja Contratar o Anuncio: {{anuncioContratado.titulo}} ?</h5>
+			     		
+			     		<div ng-show="anuncioContratado.tipo == 'SERVICO'" class="row">
+				     		<div class="form-group">
+								<label class="control-label col-lg-4" for="novaAvalicao">Data De Agendamento: </label>	
+								<div class="col-lg-6">
+									<input  name="novaData" ng-model="novaData" id="novaData" type="datetime-local" class="form-control" autocomplete="off" required>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+			    		<button ng-disabled="anuncioContratado.tipo == 'SERVICO' && !formContratarAnuncio.novaData.$valid" type="submit" class="btn btn-success btn-default"><span class="fa fa-arrow-circle-o-down"></span> Contratar</button>
+					</div>
+			    </form>
+			</div>
+		</div>
+	</div>
+		
 	<ul class="list-group" id="" >
 		<li ng-repeat="anuncio in anuncios | filter: {titulo: valorBusca}" class="lista-anuncios-item list-group-item">
 			<div class="row">
@@ -62,7 +93,7 @@
    				<div class="col-lg-7 col-md-7 col-sm-10 col-xs-10">Descricao: {{anuncio.descricao}}</div>
    				<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"><span ng-show="anuncio.tipo == 'PRODUTO'">Categoria: {{anuncio.categoria}}</span></div>
    				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><i class="{{mostrarAvaliacoes ? 'icone-subtarefa fa fa-chevron-up':'icone-subtarefa fa fa-chevron-down'}}" title="Mostrar Avaliacoes" ng-click="mostrarAvaliacoes = !mostrarAvaliacoes"></i></div>
-   				<div class="col-lg-2 col-md-2 col-sm-10 col-xs-10"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAdicionarSubtarefa" data-backdrop="static" ng-click="iniciaFormAddSubtarefa(tarefa)"><span class="fa fa-plus-square-o"></span> Contratar</button></div>
+   				<div class="col-lg-2 col-md-2 col-sm-10 col-xs-10"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalContratarAnuncio" data-backdrop="static" ng-click="setAnuncioContratado(anuncio)"><span class="fa fa-plus-square-o"></span> Contratar</button></div>
    			</div>
    			<div ng-show="mostrarAvaliacoes">
 	   			<ul class="list-group">

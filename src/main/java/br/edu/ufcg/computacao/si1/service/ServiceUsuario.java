@@ -101,7 +101,10 @@ public class ServiceUsuario {
     	Usuario usuario = this.repositorioUsuario.findOne(idUsuario);
     	
     	if(usuario.contemNotificacaoAvaliacao(idNotificacao)) {
-    		usuario.addAvaliacao(avaliacao);
+    		Long idComprador = usuario.getIdComprador(idNotificacao);
+    		Usuario comprador = this.repositorioUsuario.findOne(idComprador);
+    	
+    		comprador.addAvaliacao(avaliacao);
     		usuario.removeNotificacao(idNotificacao);
     		
     		this.atualizar(usuario);

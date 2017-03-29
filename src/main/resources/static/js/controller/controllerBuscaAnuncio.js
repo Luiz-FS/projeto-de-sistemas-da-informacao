@@ -4,6 +4,7 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     $scope.valorBusca;
     $scope.anuncios = [];
     $scope.mostrarAvaliacoes = false;
+    $scope.anuncioContratado;
     $scope.anuncioAvaliado;
     
     (function () {
@@ -19,8 +20,33 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
         });
     })();
 
-    $scope.contratarAnuncio = function (anuncio) {
-       console.log("Abre O ANUNCIO DE ID"+anuncio.id);
+    $scope.contratarAnuncio = function () {
+    	if($scope.anuncioContratado.tipo === 'SERVICO') {
+    		$scope.contratarAnuncioServico();
+    	} else {
+    		$scope.comprarAnuncio();
+    	}
+    };
+    
+    $scope.contratarAnuncioServico = function() {
+    	$http.post("http://" + location.host + "/anuncios/data/"+  $scope.anuncioContratado.id, $scope.novaData).success(function (data, status) {
+    		console.log(status);
+    		$scope.comprarAnuncio();
+    	  	
+    	
+    	}).error(function (data, status){
+    		console.log(status);
+    	});
+    };
+    
+    $scope.comprarAnuncio = function() {
+    	$http.delete("http://" + location.host + "/anuncios/contrato/"+  $scope.anuncioContratado.id).success(function (data, status) {
+    		console.log(status);
+    		$("#modalContratarAnuncio").modal("hide");    	  	
+    	
+    	}).error(function (data, status){
+    		console.log(status);
+    	});
     };
 
     $scope.calculaMediaAvaliacao = function (anuncio) {
@@ -52,6 +78,10 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, $location, $rou
     
     $scope.setAnuncioAvaliado = function(anuncio) {
     	 $scope.anuncioAvaliado = anuncio;
+    };
+    
+    $scope.setAnuncioContratado = function(anuncio) {
+    	 $scope.anuncioContratado = anuncio;
     };
     
     $scope.addAvaliacao = function() {

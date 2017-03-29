@@ -29,7 +29,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     
     $scope.contratarAnuncioServico = function() {
     	$http.post(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.ANUNCIO_DATA + "/"+  $scope.anuncioContratado.id, $scope.novaData).success(function (data, status) {
-    		console.log(status);
     		$scope.comprarAnuncio();
     	  	
     	
@@ -39,7 +38,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
     
     $scope.comprarAnuncio = function() {
     	$http.delete(CONFIGURACAO.URL + ROTA.ANUNCIO + SUB_ROTA.ANUNCIO_CONTRATO + "/"+  $scope.anuncioContratado.id).success(function (data, status) {
-    		console.log(status);
     		$("#modalContratarAnuncio").modal("hide");    	  	
     	
     	}).error(function (data, status){
@@ -107,7 +105,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
              url: CONFIGURACAO.URL + ROTA.ANUNCIO +"/usuario"
         
          }).then(function (response) {
-         	console.log(response.status);
         	$scope.anuncios = response.data;
         	$scope.isMeusAnuncios = true;
         	
@@ -121,7 +118,6 @@ app.controller("controllerBuscaAnuncio", function($scope, $http, CONFIGURACAO, R
             url: CONFIGURACAO.URL + ROTA.ANUNCIO
        
         }).then(function (response) {
-        	console.log(response.status);
         	$scope.anuncios = response.data;
         	$scope.isMeusAnuncios = false;
 
